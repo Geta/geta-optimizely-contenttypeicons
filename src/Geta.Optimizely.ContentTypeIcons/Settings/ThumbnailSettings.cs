@@ -91,11 +91,10 @@ namespace Geta.Optimizely.ContentTypeIcons.Settings
         {
             var bytes = Encoding.UTF8.GetBytes(input);
 
-            using (var hasher = MD5.Create())
-            {
-                var hash = hasher.ComputeHash(bytes);
-                return new Guid(hash);
-            }
+            using var hasher = MD5.Create();
+
+            var hash = hasher.ComputeHash(bytes);
+            return new Guid(hash);
         }
 
         /// <summary>
