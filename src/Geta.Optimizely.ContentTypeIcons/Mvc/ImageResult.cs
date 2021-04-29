@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,15 +21,20 @@ namespace Geta.Optimizely.ContentTypeIcons.Mvc
             CreateContentTypeMap();
         }
 
-        public override void ExecuteResult(ControllerContext context)
+        public override void ExecuteResult(ActionContext context)
         {
             if (Image == null) throw new ArgumentNullException(nameof(Image));
             if (ImageFormat == null) throw new ArgumentNullException(nameof(ImageFormat));
 
             context.HttpContext.Response.Clear();
             context.HttpContext.Response.ContentType = FormatMap[ImageFormat];
+            Image.Save(context.HttpContext.Response.Body, ImageFormat); // TODO: See how to better handle it.
+        }
 
-            Image.Save(context.HttpContext.Response.OutputStream, ImageFormat);
+        public override Task ExecuteResultAsync(ActionContext context)
+        {
+            ExecuteResult(context);
+            return Task.CompletedTask;
         }
 
         private static void CreateContentTypeMap()
