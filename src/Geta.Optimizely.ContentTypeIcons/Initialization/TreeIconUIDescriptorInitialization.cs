@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using EPiServer.Cms.Shell;
 using EPiServer.Framework;
 using EPiServer.Framework.Initialization;
 using EPiServer.ServiceLocation;
+using EPiServer.Shell;
 using Geta.Optimizely.ContentTypeIcons.Attributes;
-using Microsoft.IdentityModel.Protocols;
+using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace Geta.Optimizely.ContentTypeIcons.Initialization
 {
@@ -21,39 +24,40 @@ namespace Geta.Optimizely.ContentTypeIcons.Initialization
         public void Initialize(InitializationEngine context)
         {
             var registry = context.Locate.Advanced.GetInstance<UIDescriptorRegistry>();
+            var configuration = context.Locate.Advanced.GetInstance<IOptions<ContentTypeIconOptions>>().Value;
 
-            EnrichDescriptorsWithIconClass(registry.UIDescriptors);
+            EnrichDescriptorsWithIconClass(registry.UIDescriptors, configuration);
         }
 
-        internal void EnrichDescriptorsWithIconClass(IEnumerable<UIDescriptor> uiDescriptors)
+        internal void EnrichDescriptorsWithIconClass(
+            IEnumerable<UIDescriptor> uiDescriptors,
+            ContentTypeIconOptions configuration)
         {
             foreach (var descriptor in uiDescriptors)
             {
-                EnrichDescriptorWithIconClass(descriptor);
+                EnrichDescriptorWithIconClass(descriptor, configuration);
             }
         }
 
-        internal void EnrichDescriptorWithIconClass(UIDescriptor descriptor)
+        internal void EnrichDescriptorWithIconClass(UIDescriptor descriptor, ContentTypeIconOptions configuration)
         {
             var thumbnailIconAttribute = descriptor.ForType.GetCustomAttribute<ThumbnailIconAttribute>(false);
             var treeIconAttribute = descriptor.ForType.GetCustomAttribute<TreeIconAttribute>(false);
 
-            if (thumbnailIconAttribute == null && treeIconAttribute?.Icon == null)
-                return;
+            if (thumbnailIconAttribute == null && treeIconAttribute?.Icon == null) return;
 
-            var globallyEnabled = "true".Equals(ConfigurationManager<>.AppSettings[Constants.AppSettings.EnableTreeIcons], StringComparison.OrdinalIgnoreCase);
-            if ((globallyEnabled && treeIconAttribute?.Ignore != true) || treeIconAttribute?.Icon != null)
+            if ((configuration.EnableTreeIcons && treeIconAttribute?.Ignore != true) || treeIconAttribute?.Icon != null)
             {
                 descriptor.IconClass = BuildIconClassNames(thumbnailIconAttribute, treeIconAttribute);
                 EnabledAndInUse = true;
             }
         }
 
-        private static string BuildIconClassNames(ThumbnailIconAttribute thumbnailIconAttribute, TreeIconAttribute treeIconAttribute)
+        private static string BuildIconClassNames(ThumbnailIconAttribute thumbnailIconAttribute,
+            TreeIconAttribute treeIconAttribute)
         {
             var icon = treeIconAttribute?.Icon ?? thumbnailIconAttribute?.Icon;
-            if (icon == null)
-                return string.Empty;
+            if (icon == null) return string.Empty;
 
             var builder = new StringBuilder();
             var className = ToDashCase(icon.ToString()).Replace("_", string.Empty);
@@ -78,14 +82,14 @@ namespace Geta.Optimizely.ContentTypeIcons.Initialization
                     break;
             }
 
-            var rotate = treeIconAttribute?.Rotate ?? thumbnailIconAttribute?.Rotate;
+            var rotate = treeIconAttribute?.Rotate ?? thumbnailIconAttribute.Rotate;
 
             switch (rotate)
             {
                 case Rotations.Rotate90:
                 case Rotations.Rotate180:
                 case Rotations.Rotate270:
-                    builder.AppendFormat("fa-rotate-{0} ", (int)rotate);
+                    builder.AppendFormat("fa-rotate-{0} ", (int) rotate);
                     break;
                 case Rotations.FlipHorizontal:
                     builder.Append("fa-flip-horizontal ");
@@ -102,7 +106,10 @@ namespace Geta.Optimizely.ContentTypeIcons.Initialization
 
         private static string ToDashCase(string input)
         {
-            return string.Concat(input.Select((c, i) => i > 0 && char.IsUpper(c) && (!char.IsDigit(input[i - 1]) || !char.IsDigit(input[i - 2 > 0 ? i - 2 : 0])) ? "-" + c : c.ToString())).ToLower();
+            return string.Concat(input.Select((c, i) =>
+                i > 0 && char.IsUpper(c) && (!char.IsDigit(input[i - 1]) || !char.IsDigit(input[i - 2 > 0 ? i - 2 : 0]))
+                    ? "-" + c
+                    : c.ToString())).ToLower();
         }
 
         public void Uninitialize(InitializationEngine context)

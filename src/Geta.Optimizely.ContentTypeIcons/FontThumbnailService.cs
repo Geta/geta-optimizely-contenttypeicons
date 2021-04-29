@@ -5,15 +5,22 @@ using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.IO;
 using System.Runtime.InteropServices;
-using EPiServer.ServiceLocation;
 using EPiServer.Web;
+using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
 using Geta.Optimizely.ContentTypeIcons.Settings;
+using Microsoft.Extensions.Options;
 
 namespace Geta.Optimizely.ContentTypeIcons
 {
-    [ServiceConfiguration(typeof(IFontThumbnailService))]
     public class FontThumbnailService : IFontThumbnailService
     {
+        private readonly ContentTypeIconOptions _configuration;
+
+        public FontThumbnailService(IOptions<ContentTypeIconOptions> options)
+        {
+            _configuration = options.Value;
+        }
+
         /// <summary>
         /// Loads or creates a thumbnail using the given settings
         /// </summary>
@@ -26,38 +33,29 @@ namespace Geta.Optimizely.ContentTypeIcons
 
             if (File.Exists(cachePath))
             {
-                using (var bmpTemp = new Bitmap(cachePath))
-                {
-                    return new Bitmap(bmpTemp);
-                }
+                using var bmpTemp = new Bitmap(cachePath);
+                return new Bitmap(bmpTemp);
             }
             else
             {
-                using (var fileStream = File.Create(cachePath))
-                using (var stream = GenerateImage(settings))
-                using (var bmpTemp = new Bitmap(stream))
-                {
-                    stream.Seek(0, SeekOrigin.Begin);
-                    stream.CopyTo(fileStream);
-                    stream.Dispose();
-                    stream.Close();
+                using var fileStream = File.Create(cachePath);
+                using var stream = GenerateImage(settings);
+                using var bmpTemp = new Bitmap(stream);
 
-                    return new Bitmap(bmpTemp);
-                }
+                stream.Seek(0, SeekOrigin.Begin);
+                stream.CopyTo(fileStream);
+                stream.Dispose();
+                stream.Close();
+
+                return new Bitmap(bmpTemp);
             }
         }
 
         internal virtual MemoryStream GenerateImage(ThumbnailSettings settings)
         {
-            FontFamily family;
-            if (settings.UseEmbeddedFont)
-            {
-                family = LoadFontFamilyFromEmbeddedResource(settings.EmbeddedFont);
-            }
-            else
-            {
-                family = LoadFontFamilyFromDisk(settings.CustomFontName);
-            }
+            var family = settings.UseEmbeddedFont
+                ? LoadFontFamilyFromEmbeddedResource(settings.EmbeddedFont)
+                : LoadFontFamilyFromDisk(settings.CustomFontName);
 
             var cc = new ColorConverter();
             var bg = (Color)cc.ConvertFrom(settings.BackgroundColor);
@@ -66,9 +64,10 @@ namespace Geta.Optimizely.ContentTypeIcons
             var stream = new MemoryStream();
 
             using (var font = new Font(family, settings.FontSize))
-            using (var bitmap = new Bitmap(settings.Width, settings.Height, PixelFormat.Format24bppRgb))
-            using (var g = Graphics.FromImage(bitmap))
             {
+                using var bitmap = new Bitmap(settings.Width, settings.Height, PixelFormat.Format24bppRgb);
+                using var g = Graphics.FromImage(bitmap);
+
                 g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
                 g.InterpolationMode = InterpolationMode.HighQualityBilinear;
                 g.PixelOffsetMode = PixelOffsetMode.HighQuality;
@@ -94,10 +93,10 @@ namespace Geta.Optimizely.ContentTypeIcons
                     format.Alignment = StringAlignment.Center;
                     var displayRectangle = new Rectangle(new Point(0, 0), new Size(settings.Width, settings.Height));
                     var chr = char.ConvertFromUtf32(settings.Character);
-                    using (var brush = new SolidBrush(fg))
-                    {
-                        g.DrawString(chr, font, brush, displayRectangle, format);
-                    }
+
+                    using var brush = new SolidBrush(fg);
+
+                    g.DrawString(chr, font, brush, displayRectangle, format);
                 }
 
                 switch (settings.Rotate)
@@ -165,7 +164,7 @@ namespace Geta.Optimizely.ContentTypeIcons
 
             if (!(cache[cacheKey] is PrivateFontCollection fontCollection))
             {
-                var customFontFolder = ConfigurationManager.AppSettings[Constants.AppSettings.CustomFontPath] ?? Constants.DefaultCustomFontPath;
+                var customFontFolder = _configuration.CustomFontPath;
                 var fontPath = $"{customFontFolder}{fileName}";
 
                 var rebased = VirtualPathUtilityEx.RebasePhysicalPath(fontPath);
@@ -188,8 +187,7 @@ namespace Geta.Optimizely.ContentTypeIcons
 
         protected virtual string GetFileFullPath(string fileName)
         {
-            string rootPath = ConfigurationManager.AppSettings[Constants.AppSettings.CachePath] ?? Constants.DefaultCachePath;
-
+            string rootPath = _configuration.CachePath;
             return VirtualPathUtilityEx.RebasePhysicalPath(rootPath + fileName);
         }
 

@@ -1,12 +1,19 @@
 ﻿using System;
 using System.Linq;
 using System.Web;
+using EPiServer.ServiceLocation;
+using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
 using Geta.Optimizely.ContentTypeIcons.Settings;
+using Microsoft.Extensions.Options;
 
 namespace Geta.Optimizely.ContentTypeIcons
 {
     internal static class ImageUrlHelper
     {
+#pragma warning disable 649
+        private static Injected<IOptions<ContentTypeIconOptions>> _injectedOptions; // TODO: see if can use proper DI.
+#pragma warning restore 649
+
         public static string GetUrl(FontAwesome icon, string backgroundColor = "", string foregroundColor = "", int fontSize = -1, Rotations rotate = Rotations.None)
         {
             return BuildSettings(icon, backgroundColor, foregroundColor, fontSize, rotate);
@@ -80,36 +87,20 @@ namespace Geta.Optimizely.ContentTypeIcons
 
         public static ThumbnailSettings GetSettings(string backgroundColor, string foregroundColor, int fontSize)
         {
-            var settings = new ThumbnailSettings();
+            var configuration = _injectedOptions.Service.Value;
 
-            if (!string.IsNullOrEmpty(backgroundColor))
+            var settings = new ThumbnailSettings
             {
-                settings.BackgroundColor = backgroundColor;
-            }
-            else
-            {
-                var cfg = ConfigurationManager.AppSettings[Constants.AppSettings.BackgroundColor] ?? string.Empty;
-                settings.BackgroundColor = string.IsNullOrEmpty(cfg) ? Constants.DefaultBackgroundColor : cfg;
-            }
-
-            if (!string.IsNullOrEmpty(foregroundColor))
-            {
-                settings.ForegroundColor = foregroundColor;
-            }
-            else
-            {
-                var cfg = ConfigurationManager.AppSettings[Constants.AppSettings.ForegroundColor] ?? string.Empty;
-                settings.ForegroundColor = string.IsNullOrEmpty(cfg) ? Constants.DefaultForegroundColor : cfg;
-            }
-
-            if (fontSize < 0)
-            {
-                int.TryParse(ConfigurationManager.AppSettings[Constants.AppSettings.FontSize], out fontSize);
-            }
-
-            settings.FontSize = fontSize > 0 ? fontSize : Constants.DefaultFontSize;
-            settings.Width = Constants.DefaultWidth;
-            settings.Height = Constants.DefaultHeight;
+                BackgroundColor = string.IsNullOrEmpty(backgroundColor)
+                    ? configuration.BackgroundColor
+                    : backgroundColor,
+                ForegroundColor = string.IsNullOrEmpty(foregroundColor)
+                    ? configuration.ForegroundColor
+                    : foregroundColor,
+                FontSize = fontSize > 0 ? fontSize : configuration.FontSize,
+                Width = ContentTypeIconOptions.DefaultWidth,
+                Height = ContentTypeIconOptions.DefaultHeight
+            };
 
             return settings;
         }

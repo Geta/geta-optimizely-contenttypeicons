@@ -28,8 +28,6 @@ namespace Geta.Optimizely.ContentTypeIcons.Mvc
             context.HttpContext.Response.Clear();
             context.HttpContext.Response.ContentType = FormatMap[ImageFormat];
 
-            Image.
-
             Image.Save(context.HttpContext.Response.OutputStream, ImageFormat);
         }
 
