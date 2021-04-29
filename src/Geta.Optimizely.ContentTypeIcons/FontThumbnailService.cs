@@ -8,16 +8,19 @@ using System.Runtime.InteropServices;
 using EPiServer.Web;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
 using Geta.Optimizely.ContentTypeIcons.Settings;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 
 namespace Geta.Optimizely.ContentTypeIcons
 {
     public class FontThumbnailService : IFontThumbnailService
     {
+        private readonly IMemoryCache _cache;
         private readonly ContentTypeIconOptions _configuration;
 
-        public FontThumbnailService(IOptions<ContentTypeIconOptions> options)
+        public FontThumbnailService(IOptions<ContentTypeIconOptions> options, IMemoryCache cache)
         {
+            _cache = cache;
             _configuration = options.Value;
         }
 
@@ -58,8 +61,8 @@ namespace Geta.Optimizely.ContentTypeIcons
                 : LoadFontFamilyFromDisk(settings.CustomFontName);
 
             var cc = new ColorConverter();
-            var bg = (Color)cc.ConvertFrom(settings.BackgroundColor);
-            var fg = (Color)cc.ConvertFrom(settings.ForegroundColor);
+            var bg = (Color) cc.ConvertFrom(settings.BackgroundColor);
+            var fg = (Color) cc.ConvertFrom(settings.ForegroundColor);
 
             var stream = new MemoryStream();
 
@@ -81,7 +84,7 @@ namespace Geta.Optimizely.ContentTypeIcons
                     case Rotations.Rotate180:
                     case Rotations.Rotate270:
                         g.TranslateTransform(settings.Width / 2, settings.Height / 2);
-                        g.RotateTransform((int)settings.Rotate);
+                        g.RotateTransform((int) settings.Rotate);
                         g.TranslateTransform(-(settings.Width / 2), -(settings.Height / 2));
                         break;
                 }
@@ -108,6 +111,7 @@ namespace Geta.Optimizely.ContentTypeIcons
                         bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
                         break;
                 }
+
                 bitmap.Save(stream, ImageFormat.Png);
             }
 
@@ -117,10 +121,10 @@ namespace Geta.Optimizely.ContentTypeIcons
 
         protected virtual FontFamily LoadFontFamilyFromEmbeddedResource(string fileName)
         {
-            var cache = MemoryCache.Default;
             var cacheKey = $"geta.fontawesome.embedded.fontcollection.{fileName}";
+            _cache.TryGetValue(cacheKey, out PrivateFontCollection fontCollection);
 
-            if (!(cache[cacheKey] is PrivateFontCollection fontCollection))
+            if (fontCollection == null)
             {
                 try
                 {
@@ -131,22 +135,22 @@ namespace Geta.Optimizely.ContentTypeIcons
                     // receive resource stream
                     var fontStream = typeof(FontThumbnailService).Assembly.GetManifestResourceStream(resource);
                     // create an unsafe memory block for the font data
-                    var data = Marshal.AllocCoTaskMem((int)fontStream.Length);
+                    var data = Marshal.AllocCoTaskMem((int) fontStream.Length);
                     // create a buffer to read in to
                     var fontdata = new byte[fontStream.Length];
                     // read the font data from the resource
-                    fontStream.Read(fontdata, 0, (int)fontStream.Length);
+                    fontStream.Read(fontdata, 0, (int) fontStream.Length);
                     // copy the bytes to the unsafe memory block
-                    Marshal.Copy(fontdata, 0, data, (int)fontStream.Length);
+                    Marshal.Copy(fontdata, 0, data, (int) fontStream.Length);
                     // pass the font to the font collection
-                    fontCollection.AddMemoryFont(data, (int)fontStream.Length);
+                    fontCollection.AddMemoryFont(data, (int) fontStream.Length);
                     // close the resource stream
                     fontStream.Close();
                     fontStream.Dispose();
                     // free the unsafe memory
                     Marshal.FreeCoTaskMem(data);
 
-                    cache.Set(cacheKey, fontCollection, DateTimeOffset.Now.AddMinutes(5));
+                    _cache.Set(cacheKey, fontCollection, DateTimeOffset.Now.AddMinutes(5));
                 }
                 catch (Exception ex)
                 {
@@ -159,10 +163,10 @@ namespace Geta.Optimizely.ContentTypeIcons
 
         protected virtual FontFamily LoadFontFamilyFromDisk(string fileName)
         {
-            var cache = MemoryCache.Default;
             var cacheKey = $"geta.fontawesome.disk.fontcollection.{fileName}";
+            _cache.TryGetValue(cacheKey, out PrivateFontCollection fontCollection);
 
-            if (!(cache[cacheKey] is PrivateFontCollection fontCollection))
+            if (fontCollection == null)
             {
                 var customFontFolder = _configuration.CustomFontPath;
                 var fontPath = $"{customFontFolder}{fileName}";
@@ -174,7 +178,7 @@ namespace Geta.Optimizely.ContentTypeIcons
                     fontCollection = new PrivateFontCollection();
                     fontCollection.AddFontFile(rebased);
                     RemoveFontResourceEx(rebased, 16, IntPtr.Zero);
-                    cache.Set(cacheKey, fontCollection, DateTimeOffset.Now.AddMinutes(5));
+                    _cache.Set(cacheKey, fontCollection, DateTimeOffset.Now.AddMinutes(5));
                 }
                 catch (Exception ex)
                 {
@@ -187,7 +191,7 @@ namespace Geta.Optimizely.ContentTypeIcons
 
         protected virtual string GetFileFullPath(string fileName)
         {
-            string rootPath = _configuration.CachePath;
+            var rootPath = _configuration.CachePath;
             return VirtualPathUtilityEx.RebasePhysicalPath(rootPath + fileName);
         }
 
