@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using System.Linq;
 
 namespace Geta.Optimizely.ContentTypeIcons.ResourceProvider
@@ -16,4 +16,4 @@ namespace Geta.Optimizely.ContentTypeIcons.ResourceProvider
 
         public override IEnumerable Files => Enumerable.Empty<IEnumerable>();
     }
-}
+}*/

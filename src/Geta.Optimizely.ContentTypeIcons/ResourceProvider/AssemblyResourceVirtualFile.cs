@@ -1,4 +1,4 @@
-﻿using System.IO;
+﻿/*using System.IO;
 using EPiServer.ServiceLocation;
 using EPiServer.Web;
 
@@ -28,4 +28,4 @@ namespace Geta.Optimizely.ContentTypeIcons.ResourceProvider
             return null;
         }
     }
-}
+}*/

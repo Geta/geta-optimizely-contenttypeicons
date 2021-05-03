@@ -1,4 +1,5 @@
-﻿namespace Geta.Optimizely.ContentTypeIcons.ResourceProvider
+﻿/*
+namespace Geta.Optimizely.ContentTypeIcons.ResourceProvider
 {
     internal class NeverExpiresCacheCacheDependency : CacheDependency
     {
@@ -7,3 +8,4 @@
         }
     }
 }
+*/
