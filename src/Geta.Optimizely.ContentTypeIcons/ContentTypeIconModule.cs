@@ -4,14 +4,14 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Geta.Optimizely.ContentTypeIcons
 {
-    public class FontThumbnailModule : ShellModule
+    public class ContentTypeIconModule : ShellModule
     {
-        public FontThumbnailModule(string name, string routeBasePath, string resourceBasePath)
+        public ContentTypeIconModule(string name, string routeBasePath, string resourceBasePath)
             : base(name, routeBasePath, resourceBasePath)
         {
         }
 
-        public FontThumbnailModule(string name, string routeBasePath, string resourceBasePath, ITypeScannerLookup typeScannerLookup, IFileProvider virtualPathProvider)
+        public ContentTypeIconModule(string name, string routeBasePath, string resourceBasePath, ITypeScannerLookup typeScannerLookup, IFileProvider virtualPathProvider)
             : base(name, routeBasePath, resourceBasePath, typeScannerLookup, virtualPathProvider)
         {
         }

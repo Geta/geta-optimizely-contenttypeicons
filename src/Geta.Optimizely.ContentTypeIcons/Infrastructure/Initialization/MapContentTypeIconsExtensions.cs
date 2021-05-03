@@ -8,9 +8,9 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Initialization
         public static IEndpointRouteBuilder MapContentTypeIcons(this IEndpointRouteBuilder builder)
         {
             builder.MapControllerRoute(
-                "ThumbnailIcon",
+                "ContentTypeIcon",
                 Constants.UrlPattern,
-                new {controller = "ThumbnailIcon", action = "GenerateThumbnail"});
+                new {controller = "ContentTypeIcon", action = "GenerateIcon"});
 
             return builder;
         }

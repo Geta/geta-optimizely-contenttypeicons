@@ -41,22 +41,22 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Initialization
 
         internal void EnrichDescriptorWithIconClass(UIDescriptor descriptor, ContentTypeIconOptions configuration)
         {
-            var thumbnailIconAttribute = descriptor.ForType.GetCustomAttribute<ThumbnailIconAttribute>(false);
+            var contentTypeIconAttribute = descriptor.ForType.GetCustomAttribute<ContentTypeIconAttribute>(false);
             var treeIconAttribute = descriptor.ForType.GetCustomAttribute<TreeIconAttribute>(false);
 
-            if (thumbnailIconAttribute == null && treeIconAttribute?.Icon == null) return;
+            if (contentTypeIconAttribute == null && treeIconAttribute?.Icon == null) return;
 
             if ((configuration.EnableTreeIcons && treeIconAttribute?.Ignore != true) || treeIconAttribute?.Icon != null)
             {
-                descriptor.IconClass = BuildIconClassNames(thumbnailIconAttribute, treeIconAttribute);
+                descriptor.IconClass = BuildIconClassNames(contentTypeIconAttribute, treeIconAttribute);
                 EnabledAndInUse = true;
             }
         }
 
-        private static string BuildIconClassNames(ThumbnailIconAttribute thumbnailIconAttribute,
+        private static string BuildIconClassNames(ContentTypeIconAttribute contentTypeIconAttribute,
             TreeIconAttribute treeIconAttribute)
         {
-            var icon = treeIconAttribute?.Icon ?? thumbnailIconAttribute?.Icon;
+            var icon = treeIconAttribute?.Icon ?? contentTypeIconAttribute?.Icon;
             if (icon == null) return string.Empty;
 
             var builder = new StringBuilder();
@@ -82,7 +82,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Initialization
                     break;
             }
 
-            var rotate = treeIconAttribute?.Rotate ?? thumbnailIconAttribute.Rotate;
+            var rotate = treeIconAttribute?.Rotate ?? contentTypeIconAttribute.Rotate;
 
             switch (rotate)
             {

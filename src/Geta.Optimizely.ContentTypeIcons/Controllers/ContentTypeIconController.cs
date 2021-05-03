@@ -8,26 +8,26 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Geta.Optimizely.ContentTypeIcons.Controllers
 {
-    public class ThumbnailIconController : Controller
+    public class ContentTypeIconController : Controller
     {
-        private readonly IFontThumbnailService _thumbnailService;
+        private readonly IContentTypeIconService _contentTypeIconService;
 
-        public ThumbnailIconController(IFontThumbnailService thumbnailService)
+        public ContentTypeIconController(IContentTypeIconService contentTypeIconService)
         {
-            _thumbnailService = thumbnailService ?? throw new ArgumentNullException(nameof(thumbnailService));
+            _contentTypeIconService = contentTypeIconService ?? throw new ArgumentNullException(nameof(contentTypeIconService));
         }
 
         [Authorize(Roles = "Administrators, CmsAdmins, CmsEditors, WebAdmins, WebEditors, ThumbnailGroup")]
-        public ActionResult GenerateThumbnail(ThumbnailSettings settings)
+        public ActionResult GenerateIcon(ContentTypeIconSettings settings)
         {
             if (!CheckValidFormatHtmlColor(settings.BackgroundColor) || !CheckValidFormatHtmlColor(settings.ForegroundColor))
             {
                 throw new Exception("Unknown foreground or background color");
             }
 
-            var image = _thumbnailService.LoadThumbnailImage(settings);
+            var image = _contentTypeIconService.LoadIconImage(settings);
 
-            return new ImageResult() { Image = image, ImageFormat = ImageFormat.Png };
+            return new ImageResult { Image = image, ImageFormat = ImageFormat.Png };
         }
 
         internal bool CheckValidFormatHtmlColor(string inputColor)

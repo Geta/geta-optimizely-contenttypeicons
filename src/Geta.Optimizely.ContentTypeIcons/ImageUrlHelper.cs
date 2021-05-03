@@ -77,7 +77,7 @@ namespace Geta.Optimizely.ContentTypeIcons
         }
 
         // Helper methods
-        private static string CompileUrl(ThumbnailSettings settings)
+        private static string CompileUrl(ContentTypeIconSettings settings)
         {
             var nvc = settings.GetUrlParameters();
             var parameters = string.Join("&", nvc.AllKeys.Select(a => a + "=" + HttpUtility.UrlEncode(nvc[a])));
@@ -85,11 +85,11 @@ namespace Geta.Optimizely.ContentTypeIcons
             return $"/{Constants.UrlPattern}?{parameters}";
         }
 
-        public static ThumbnailSettings GetSettings(string backgroundColor, string foregroundColor, int fontSize)
+        public static ContentTypeIconSettings GetSettings(string backgroundColor, string foregroundColor, int fontSize)
         {
             var configuration = _injectedOptions.Service.Value;
 
-            var settings = new ThumbnailSettings
+            var settings = new ContentTypeIconSettings
             {
                 BackgroundColor = string.IsNullOrEmpty(backgroundColor)
                     ? configuration.BackgroundColor

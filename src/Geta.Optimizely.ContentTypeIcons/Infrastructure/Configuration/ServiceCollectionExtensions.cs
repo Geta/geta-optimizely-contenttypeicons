@@ -10,7 +10,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
             this IServiceCollection services,
             Action<ContentTypeIconOptions> setupAction)
         {
-            services.AddTransient<IFontThumbnailService, FontThumbnailService>();
+            services.AddTransient<IContentTypeIconService, ContentTypeIconService>();
 
             services.AddOptions<ContentTypeIconOptions>().Configure<IConfiguration>((options, configuration) =>
             {

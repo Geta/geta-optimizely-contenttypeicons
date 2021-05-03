@@ -13,23 +13,23 @@ using Microsoft.Extensions.Options;
 
 namespace Geta.Optimizely.ContentTypeIcons
 {
-    public class FontThumbnailService : IFontThumbnailService
+    public class ContentTypeIconService : IContentTypeIconService
     {
         private readonly IMemoryCache _cache;
         private readonly ContentTypeIconOptions _configuration;
 
-        public FontThumbnailService(IOptions<ContentTypeIconOptions> options, IMemoryCache cache)
+        public ContentTypeIconService(IOptions<ContentTypeIconOptions> options, IMemoryCache cache)
         {
             _cache = cache;
             _configuration = options.Value;
         }
 
         /// <summary>
-        /// Loads or creates a thumbnail using the given settings
+        /// Loads or creates a icon using the given settings
         /// </summary>
-        /// <param name="settings">The ThumbnailSettings parameter</param>
+        /// <param name="settings">The ContentTypeIconSettings parameter</param>
         /// <returns></returns>
-        public virtual Image LoadThumbnailImage(ThumbnailSettings settings)
+        public virtual Image LoadIconImage(ContentTypeIconSettings settings)
         {
             var fileName = settings.GetFileName(".png");
             var cachePath = GetFileFullPath(fileName);
@@ -54,7 +54,7 @@ namespace Geta.Optimizely.ContentTypeIcons
             }
         }
 
-        internal virtual MemoryStream GenerateImage(ThumbnailSettings settings)
+        internal virtual MemoryStream GenerateImage(ContentTypeIconSettings settings)
         {
             var family = settings.UseEmbeddedFont
                 ? LoadFontFamilyFromEmbeddedResource(settings.EmbeddedFont)
@@ -133,7 +133,7 @@ namespace Geta.Optimizely.ContentTypeIcons
                     // specify embedded resource name
                     var resource = $"{Constants.EmbeddedFontPath}.{fileName}";
                     // receive resource stream
-                    var fontStream = typeof(FontThumbnailService).Assembly.GetManifestResourceStream(resource);
+                    var fontStream = typeof(ContentTypeIconService).Assembly.GetManifestResourceStream(resource);
                     // create an unsafe memory block for the font data
                     var data = Marshal.AllocCoTaskMem((int) fontStream.Length);
                     // create a buffer to read in to

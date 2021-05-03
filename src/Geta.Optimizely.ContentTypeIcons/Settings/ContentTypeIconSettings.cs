@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Geta.Optimizely.ContentTypeIcons.Settings
 {
-    public class ThumbnailSettings
+    public class ContentTypeIconSettings
     {
         /// <summary>
         ///  The BackgroundColor to be used when rendering the image (specified in hexadecimal, for example #000000)
