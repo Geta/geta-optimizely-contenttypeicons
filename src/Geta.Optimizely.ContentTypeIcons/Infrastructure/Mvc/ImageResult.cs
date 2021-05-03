@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Geta.Optimizely.ContentTypeIcons.Mvc
+namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Mvc
 {
     public class ImageResult : ActionResult
     {
@@ -28,7 +28,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Mvc
 
             context.HttpContext.Response.Clear();
             context.HttpContext.Response.ContentType = FormatMap[ImageFormat];
-            Image.Save(context.HttpContext.Response.Body, ImageFormat); // TODO: See how to better handle it.
+            Image.Save(context.HttpContext.Response.Body, ImageFormat);
         }
 
         public override Task ExecuteResultAsync(ActionContext context)

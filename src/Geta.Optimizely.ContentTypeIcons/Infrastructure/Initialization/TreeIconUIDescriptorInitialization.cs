@@ -11,11 +11,11 @@ using Geta.Optimizely.ContentTypeIcons.Attributes;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
 using Microsoft.Extensions.Options;
 
-namespace Geta.Optimizely.ContentTypeIcons.Initialization
+namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Initialization
 {
     [InitializableModule]
     [ModuleDependency(typeof(InitializableModule))]
-    internal class TreeIconUIDescriptorInitialization : IInitializableModule
+    internal class TreeIconUiDescriptorInitialization : IInitializableModule
     {
         public static bool EnabledAndInUse { get; internal set; }
         public static bool FontAwesomeVersion4InUse { get; internal set; }

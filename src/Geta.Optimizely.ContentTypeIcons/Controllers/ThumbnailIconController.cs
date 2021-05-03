@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing.Imaging;
 using System.Text.RegularExpressions;
-using Geta.Optimizely.ContentTypeIcons.Mvc;
+using Geta.Optimizely.ContentTypeIcons.Infrastructure.Mvc;
 using Geta.Optimizely.ContentTypeIcons.Settings;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
