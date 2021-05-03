@@ -2,8 +2,8 @@
 {
     public static class Constants
     {
-        public static string ModuleName = "Geta.Epi.FontThumbnail";
-        public static string UrlPattern = "Geta_Epi_ThumbnailIcon";
-        public static string EmbeddedFontPath = "Geta.Epi.FontThumbnail.ClientResources";
+        public static string ModuleName = "Geta.Optimizely.ContentTypeIcons";
+        public static string UrlPattern = "Geta_Optimizely_ContentTypeIcons";
+        public static string EmbeddedFontPath = "Geta.Optimizely.ContentTypeIcons.ClientResources";
     }
 }
