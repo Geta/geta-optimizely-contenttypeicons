@@ -82,7 +82,7 @@ namespace Geta.Optimizely.ContentTypeIcons
             var nvc = settings.GetUrlParameters();
             var parameters = string.Join("&", nvc.AllKeys.Select(a => a + "=" + HttpUtility.UrlEncode(nvc[a])));
 
-            return $"/{Constants.UrlFragment}?{parameters}";
+            return $"/{Constants.UrlPattern}?{parameters}";
         }
 
         public static ThumbnailSettings GetSettings(string backgroundColor, string foregroundColor, int fontSize)

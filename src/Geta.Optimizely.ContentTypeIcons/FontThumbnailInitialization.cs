@@ -19,9 +19,6 @@ namespace Geta.Optimizely.ContentTypeIcons
                 return;
             }
 
-            // the route for the controller responsible for generating or loading the image from disk
-            RouteTable.Routes.MapRoute("ThumbnailIcon", Constants.UrlFragment, new { controller = "ThumbnailIcon", action = "GenerateThumbnail" });
-
             // verify cache directory exists
             var fullPath = VirtualPathUtilityEx.RebasePhysicalPath(Constants.DefaultCachePath);
             if (!Directory.Exists(fullPath))
