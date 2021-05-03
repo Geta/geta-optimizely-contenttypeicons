@@ -41,8 +41,8 @@ namespace Geta.Optimizely.ContentTypeIcons
             }
             else
             {
-                using var fileStream = File.Create(cachePath);
                 using var stream = GenerateImage(settings);
+                using var fileStream = File.Create(cachePath);
                 using var bmpTemp = new Bitmap(stream);
 
                 stream.Seek(0, SeekOrigin.Begin);
