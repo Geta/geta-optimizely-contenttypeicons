@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Linq;
+using EPiServer.DependencyInjection;
+using EPiServer.Shell.Modules;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,6 +13,8 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
             this IServiceCollection services,
             Action<ContentTypeIconOptions> setupAction)
         {
+            AddModule(services);
+
             services.AddTransient<IContentTypeIconService, ContentTypeIconService>();
 
             services.AddOptions<ContentTypeIconOptions>().Configure<IConfiguration>((options, configuration) =>
@@ -19,6 +24,19 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
             });
 
             return services;
+        }
+
+        private static void AddModule(IServiceCollection services)
+        {
+            services.AddCmsUI();
+            services.Configure<ProtectedModuleOptions>(
+                pm =>
+                {
+                    if (!pm.Items.Any(i => i.Name.Equals(Constants.ModuleName, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        pm.Items.Add(new ModuleDetails { Name = Constants.ModuleName });
+                    }
+                });
         }
     }
 }
