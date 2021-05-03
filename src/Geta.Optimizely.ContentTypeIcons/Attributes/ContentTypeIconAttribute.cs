@@ -10,15 +10,21 @@ namespace Geta.Optimizely.ContentTypeIcons.Attributes
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public class ContentTypeIconAttribute : ImageUrlAttribute
     {
-        internal Enum Icon { get; set; }
-        internal Rotations Rotate { get; set; }
+        public string CustomFont { get; }
+        public int Character { get; }
+        internal Enum Icon { get; }
+        internal string BackgroundColor { get; } = "";
+        internal string ForegroundColor { get; } = "";
+        internal int FontSize { get; } = -1;
+        internal Rotations Rotate { get; } = Rotations.None;
+        internal bool IsCustomFont { get; } = false;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Geta.Optimizely.ContentTypeIcons.Attributes.ContentTypeIconAttribute" /> class.
         /// </summary>
         /// <param name="icon">The FontAwesome icon to be used</param>
         public ContentTypeIconAttribute(FontAwesome icon)
-            : base(ImageUrlHelper.GetUrl(icon))
+            : base(string.Empty)
         {
             Icon = icon;
         }
@@ -28,7 +34,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Attributes
         /// </summary>
         /// <param name="icon">The FontAwesome5Brands icon to be used</param>
         public ContentTypeIconAttribute(FontAwesome5Brands icon)
-            : base(ImageUrlHelper.GetUrl(icon))
+            : base(string.Empty)
         {
             Icon = icon;
         }
@@ -38,7 +44,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Attributes
         /// </summary>
         /// <param name="icon">The FontAwesome5Regular icon to be used</param>
         public ContentTypeIconAttribute(FontAwesome5Regular icon)
-            : base(ImageUrlHelper.GetUrl(icon))
+            : base(string.Empty)
         {
             Icon = icon;
         }
@@ -48,7 +54,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Attributes
         /// </summary>
         /// <param name="icon">The FontAwesome5Solid icon to be used</param>
         public ContentTypeIconAttribute(FontAwesome5Solid icon)
-            : base(ImageUrlHelper.GetUrl(icon))
+            : base(string.Empty)
         {
             Icon = icon;
         }
@@ -62,9 +68,12 @@ namespace Geta.Optimizely.ContentTypeIcons.Attributes
         /// <param name="fontSize">The fontSize to be used, default value is 40</param>
         /// <param name="rotate">The rotation to be used, defaults to None</param>
         public ContentTypeIconAttribute(FontAwesome icon, string backgroundColor = "", string foregroundColor = "", int fontSize = -1, Rotations rotate = Rotations.None)
-            : base(ImageUrlHelper.GetUrl(icon, backgroundColor, foregroundColor, fontSize, rotate))
+            : base(string.Empty)
         {
             Icon = icon;
+            BackgroundColor = backgroundColor;
+            ForegroundColor = foregroundColor;
+            FontSize = fontSize;
             Rotate = rotate;
         }
 
@@ -77,9 +86,12 @@ namespace Geta.Optimizely.ContentTypeIcons.Attributes
         /// <param name="fontSize">The fontSize to be used, default value is 40</param>
         /// <param name="rotate">The rotation to be used, defaults to None</param>
         public ContentTypeIconAttribute(FontAwesome5Brands icon, string backgroundColor = "", string foregroundColor = "", int fontSize = -1, Rotations rotate = Rotations.None)
-            : base(ImageUrlHelper.GetUrl(icon, backgroundColor, foregroundColor, fontSize, rotate))
+            : base(string.Empty)
         {
             Icon = icon;
+            BackgroundColor = backgroundColor;
+            ForegroundColor = foregroundColor;
+            FontSize = fontSize;
             Rotate = rotate;
         }
 
@@ -92,9 +104,12 @@ namespace Geta.Optimizely.ContentTypeIcons.Attributes
         /// <param name="fontSize">The fontSize to be used, default value is 40</param>
         /// <param name="rotate">The rotation to be used, defaults to None</param>
         public ContentTypeIconAttribute(FontAwesome5Regular icon, string backgroundColor = "", string foregroundColor = "", int fontSize = -1, Rotations rotate = Rotations.None)
-            : base(ImageUrlHelper.GetUrl(icon, backgroundColor, foregroundColor, fontSize, rotate))
+            : base(string.Empty)
         {
             Icon = icon;
+            BackgroundColor = backgroundColor;
+            ForegroundColor = foregroundColor;
+            FontSize = fontSize;
             Rotate = rotate;
         }
         
@@ -107,9 +122,12 @@ namespace Geta.Optimizely.ContentTypeIcons.Attributes
         /// <param name="fontSize">The fontSize to be used, default value is 40</param>
         /// <param name="rotate">The rotation to be used, defaults to None</param>
         public ContentTypeIconAttribute(FontAwesome5Solid icon, string backgroundColor = "", string foregroundColor = "", int fontSize = -1, Rotations rotate = Rotations.None)
-            : base(ImageUrlHelper.GetUrl(icon, backgroundColor, foregroundColor, fontSize, rotate))
+            : base(string.Empty)
         {
             Icon = icon;
+            BackgroundColor = backgroundColor;
+            ForegroundColor = foregroundColor;
+            FontSize = fontSize;
             Rotate = rotate;
         }
 
@@ -122,10 +140,13 @@ namespace Geta.Optimizely.ContentTypeIcons.Attributes
         /// <param name="foregroundColor">The foregroundColor to be used when rendering the image (specified in hexadecimal, for example #ffffff) </param>
         /// <param name="fontSize">The fontSize to be used, default value is 40</param>
         public ContentTypeIconAttribute(FontAwesome icon, Rotations rotate = Rotations.None, string backgroundColor = "", string foregroundColor = "", int fontSize = -1)
-            : base(ImageUrlHelper.GetUrl(icon, backgroundColor, foregroundColor, fontSize, rotate))
+            : base(string.Empty)
         {
             Icon = icon;
             Rotate = rotate;
+            BackgroundColor = backgroundColor;
+            ForegroundColor = foregroundColor;
+            FontSize = fontSize;
         }
 
         /// <summary>
@@ -137,10 +158,13 @@ namespace Geta.Optimizely.ContentTypeIcons.Attributes
         /// <param name="foregroundColor">The foregroundColor to be used when rendering the image (specified in hexadecimal, for example #ffffff) </param>
         /// <param name="fontSize">The fontSize to be used, default value is 40</param>
         public ContentTypeIconAttribute(FontAwesome5Brands icon, Rotations rotate = Rotations.None, string backgroundColor = "", string foregroundColor = "", int fontSize = -1)
-            : base(ImageUrlHelper.GetUrl(icon, backgroundColor, foregroundColor, fontSize, rotate))
+            : base(string.Empty)
         {
             Icon = icon;
             Rotate = rotate;
+            BackgroundColor = backgroundColor;
+            ForegroundColor = foregroundColor;
+            FontSize = fontSize;
         }
 
         /// <summary>
@@ -152,10 +176,13 @@ namespace Geta.Optimizely.ContentTypeIcons.Attributes
         /// <param name="foregroundColor">The foregroundColor to be used when rendering the image (specified in hexadecimal, for example #ffffff) </param>
         /// <param name="fontSize">The fontSize to be used, default value is 40</param>
         public ContentTypeIconAttribute(FontAwesome5Regular icon, Rotations rotate = Rotations.None, string backgroundColor = "", string foregroundColor = "", int fontSize = -1)
-            : base(ImageUrlHelper.GetUrl(icon, backgroundColor, foregroundColor, fontSize, rotate))
+            : base(string.Empty)
         {
             Icon = icon;
             Rotate = rotate;
+            BackgroundColor = backgroundColor;
+            ForegroundColor = foregroundColor;
+            FontSize = fontSize;
         }
 
         /// <summary>
@@ -167,10 +194,13 @@ namespace Geta.Optimizely.ContentTypeIcons.Attributes
         /// <param name="foregroundColor">The foregroundColor to be used when rendering the image (specified in hexadecimal, for example #ffffff) </param>
         /// <param name="fontSize">The fontSize to be used, default value is 40</param>
         public ContentTypeIconAttribute(FontAwesome5Solid icon, Rotations rotate = Rotations.None, string backgroundColor = "", string foregroundColor = "", int fontSize = -1)
-            : base(ImageUrlHelper.GetUrl(icon, backgroundColor, foregroundColor, fontSize, rotate))
+            : base(string.Empty)
         {
             Icon = icon;
             Rotate = rotate;
+            BackgroundColor = backgroundColor;
+            ForegroundColor = foregroundColor;
+            FontSize = fontSize;
         }
 
         
@@ -183,8 +213,19 @@ namespace Geta.Optimizely.ContentTypeIcons.Attributes
         /// <param name="foregroundColor">The foregroundColor to be used when rendering the image (specified in hexadecimal, for example #ffffff) </param>
         /// <param name="fontSize">The fontSize to be used, default value is 40</param>
         public ContentTypeIconAttribute(string customFont, int character, string backgroundColor = "", string foregroundColor = "", int fontSize = -1)
-            : base(ImageUrlHelper.GetUrl(customFont, character, backgroundColor, foregroundColor, fontSize))
+            : base(string.Empty)
         {
+            IsCustomFont = true;
+            CustomFont = customFont;
+            Character = character;
+            BackgroundColor = backgroundColor;
+            ForegroundColor = foregroundColor;
+            FontSize = fontSize;
         }
+
+        public override string Path =>
+            IsCustomFont
+                ? ImageUrlHelper.GetUrl(CustomFont, Character, BackgroundColor, ForegroundColor, FontSize)
+                : ImageUrlHelper.GetUrl(Icon, BackgroundColor, ForegroundColor, FontSize, Rotate);
     }
 }

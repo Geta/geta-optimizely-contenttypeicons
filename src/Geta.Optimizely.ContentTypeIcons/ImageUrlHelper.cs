@@ -14,22 +14,7 @@ namespace Geta.Optimizely.ContentTypeIcons
         private static Injected<IOptions<ContentTypeIconOptions>> _injectedOptions; // TODO: see if can use proper DI.
 #pragma warning restore 649
 
-        public static string GetUrl(FontAwesome icon, string backgroundColor = "", string foregroundColor = "", int fontSize = -1, Rotations rotate = Rotations.None)
-        {
-            return BuildSettings(icon, backgroundColor, foregroundColor, fontSize, rotate);
-        }
-
-        public static string GetUrl(FontAwesome5Brands icon, string backgroundColor = "", string foregroundColor = "", int fontSize = -1, Rotations rotate = Rotations.None)
-        {
-            return BuildSettings(icon, backgroundColor, foregroundColor, fontSize, rotate);
-        }
-
-        public static string GetUrl(FontAwesome5Regular icon, string backgroundColor = "", string foregroundColor = "", int fontSize = -1, Rotations rotate = Rotations.None)
-        {
-            return BuildSettings(icon, backgroundColor, foregroundColor, fontSize, rotate);
-        }
-
-        public static string GetUrl(FontAwesome5Solid icon, string backgroundColor = "", string foregroundColor = "", int fontSize = -1, Rotations rotate = Rotations.None)
+        public static string GetUrl(Enum icon, string backgroundColor = "", string foregroundColor = "", int fontSize = -1, Rotations rotate = Rotations.None)
         {
             return BuildSettings(icon, backgroundColor, foregroundColor, fontSize, rotate);
         }
