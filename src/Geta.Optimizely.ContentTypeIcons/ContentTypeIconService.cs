@@ -5,21 +5,28 @@ using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.IO;
 using System.Runtime.InteropServices;
+using EPiServer.Shell;
 using EPiServer.Web;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
 using Geta.Optimizely.ContentTypeIcons.Settings;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
 
 namespace Geta.Optimizely.ContentTypeIcons
 {
     public class ContentTypeIconService : IContentTypeIconService
     {
+        private readonly IFileProvider _fileProvider;
         private readonly IMemoryCache _cache;
         private readonly ContentTypeIconOptions _configuration;
 
-        public ContentTypeIconService(IOptions<ContentTypeIconOptions> options, IMemoryCache cache)
+        public ContentTypeIconService(
+            IOptions<ContentTypeIconOptions> options,
+            IFileProvider fileProvider,
+            IMemoryCache cache)
         {
+            _fileProvider = fileProvider;
             _cache = cache;
             _configuration = options.Value;
         }
@@ -57,7 +64,7 @@ namespace Geta.Optimizely.ContentTypeIcons
         internal virtual MemoryStream GenerateImage(ContentTypeIconSettings settings)
         {
             var family = settings.UseEmbeddedFont
-                ? LoadFontFamilyFromEmbeddedResource(settings.EmbeddedFont)
+                ? LoadFontFamilyFromClientResources(settings.EmbeddedFont)
                 : LoadFontFamilyFromDisk(settings.CustomFontName);
 
             var cc = new ColorConverter();
@@ -119,7 +126,7 @@ namespace Geta.Optimizely.ContentTypeIcons
             return stream;
         }
 
-        protected virtual FontFamily LoadFontFamilyFromEmbeddedResource(string fileName)
+        protected virtual FontFamily LoadFontFamilyFromClientResources(string fileName)
         {
             var cacheKey = $"geta.fontawesome.embedded.fontcollection.{fileName}";
             _cache.TryGetValue(cacheKey, out PrivateFontCollection fontCollection);
@@ -130,10 +137,11 @@ namespace Geta.Optimizely.ContentTypeIcons
                 {
                     fontCollection = new PrivateFontCollection();
 
-                    // specify embedded resource name
-                    var resource = $"{Constants.EmbeddedFontPath}.{fileName}";
-                    // receive resource stream
-                    var fontStream = typeof(ContentTypeIconService).Assembly.GetManifestResourceStream(resource);
+                    // var resource = $"{Constants.EmbeddedFontPath}.{fileName}";
+
+                    var path = Paths.ToResource(Constants.ModuleName, fileName);
+                    var file = _fileProvider.GetFileInfo(path);
+                    var fontStream = file.CreateReadStream();
                     // create an unsafe memory block for the font data
                     var data = Marshal.AllocCoTaskMem((int) fontStream.Length);
                     // create a buffer to read in to

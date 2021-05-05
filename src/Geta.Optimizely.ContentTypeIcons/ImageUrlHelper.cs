@@ -40,13 +40,13 @@ namespace Geta.Optimizely.ContentTypeIcons
             switch (icon)
             {
                 case FontAwesome _:
-                    return "fa4.fonts.fontawesome-webfont.ttf";
+                    return "fa4/fonts/fontawesome-webfont.ttf";
                 case FontAwesome5Brands _:
-                    return "fa5.webfonts.fa-brands-400.ttf";
+                    return "fa5/webfonts/fa-brands-400.ttf";
                 case FontAwesome5Regular _:
-                    return "fa5.webfonts.fa-regular-400.ttf";
+                    return "fa5/webfonts/fa-regular-400.ttf";
                 case FontAwesome5Solid _:
-                    return "fa5.webfonts.fa-solid-900.ttf";
+                    return "fa5/webfonts/fa-solid-900.ttf";
                 default:
                     return string.Empty;
             }
