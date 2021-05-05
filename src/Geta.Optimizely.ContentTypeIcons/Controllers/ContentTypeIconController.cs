@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Geta.Optimizely.ContentTypeIcons.Controllers
 {
+    [Route(Constants.RouteTemplate)]
     public class ContentTypeIconController : Controller
     {
         private readonly IContentTypeIconService _contentTypeIconService;
@@ -18,7 +19,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Controllers
         }
 
         [Authorize(Roles = "Administrators, CmsAdmins, CmsEditors, WebAdmins, WebEditors, ThumbnailGroup")]
-        public ActionResult GenerateIcon(ContentTypeIconSettings settings)
+        public ActionResult Index(ContentTypeIconSettings settings)
         {
             if (!CheckValidFormatHtmlColor(settings.BackgroundColor) || !CheckValidFormatHtmlColor(settings.ForegroundColor))
             {

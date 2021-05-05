@@ -2,8 +2,8 @@
 {
     public static class Constants
     {
-        public static string ModuleName = "Geta.Optimizely.ContentTypeIcons";
-        public static string UrlPattern = "Geta_Optimizely_ContentTypeIcons";
-        public static string EmbeddedFontPath = "Geta.Optimizely.ContentTypeIcons.ClientResources";
+        public const string ModuleName = "Geta.Optimizely.ContentTypeIcons";
+        public const string RouteTemplate = "Geta_Optimizely_ContentTypeIcons";
+        public const string EmbeddedFontPath = "Geta.Optimizely.ContentTypeIcons.ClientResources";
     }
 }

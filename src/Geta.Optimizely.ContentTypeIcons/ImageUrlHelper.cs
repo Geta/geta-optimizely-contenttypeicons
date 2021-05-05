@@ -67,7 +67,7 @@ namespace Geta.Optimizely.ContentTypeIcons
             var nvc = settings.GetUrlParameters();
             var parameters = string.Join("&", nvc.AllKeys.Select(a => a + "=" + HttpUtility.UrlEncode(nvc[a])));
 
-            return $"/{Constants.UrlPattern}?{parameters}";
+            return $"/{Constants.RouteTemplate}?{parameters}";
         }
 
         public static ContentTypeIconSettings GetSettings(string backgroundColor, string foregroundColor, int fontSize)

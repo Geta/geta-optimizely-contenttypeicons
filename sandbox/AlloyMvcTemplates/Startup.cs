@@ -13,7 +13,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.IO;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
-using Geta.Optimizely.ContentTypeIcons.Infrastructure.Initialization;
 
 namespace AlloyMvcTemplates
 {
@@ -81,9 +80,6 @@ namespace AlloyMvcTemplates
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapContent();
-
-                endpoints.MapContentTypeIcons();
-
                 endpoints.MapControllerRoute("Register", "/Register", new { controller = "Register", action = "Index" });
                 endpoints.MapRazorPages();
             });
