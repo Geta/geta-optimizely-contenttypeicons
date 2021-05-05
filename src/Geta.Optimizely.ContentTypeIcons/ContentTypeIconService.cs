@@ -137,9 +137,7 @@ namespace Geta.Optimizely.ContentTypeIcons
                 {
                     fontCollection = new PrivateFontCollection();
 
-                    // var resource = $"{Constants.EmbeddedFontPath}.{fileName}";
-
-                    var path = Paths.ToResource(Constants.ModuleName, fileName);
+                    var path = Paths.ToResource(Constants.ModuleName, $"ClientResources/{fileName}");
                     var file = _fileProvider.GetFileInfo(path);
                     var fontStream = file.CreateReadStream();
                     // create an unsafe memory block for the font data
