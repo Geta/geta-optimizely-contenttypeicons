@@ -19,4 +19,16 @@
     </AssemblyAttribute>
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="module\module.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\images\icon.png" Pack="true" PackagePath="\" />
+    <None Include="module\module.config" />
+    <None Include="msbuild\Main.proj" />
+  </ItemGroup>
+
+  <Import Project="$(SolutionDir)\src\Geta.Optimizely.ContentTypeIcons\msbuild\Main.proj" Condition="Exists('$(SolutionDir)\src\Geta.Optimizely.ContentTypeIcons\msbuild\Main.proj')" />
+
 </Project>
