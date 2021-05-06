@@ -64,7 +64,7 @@ namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
 
         private static void CopyFontFiles(ZipArchive archive, string enumBasePath)
         {
-            var destination = $@"{enumBasePath}\ClientResources\fa5\webfonts\";
+            var destination = $@"{enumBasePath}\module\ClientResources\fa5\webfonts\";
             var rootEntry = archive.Entries[0];
             var fontEntries = archive.Entries.Where(x => x.FullName.StartsWith(rootEntry + "webfonts") && x.FullName.Contains("."));
 
@@ -77,7 +77,7 @@ namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
 
         private static void CopyCssFiles(ZipArchive archive, string enumBasePath)
         {
-            var destination = $@"{enumBasePath}\ClientResources\fa5\css\";
+            var destination = $@"{enumBasePath}\module\ClientResources\fa5\css\";
             var rootEntry = archive.Entries[0];
             var cssFile = archive.Entries.Single(x => x.FullName.Contains(rootEntry + "css/all.min.css"));
 
