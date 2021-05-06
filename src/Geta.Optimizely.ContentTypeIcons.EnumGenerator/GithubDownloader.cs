@@ -3,13 +3,13 @@ using System.IO;
 using System.Threading.Tasks;
 using Octokit;
 
-namespace Geta.Optimizely.EnumGenerator
+namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
 {
     public static class GithubDownloader
     {
         public static async Task<Stream> DownloadLatestReleaseAsync(string owner, string repo)
         {
-            var gitHubClient = new GitHubClient(new ProductHeaderValue("Geta.Epi.FontThumbnail.EnumGenerator"));
+            var gitHubClient = new GitHubClient(new ProductHeaderValue("Geta.Optimizely.ContentTypeIcons.EnumGenerator"));
             var latestRelease = await gitHubClient.Repository.Release.GetLatest(owner, repo);
             var fileName = Path.GetFileName(latestRelease.ZipballUrl);
 

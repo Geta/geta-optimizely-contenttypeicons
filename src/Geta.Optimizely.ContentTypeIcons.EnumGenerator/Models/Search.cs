@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Geta.Optimizely.EnumGenerator.Models
+namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator.Models
 {
     public class Search
     {

@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Linq;
 
-namespace Geta.Optimizely.EnumGenerator
+namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
 {
     internal static class StringExtensions
     {

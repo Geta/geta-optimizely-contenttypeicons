@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Geta.Optimizely.EnumGenerator.Models;
+using Geta.Optimizely.ContentTypeIcons.EnumGenerator.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Geta.Optimizely.EnumGenerator
+namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
 {
     public class FontAwesomeJsonConverter : JsonConverter
     {

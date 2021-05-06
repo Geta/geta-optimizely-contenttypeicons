@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sandbox", "Sandbox", "{E0B8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlloyMvcTemplates", "sandbox\AlloyMvcTemplates\AlloyMvcTemplates.csproj", "{71916B3D-E85A-4938-9BA2-089A14B5499F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geta.Optimizely.EnumGenerator", "src\Geta.Optimizely.EnumGenerator\Geta.Optimizely.EnumGenerator.csproj", "{E59EF540-4245-40AE-AFDE-C6DC55F1EC3D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geta.Optimizely.ContentTypeIcons.EnumGenerator", "src\Geta.Optimizely.ContentTypeIcons.EnumGenerator\Geta.Optimizely.ContentTypeIcons.EnumGenerator.csproj", "{E59EF540-4245-40AE-AFDE-C6DC55F1EC3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

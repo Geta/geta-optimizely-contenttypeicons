@@ -6,10 +6,10 @@ using System.IO.Compression;
 using System.Linq;
 using System.Security;
 using System.Threading.Tasks;
-using Geta.Optimizely.EnumGenerator.Models;
+using Geta.Optimizely.ContentTypeIcons.EnumGenerator.Models;
 using Newtonsoft.Json;
 
-namespace Geta.Optimizely.EnumGenerator
+namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
 {
     static class Program
     {
