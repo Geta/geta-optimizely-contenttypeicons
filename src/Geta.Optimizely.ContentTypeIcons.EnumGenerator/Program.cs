@@ -20,7 +20,7 @@ namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Font Awesome Enum Generator");
             Console.WriteLine("{0}", sourcePath);
-            var enumBasePath = $@"{sourcePath}\Geta.Epi.FontThumbnail";
+            var enumBasePath = $@"{sourcePath}\Geta.Optimizely.ContentTypeIcons";
             Console.WriteLine("\nOutput directory: {0}", enumBasePath);
 
             var fontAwesomeZipStream = await GithubDownloader.DownloadLatestReleaseAsync("FortAwesome", "Font-Awesome");
@@ -55,7 +55,7 @@ namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
                 CopyFontFiles(archive, enumBasePath);
                 CopyCssFiles(archive, enumBasePath);
 
-                CopyTestFontFiles(archive, $@"{sourcePath}\Geta.Epi.FontThumbnail.Tests\App_Data\fonts\");
+                CopyTestFontFiles(archive, $@"{sourcePath}\Geta.Optimizely.ContentTypeIcons.Tests\App_Data\fonts\");
             }
 
             Console.WriteLine("\nDone generating Enums. Press enter to exit.");
@@ -122,7 +122,7 @@ namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
                 writer.WriteLine("//------------------------------------------------------------------------------");
                 writer.WriteLine();
 
-                writer.WriteLine("namespace Geta.Epi.FontThumbnail\n{");
+                writer.WriteLine("namespace Geta.Optimizely.ContentTypeIcons\n{");
 
                 writer.WriteLine("    /// <summary>");
                 writer.WriteLine($"    /// Font Awesome. Version {latestVersionChange}.");
