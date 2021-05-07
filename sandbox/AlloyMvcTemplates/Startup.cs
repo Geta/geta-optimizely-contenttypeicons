@@ -48,7 +48,7 @@ namespace AlloyMvcTemplates
                 }
             });
 
-            services.AddContentTypeIcons(x => x.EnableTreeIcons = true);
+            services.AddContentTypeIcons(x => { x.EnableTreeIcons = false; });
 
             services.AddMvc();
             services.AddCms();
