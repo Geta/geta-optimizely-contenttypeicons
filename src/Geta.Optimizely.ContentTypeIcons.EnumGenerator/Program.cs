@@ -54,8 +54,6 @@ namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
 
                 CopyFontFiles(archive, enumBasePath);
                 CopyCssFiles(archive, enumBasePath);
-
-                CopyTestFontFiles(archive, $@"{sourcePath}\Geta.Optimizely.ContentTypeIcons.Tests\App_Data\fonts\");
             }
 
             Console.WriteLine("\nDone generating Enums. Press enter to exit.");
@@ -83,18 +81,6 @@ namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
 
             Console.WriteLine("\nCopying {0} to {1}...", cssFile.Name, destination);
             cssFile.ExtractToFile(destination + Path.GetFileName(cssFile.Name), true);
-        }
-
-        private static void CopyTestFontFiles(ZipArchive archive, string destination)
-        {
-            var rootEntry = archive.Entries[0];
-            var fontEntries = archive.Entries.Where(x => x.FullName.StartsWith(rootEntry + "webfonts") && x.FullName.EndsWith(".ttf"));
-
-            foreach (var fileToCopy in fontEntries)
-            {
-                Console.WriteLine("\nCopying {0} to {1}...", fileToCopy.Name, destination);
-                fileToCopy.ExtractToFile(Path.Combine(destination, Path.GetFileName(fileToCopy.Name)), true);
-            }
         }
 
         private static IList<MetadataIcon> LoadMetadata(Stream stream)
