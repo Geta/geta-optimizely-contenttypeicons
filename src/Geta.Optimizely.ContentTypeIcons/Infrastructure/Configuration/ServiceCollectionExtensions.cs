@@ -10,6 +10,12 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
     public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddContentTypeIcons(
+            this IServiceCollection services)
+        {
+            return services.AddContentTypeIcons(_ => { });
+        }
+
+        public static IServiceCollection AddContentTypeIcons(
             this IServiceCollection services,
             Action<ContentTypeIconOptions> setupAction)
         {
