@@ -47,7 +47,7 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <summary>
         /// Air Freshener (air-freshener)
         /// <para>Terms: car, deodorize, fresh, pine, scent</para>
-        /// <para>Added in 5.2.0.</para>
+        /// <para>Added in 5.15.3, updated in 5.2.0.</para>
         /// </summary>
         AirFreshener = 0xf5d0,
 
@@ -393,6 +393,20 @@ namespace Geta.Optimizely.ContentTypeIcons
         Bacon = 0xf7e5,
 
         /// <summary>
+        /// Bacteria (bacteria)
+        /// <para>Terms: antibiotic, antibody, covid-19, health, organism, sick</para>
+        /// <para>Added in 5.13.0, updated in 5.13.1 and 5.14.0.</para>
+        /// </summary>
+        Bacteria = 0xe059,
+
+        /// <summary>
+        /// Bacterium (bacterium)
+        /// <para>Terms: antibiotic, antibody, covid-19, health, organism, sick</para>
+        /// <para>Added in 5.13.0, updated in 5.13.1 and 5.14.0.</para>
+        /// </summary>
+        Bacterium = 0xe05a,
+
+        /// <summary>
         /// Bahá&apos;í (bahai)
         /// <para>Terms: bahai, bahá&apos;í, star</para>
         /// <para>Added in 5.12.0, updated in 5.3.0.</para>
@@ -733,9 +747,9 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <summary>
         /// Tissue Box (box-tissue)
         /// <para>Terms: cough, covid-19, kleenex, mucus, nose, sneeze, snot</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        BoxTissue = 0xf95b,
+        BoxTissue = 0xe05b,
 
         /// <summary>
         /// Boxes (boxes)
@@ -2164,21 +2178,21 @@ namespace Geta.Optimizely.ContentTypeIcons
 
         /// <summary>
         /// Expand (expand)
-        /// <para>Terms: arrow, bigger, enlarge, resize</para>
+        /// <para>Terms: bigger, enlarge, fullscreen, resize</para>
         /// <para>Added in 5.0.0.</para>
         /// </summary>
         Expand = 0xf065,
 
         /// <summary>
         /// Alternate Expand (expand-alt)
-        /// <para>Terms: arrow, bigger, enlarge, resize</para>
+        /// <para>Terms: arrows, bigger, enlarge, fullscreen, resize</para>
         /// <para>Added in 1.0.0, updated in 5.0.0 and 5.12.0.</para>
         /// </summary>
         ExpandAlt = 0xf424,
 
         /// <summary>
         /// Alternate Expand Arrows (expand-arrows-alt)
-        /// <para>Terms: arrows-alt, bigger, enlarge, move, resize</para>
+        /// <para>Terms: bigger, enlarge, fullscreen, move, resize</para>
         /// <para>Added in 5.0.0, updated in 5.8.0.</para>
         /// </summary>
         ExpandArrowsAlt = 0xf31e,
@@ -2244,9 +2258,9 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <summary>
         /// Faucet (faucet)
         /// <para>Terms: covid-19, drip, house, hygiene, kitchen, sink, water</para>
-        /// <para>Added in 5.12.0.</para>
+        /// <para>Added in 5.12.0, updated in 5.14.0.</para>
         /// </summary>
-        Faucet = 0xf905,
+        Faucet = 0xe005,
 
         /// <summary>
         /// Fax (fax)
@@ -3012,9 +3026,9 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <summary>
         /// Hand Holding Medical Cross (hand-holding-medical)
         /// <para>Terms: care, covid-19, donate, help</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        HandHoldingMedical = 0xf95c,
+        HandHoldingMedical = 0xe05c,
 
         /// <summary>
         /// Hand Holding US Dollar (hand-holding-usd)
@@ -3026,7 +3040,7 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <summary>
         /// Hand Holding Water (hand-holding-water)
         /// <para>Terms: carry, covid-19, drought, grow, lift</para>
-        /// <para>Added in 5.0.9.</para>
+        /// <para>Added in 5.0.9, updated in 5.13.0.</para>
         /// </summary>
         HandHoldingWater = 0xf4c1,
 
@@ -3120,9 +3134,9 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <summary>
         /// Hand Sparkles (hand-sparkles)
         /// <para>Terms: clean, covid-19, hygiene, magic, soap, wash</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        HandSparkles = 0xf95d,
+        HandSparkles = 0xe05d,
 
         /// <summary>
         /// Spock (Hand) (hand-spock)
@@ -3149,9 +3163,9 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <summary>
         /// Hands Wash (hands-wash)
         /// <para>Terms: covid-19, hygiene, soap, wash</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        HandsWash = 0xf95e,
+        HandsWash = 0xe05e,
 
         /// <summary>
         /// Handshake (handshake)
@@ -3164,16 +3178,16 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <summary>
         /// Handshake Alternate Slash (handshake-alt-slash)
         /// <para>Terms: broken, covid-19, social distance</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        HandshakeAltSlash = 0xf95f,
+        HandshakeAltSlash = 0xe05f,
 
         /// <summary>
         /// Handshake Slash (handshake-slash)
         /// <para>Terms: broken, covid-19, social distance</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        HandshakeSlash = 0xf960,
+        HandshakeSlash = 0xe060,
 
         /// <summary>
         /// Hanukiah (hanukiah)
@@ -3228,30 +3242,30 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <summary>
         /// Head Side Cough (head-side-cough)
         /// <para>Terms: cough, covid-19, germs, lungs, respiratory, sick</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        HeadSideCough = 0xf961,
+        HeadSideCough = 0xe061,
 
         /// <summary>
         /// Head Side-Cough-Slash (head-side-cough-slash)
         /// <para>Terms: cough, covid-19, germs, lungs, respiratory, sick</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        HeadSideCoughSlash = 0xf962,
+        HeadSideCoughSlash = 0xe062,
 
         /// <summary>
         /// Head Side Mask (head-side-mask)
         /// <para>Terms: breath, covid-19, filter, respirator, virus</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        HeadSideMask = 0xf963,
+        HeadSideMask = 0xe063,
 
         /// <summary>
         /// Head Side Virus (head-side-virus)
         /// <para>Terms: cold, covid-19, flu, sick</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        HeadSideVirus = 0xf964,
+        HeadSideVirus = 0xe064,
 
         /// <summary>
         /// Heading (heading)
@@ -3462,9 +3476,9 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <summary>
         /// House User (house-user)
         /// <para>Terms: covid-19, home, isolation, quarantine</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        HouseUser = 0xf965,
+        HouseUser = 0xe065,
 
         /// <summary>
         /// Hryvnia (hryvnia)
@@ -3708,9 +3722,9 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <summary>
         /// Laptop House (laptop-house)
         /// <para>Terms: computer, covid-19, device, office, remote, work from home</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        LaptopHouse = 0xf966,
+        LaptopHouse = 0xe066,
 
         /// <summary>
         /// Laptop Medical (laptop-medical)
@@ -3933,9 +3947,9 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <summary>
         /// Lungs Virus (lungs-virus)
         /// <para>Terms: breath, covid-19, respiratory, sick</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        LungsVirus = 0xf967,
+        LungsVirus = 0xe067,
 
         /// <summary>
         /// Magic (magic)
@@ -4577,9 +4591,9 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <summary>
         /// People Arrows (people-arrows)
         /// <para>Terms: covid-19, personal space, social distance, space, spread, users</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        PeopleArrows = 0xf968,
+        PeopleArrows = 0xe068,
 
         /// <summary>
         /// People Carry (people-carry)
@@ -4717,9 +4731,9 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <summary>
         /// Plane Slash (plane-slash)
         /// <para>Terms: airplane mode, canceled, covid-19, delayed, grounded, travel</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        PlaneSlash = 0xf969,
+        PlaneSlash = 0xe069,
 
         /// <summary>
         /// Play (play)
@@ -4887,16 +4901,16 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <summary>
         /// Pump Medical (pump-medical)
         /// <para>Terms: anti-bacterial, clean, covid-19, disinfect, hygiene, medical grade, sanitizer, soap</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        PumpMedical = 0xf96a,
+        PumpMedical = 0xe06a,
 
         /// <summary>
         /// Pump Soap (pump-soap)
         /// <para>Terms: anti-bacterial, clean, covid-19, disinfect, hygiene, sanitizer, soap</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        PumpSoap = 0xf96b,
+        PumpSoap = 0xe06b,
 
         /// <summary>
         /// Puzzle Piece (puzzle-piece)
@@ -5341,9 +5355,9 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <summary>
         /// Shield Virus (shield-virus)
         /// <para>Terms: antibodies, barrier, covid-19, health, protect</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        ShieldVirus = 0xf96c,
+        ShieldVirus = 0xe06c,
 
         /// <summary>
         /// Ship (ship)
@@ -5449,6 +5463,13 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <para>Added in 5.10.2, updated in 5.6.0 and 5.8.2.</para>
         /// </summary>
         SimCard = 0xf7c4,
+
+        /// <summary>
+        /// Sink (sink)
+        /// <para>Terms: bathroom, covid-19, faucet, kitchen, wash</para>
+        /// <para>Added in 5.13.0, updated in 5.13.1 and 5.14.0.</para>
+        /// </summary>
+        Sink = 0xe06d,
 
         /// <summary>
         /// Sitemap (sitemap)
@@ -5597,9 +5618,9 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <summary>
         /// Soap (soap)
         /// <para>Terms: bubbles, clean, covid-19, hygiene, wash</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        Soap = 0xf96e,
+        Soap = 0xe06e,
 
         /// <summary>
         /// Socks (socks)
@@ -5896,9 +5917,9 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <summary>
         /// Stopwatch 20 (stopwatch-20)
         /// <para>Terms: ABCs, countdown, covid-19, happy birthday, i will survive, reminder, seconds, time, timer</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        Stopwatch20 = 0xf96f,
+        Stopwatch20 = 0xe06f,
 
         /// <summary>
         /// Store (store)
@@ -5917,16 +5938,16 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <summary>
         /// Alternate Store Slash (store-alt-slash)
         /// <para>Terms: building, buy, closed, covid-19, purchase, shopping</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        StoreAltSlash = 0xf970,
+        StoreAltSlash = 0xe070,
 
         /// <summary>
         /// Store Slash (store-slash)
         /// <para>Terms: building, buy, closed, covid-19, purchase, shopping</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        StoreSlash = 0xf971,
+        StoreSlash = 0xe071,
 
         /// <summary>
         /// Stream (stream)
@@ -6357,9 +6378,9 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <summary>
         /// Toilet Paper Slash (toilet-paper-slash)
         /// <para>Terms: bathroom, covid-19, halloween, holiday, lavatory, leaves, prank, restroom, roll, trouble, ut oh</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        ToiletPaperSlash = 0xf972,
+        ToiletPaperSlash = 0xe072,
 
         /// <summary>
         /// Toolbox (toolbox)
@@ -6420,9 +6441,9 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <summary>
         /// Trailer (trailer)
         /// <para>Terms: carry, haul, moving, travel</para>
-        /// <para>Added in 5.12.0.</para>
+        /// <para>Added in 5.12.0, updated in 5.14.0.</para>
         /// </summary>
-        Trailer = 0xf941,
+        Trailer = 0xe041,
 
         /// <summary>
         /// Train (train)
@@ -6813,6 +6834,13 @@ namespace Geta.Optimizely.ContentTypeIcons
         UsersCog = 0xf509,
 
         /// <summary>
+        /// Users Slash (users-slash)
+        /// <para>Terms: disband, friends, group, people, persons, profiles, separate, team, ungroup</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
+        /// </summary>
+        UsersSlash = 0xe073,
+
+        /// <summary>
         /// Utensil Spoon (utensil-spoon)
         /// <para>Terms: cutlery, dining, scoop, silverware, spoon</para>
         /// <para>Added in 5.0.0, updated in 5.10.2.</para>
@@ -6855,6 +6883,20 @@ namespace Geta.Optimizely.ContentTypeIcons
         VenusMars = 0xf228,
 
         /// <summary>
+        /// Vest (vest)
+        /// <para>Terms: biker, fashion, style</para>
+        /// <para>Added in 5.15.0, updated in 5.15.1.</para>
+        /// </summary>
+        Vest = 0xe085,
+
+        /// <summary>
+        /// Vest-Patches (vest-patches)
+        /// <para>Terms: biker, fashion, style</para>
+        /// <para>Added in 5.15.0, updated in 5.15.1.</para>
+        /// </summary>
+        VestPatches = 0xe086,
+
+        /// <summary>
         /// Vial (vial)
         /// <para>Terms: experiment, lab, sample, science, test, test tube</para>
         /// <para>Added in 5.0.7.</para>
@@ -6892,23 +6934,23 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <summary>
         /// Virus (virus)
         /// <para>Terms: bug, covid-19, flu, health, sick, viral</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        Virus = 0xf974,
+        Virus = 0xe074,
 
         /// <summary>
         /// Virus Slash (virus-slash)
         /// <para>Terms: bug, covid-19, cure, eliminate, flu, health, sick, viral</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        VirusSlash = 0xf975,
+        VirusSlash = 0xe075,
 
         /// <summary>
         /// Viruses (viruses)
         /// <para>Terms: bugs, covid-19, flu, health, multiply, sick, spread, viral</para>
-        /// <para>Added in 5.13.0.</para>
+        /// <para>Added in 5.13.0, updated in 5.14.0.</para>
         /// </summary>
-        Viruses = 0xf976,
+        Viruses = 0xe076,
 
         /// <summary>
         /// Voicemail (voicemail)

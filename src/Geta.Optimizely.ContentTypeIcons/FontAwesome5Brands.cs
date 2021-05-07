@@ -47,13 +47,6 @@ namespace Geta.Optimizely.ContentTypeIcons
         Adn = 0xf170,
 
         /// <summary>
-        /// Adobe (adobe)
-        /// <para>Terms: acrobat, app, design, illustrator, indesign, photoshop</para>
-        /// <para>Added in 5.6.0, updated in 5.8.0.</para>
-        /// </summary>
-        Adobe = 0xf778,
-
-        /// <summary>
         /// Adversal (adversal)
         /// <para>Added in 5.0.0.</para>
         /// </summary>
@@ -207,7 +200,7 @@ namespace Geta.Optimizely.ContentTypeIcons
 
         /// <summary>
         /// Bandcamp (bandcamp)
-        /// <para>Added in 4.7.0, updated in 5.0.0.</para>
+        /// <para>Added in 4.7.0, updated in 5.0.0 and 5.13.1.</para>
         /// </summary>
         Bandcamp = 0xf2d5,
 
@@ -421,6 +414,12 @@ namespace Geta.Optimizely.ContentTypeIcons
         Chromecast = 0xf838,
 
         /// <summary>
+        /// Cloudflare (cloudflare)
+        /// <para>Added in 5.15.0.</para>
+        /// </summary>
+        Cloudflare = 0xe07d,
+
+        /// <summary>
         /// Cloudscale.Ch (cloudscale)
         /// <para>Added in 5.0.0.</para>
         /// </summary>
@@ -607,15 +606,21 @@ namespace Geta.Optimizely.ContentTypeIcons
 
         /// <summary>
         /// Dailymotion (dailymotion)
-        /// <para>Added in 5.12.1.</para>
+        /// <para>Added in 5.12.1, updated in 5.14.0.</para>
         /// </summary>
-        Dailymotion = 0xf952,
+        Dailymotion = 0xe052,
 
         /// <summary>
         /// Dashcube (dashcube)
         /// <para>Added in 4.3.0, updated in 5.0.0 and 5.0.3.</para>
         /// </summary>
         Dashcube = 0xf210,
+
+        /// <summary>
+        /// Deezer (deezer)
+        /// <para>Added in 5.13.1, updated in 5.14.0.</para>
+        /// </summary>
+        Deezer = 0xe077,
 
         /// <summary>
         /// Delicious (delicious)
@@ -752,6 +757,12 @@ namespace Geta.Optimizely.ContentTypeIcons
         Edge = 0xf282,
 
         /// <summary>
+        /// Edge Legacy Browser (edge-legacy)
+        /// <para>Added in 5.13.1, updated in 5.14.0.</para>
+        /// </summary>
+        EdgeLegacy = 0xe078,
+
+        /// <summary>
         /// Elementor (elementor)
         /// <para>Added in 5.0.3.</para>
         /// </summary>
@@ -877,9 +888,9 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <summary>
         /// Firefox Browser (firefox-browser)
         /// <para>Terms: browser</para>
-        /// <para>Added in 5.12.0.</para>
+        /// <para>Added in 5.12.0, updated in 5.14.0.</para>
         /// </summary>
-        FirefoxBrowser = 0xf907,
+        FirefoxBrowser = 0xe007,
 
         /// <summary>
         /// First Order (first-order)
@@ -1125,6 +1136,12 @@ namespace Geta.Optimizely.ContentTypeIcons
         GoogleDrive = 0xf3aa,
 
         /// <summary>
+        /// Google Pay (google-pay)
+        /// <para>Added in 5.13.1, updated in 5.14.0.</para>
+        /// </summary>
+        GooglePay = 0xe079,
+
+        /// <summary>
         /// Google Play (google-play)
         /// <para>Added in 5.0.0.</para>
         /// </summary>
@@ -1133,7 +1150,7 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <summary>
         /// Google Plus (google-plus)
         /// <para>Terms: google-plus-circle, google-plus-official</para>
-        /// <para>Added in 4.6.0, updated in 5.0.0.</para>
+        /// <para>Added in 4.6.0, updated in 5.0.0 and 5.13.1.</para>
         /// </summary>
         GooglePlus = 0xf2b3,
 
@@ -1183,6 +1200,12 @@ namespace Geta.Optimizely.ContentTypeIcons
         Grunt = 0xf3ad,
 
         /// <summary>
+        /// Guilded (guilded)
+        /// <para>Added in 5.15.0.</para>
+        /// </summary>
+        Guilded = 0xe07e,
+
+        /// <summary>
         /// Gulp (gulp)
         /// <para>Added in 5.0.0.</para>
         /// </summary>
@@ -1217,6 +1240,12 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <para>Added in 5.0.0.</para>
         /// </summary>
         HireAHelper = 0xf3b0,
+
+        /// <summary>
+        /// Hive Blockchain Network (hive)
+        /// <para>Added in 5.15.0.</para>
+        /// </summary>
+        Hive = 0xe07f,
 
         /// <summary>
         /// Hooli (hooli)
@@ -1256,15 +1285,21 @@ namespace Geta.Optimizely.ContentTypeIcons
 
         /// <summary>
         /// Ideal (ideal)
-        /// <para>Added in 5.12.0.</para>
+        /// <para>Added in 5.12.0, updated in 5.14.0.</para>
         /// </summary>
-        Ideal = 0xf913,
+        Ideal = 0xe013,
 
         /// <summary>
         /// IMDB (imdb)
         /// <para>Added in 4.7.0, updated in 5.0.0.</para>
         /// </summary>
         Imdb = 0xf2d8,
+
+        /// <summary>
+        /// Innosoft (innosoft)
+        /// <para>Added in 5.15.0.</para>
+        /// </summary>
+        Innosoft = 0xe080,
 
         /// <summary>
         /// Instagram (instagram)
@@ -1274,9 +1309,15 @@ namespace Geta.Optimizely.ContentTypeIcons
 
         /// <summary>
         /// Instagram Square (instagram-square)
-        /// <para>Added in 5.12.1.</para>
+        /// <para>Added in 5.12.1, updated in 5.14.0.</para>
         /// </summary>
-        InstagramSquare = 0xf955,
+        InstagramSquare = 0xe055,
+
+        /// <summary>
+        /// Instalod (instalod)
+        /// <para>Added in 5.15.0.</para>
+        /// </summary>
+        Instalod = 0xe081,
 
         /// <summary>
         /// Intercom (intercom)
@@ -1570,9 +1611,9 @@ namespace Geta.Optimizely.ContentTypeIcons
 
         /// <summary>
         /// Micro.Blog (microblog)
-        /// <para>Added in 5.12.0.</para>
+        /// <para>Added in 5.12.0, updated in 5.14.0.</para>
         /// </summary>
-        Microblog = 0xf91a,
+        Microblog = 0xe01a,
 
         /// <summary>
         /// Microsoft (microsoft)
@@ -1594,9 +1635,9 @@ namespace Geta.Optimizely.ContentTypeIcons
 
         /// <summary>
         /// Mixer (mixer)
-        /// <para>Added in 5.12.1.</para>
+        /// <para>Added in 5.12.1, updated in 5.14.0.</para>
         /// </summary>
-        Mixer = 0xf956,
+        Mixer = 0xe056,
 
         /// <summary>
         /// Mizuni (mizuni)
@@ -1654,7 +1695,7 @@ namespace Geta.Optimizely.ContentTypeIcons
 
         /// <summary>
         /// NS8 (ns8)
-        /// <para>Added in 5.0.0.</para>
+        /// <para>Added in 5.0.0, updated in 5.15.0.</para>
         /// </summary>
         Ns8 = 0xf3d5,
 
@@ -1663,6 +1704,12 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <para>Added in 5.0.0.</para>
         /// </summary>
         Nutritionix = 0xf3d6,
+
+        /// <summary>
+        /// Octopus Deploy (octopus-deploy)
+        /// <para>Added in 5.15.0.</para>
+        /// </summary>
+        OctopusDeploy = 0xe082,
 
         /// <summary>
         /// Odnoklassniki (odnoklassniki)
@@ -1758,6 +1805,12 @@ namespace Geta.Optimizely.ContentTypeIcons
         PennyArcade = 0xf704,
 
         /// <summary>
+        /// Perbyte (perbyte)
+        /// <para>Added in 5.15.0.</para>
+        /// </summary>
+        Perbyte = 0xe083,
+
+        /// <summary>
         /// Periscope (periscope)
         /// <para>Added in 5.0.0.</para>
         /// </summary>
@@ -1814,9 +1867,9 @@ namespace Geta.Optimizely.ContentTypeIcons
 
         /// <summary>
         /// Pied Piper Square Logo (Old) (pied-piper-square)
-        /// <para>Added in 5.12.0.</para>
+        /// <para>Added in 5.12.0, updated in 5.14.0.</para>
         /// </summary>
-        PiedPiperSquare = 0xf91e,
+        PiedPiperSquare = 0xe01e,
 
         /// <summary>
         /// Pinterest (pinterest)
@@ -1892,7 +1945,7 @@ namespace Geta.Optimizely.ContentTypeIcons
 
         /// <summary>
         /// Ravelry (ravelry)
-        /// <para>Added in 4.7.0, updated in 5.0.0.</para>
+        /// <para>Added in 4.7.0, updated in 5.0.0 and 5.15.1.</para>
         /// </summary>
         Ravelry = 0xf2d9,
 
@@ -1983,7 +2036,7 @@ namespace Geta.Optimizely.ContentTypeIcons
 
         /// <summary>
         /// Rocket.Chat (rocketchat)
-        /// <para>Added in 5.0.0, updated in 5.4.2 and 5.8.0.</para>
+        /// <para>Added in 5.0.0, updated in 5.15.0, 5.4.2 and 5.8.0.</para>
         /// </summary>
         Rocketchat = 0xf3e8,
 
@@ -1992,6 +2045,12 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <para>Added in 5.0.0.</para>
         /// </summary>
         Rockrms = 0xf3e9,
+
+        /// <summary>
+        /// Rust (rust)
+        /// <para>Added in 5.13.1, updated in 5.14.0.</para>
+        /// </summary>
+        Rust = 0xe07a,
 
         /// <summary>
         /// Safari (safari)
@@ -2057,9 +2116,9 @@ namespace Geta.Optimizely.ContentTypeIcons
 
         /// <summary>
         /// Shopify (shopify)
-        /// <para>Added in 5.12.1.</para>
+        /// <para>Added in 5.12.1, updated in 5.14.0.</para>
         /// </summary>
-        Shopify = 0xf957,
+        Shopify = 0xe057,
 
         /// <summary>
         /// Shopware (shopware)
@@ -2342,6 +2401,12 @@ namespace Geta.Optimizely.ContentTypeIcons
         ThinkPeaks = 0xf731,
 
         /// <summary>
+        /// Tiktok (tiktok)
+        /// <para>Added in 5.13.1, updated in 5.14.0.</para>
+        /// </summary>
+        Tiktok = 0xe07b,
+
+        /// <summary>
         /// Trade Federation (trade-federation)
         /// <para>Added in 5.0.12.</para>
         /// </summary>
@@ -2356,7 +2421,7 @@ namespace Geta.Optimizely.ContentTypeIcons
 
         /// <summary>
         /// Tripadvisor (tripadvisor)
-        /// <para>Added in 4.4.0, updated in 5.0.0.</para>
+        /// <para>Added in 4.4.0, updated in 5.0.0, 5.13.1 and 5.14.0.</para>
         /// </summary>
         Tripadvisor = 0xf262,
 
@@ -2424,6 +2489,12 @@ namespace Geta.Optimizely.ContentTypeIcons
         Umbraco = 0xf8e8,
 
         /// <summary>
+        /// Uncharted Software (uncharted)
+        /// <para>Added in 5.15.0.</para>
+        /// </summary>
+        Uncharted = 0xe084,
+
+        /// <summary>
         /// Uniregistry (uniregistry)
         /// <para>Added in 5.0.0.</para>
         /// </summary>
@@ -2431,9 +2502,15 @@ namespace Geta.Optimizely.ContentTypeIcons
 
         /// <summary>
         /// Unity 3D (unity)
-        /// <para>Added in 5.12.0.</para>
+        /// <para>Added in 5.12.0, updated in 5.14.0.</para>
         /// </summary>
-        Unity = 0xf949,
+        Unity = 0xe049,
+
+        /// <summary>
+        /// Unsplash (unsplash)
+        /// <para>Added in 5.13.1, updated in 5.14.0.</para>
+        /// </summary>
+        Unsplash = 0xe07c,
 
         /// <summary>
         /// Untappd (untappd)
@@ -2480,13 +2557,13 @@ namespace Geta.Optimizely.ContentTypeIcons
         Viacoin = 0xf237,
 
         /// <summary>
-        /// Video (viadeo)
+        /// Viadeo (viadeo)
         /// <para>Added in 4.6.0, updated in 5.0.0.</para>
         /// </summary>
         Viadeo = 0xf2a9,
 
         /// <summary>
-        /// Video Square (viadeo-square)
+        /// Viadeo Square (viadeo-square)
         /// <para>Added in 4.6.0, updated in 5.0.0 and 5.7.0.</para>
         /// </summary>
         ViadeoSquare = 0xf2aa,
@@ -2539,6 +2616,12 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <para>Added in 5.0.0.</para>
         /// </summary>
         Vuejs = 0xf41f,
+
+        /// <summary>
+        /// Watchman Monitoring (watchman-monitoring)
+        /// <para>Added in 5.15.0.</para>
+        /// </summary>
+        WatchmanMonitoring = 0xe087,
 
         /// <summary>
         /// Waze (waze)
@@ -2609,6 +2692,12 @@ namespace Geta.Optimizely.ContentTypeIcons
         WizardsOfTheCoast = 0xf730,
 
         /// <summary>
+        /// Wodu (wodu)
+        /// <para>Added in 5.15.0.</para>
+        /// </summary>
+        Wodu = 0xe088,
+
+        /// <summary>
         /// Wolf Pack Battalion (wolf-pack-battalion)
         /// <para>Added in 5.0.12, updated in 5.8.0.</para>
         /// </summary>
@@ -2677,7 +2766,7 @@ namespace Geta.Optimizely.ContentTypeIcons
 
         /// <summary>
         /// Yahoo Logo (yahoo)
-        /// <para>Added in 4.1.0, updated in 5.0.0 and 5.0.3.</para>
+        /// <para>Added in 4.1.0, updated in 5.0.0, 5.0.3 and 5.13.1.</para>
         /// </summary>
         Yahoo = 0xf19e,
 
