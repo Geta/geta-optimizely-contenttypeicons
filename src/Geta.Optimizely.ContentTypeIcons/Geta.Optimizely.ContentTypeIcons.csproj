@@ -16,7 +16,7 @@
     <Description>Generates images based on FontAwesome (4 and 5) or custom icon font, to be shown when creating new content in Episerver.</Description>
     <PackageReleaseNotes>https://github.com/Geta/geta-optimizely-content-type-icons/blob/master/CHANGELOG.md</PackageReleaseNotes>
     <PackageTags>Optimizely Episerver ContentType Icon Thumbnail</PackageTags>
-    <RepositoryUrl>https://github.com/Geta/geta-optimizely-content-type-icons</RepositoryUrl>
+    <RepositoryUrl>URL</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
