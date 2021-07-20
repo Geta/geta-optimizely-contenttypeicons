@@ -4,10 +4,9 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="EPiServer.Cms.UI.AspNetIdentity" Version="12.0.0-inte-020092" />
-    <PackageReference Include="EPiServer.Cms.Web" Version="12.0.0-inte-020092" />
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="Wangkanai.Detection" Version="2.0.1" />
+    <PackageReference Include="EPiServer.CMS" Version="12.0.0-pre-021814" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Geta.Optimizely.ContentTypeIcons\Geta.Optimizely.ContentTypeIcons.csproj" />

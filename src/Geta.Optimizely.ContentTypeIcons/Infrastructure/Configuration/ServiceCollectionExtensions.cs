@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using EPiServer.DependencyInjection;
+using EPiServer.Cms.Shell;
 using EPiServer.Shell.Modules;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

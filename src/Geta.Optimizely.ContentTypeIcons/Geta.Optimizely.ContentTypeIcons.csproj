@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EPiServer.CMS.UI.Core" Version="12.0.0-inte-020292" />
+    <PackageReference Include="EPiServer.CMS.UI.Core" Version="12.0.0-pre-021814" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,9 +39,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\images\icon.png" Pack="true" PackagePath="\" />
     <None Include="module\module.config" />
     <None Include="msbuild\Main.proj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\images\icon.png">
+      <Pack>true</Pack>
+      <PackagePath>\</PackagePath>
+      <Link>icon.png</Link>
+    </None>
   </ItemGroup>
 
   <Import Project="$(SolutionDir)\src\Geta.Optimizely.ContentTypeIcons\msbuild\Main.proj" Condition="Exists('$(SolutionDir)\src\Geta.Optimizely.ContentTypeIcons\msbuild\Main.proj')" />
