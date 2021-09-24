@@ -24,7 +24,7 @@
   </UsingTask>
 
   <PropertyGroup>
-    <SolutionDir Condition="$(SolutionDir) == ''">$(MSBuildProjectDirectory)\..\</SolutionDir>
+    <SolutionDir Condition="$(SolutionDir) == ''">$(MSBuildProjectDirectory)\..\..\</SolutionDir>
     <TmpOutDir>$(SolutionDir)\tmp</TmpOutDir>
   </PropertyGroup>
 
@@ -34,10 +34,10 @@
 
     <!-- Copy -->
     <ItemGroup>
-      <ClientResources Include="$(SolutionDir)\src\Geta.Optimizely.ContentTypeIcons\module\ClientResources\**\*" />
+      <ClientResources Include="$(SolutionDir)\src\$(MSBuildProjectName)\module\ClientResources\**\*" />
     </ItemGroup>
 
-    <Copy SourceFiles="$(SolutionDir)\src\Geta.Optimizely.ContentTypeIcons\module\module.config"
+    <Copy SourceFiles="$(SolutionDir)\src\$(MSBuildProjectName)\module\module.config"
           DestinationFolder="$(TmpOutDir)\content" />
     <Copy SourceFiles="@(ClientResources)"
           DestinationFiles="@(ClientResources -> '$(TmpOutDir)\content\$(Version)\ClientResources\%(RecursiveDir)%(Filename)%(Extension)')" />
@@ -48,7 +48,7 @@
 
     <ZipDirectory
       InputPath="$(TmpOutDir)\content"
-      OutputFileName="$(OutDir)\Geta.Optimizely.ContentTypeIcons.zip"
+      OutputFileName="$(OutDir)\$(MSBuildProjectName).zip"
       OverwriteExistingFile="true" />
 
     <!-- Cleanup -->
@@ -56,9 +56,9 @@
   </Target>
 
   <ItemGroup>
-    <Content Include="$(OutDir)\Geta.Optimizely.ContentTypeIcons.zip" >
+    <Content Include="$(OutDir)\$(MSBuildProjectName).zip" >
       <Pack>true</Pack>
-      <PackagePath>content\modules\_protected\Geta.Optimizely.ContentTypeIcons\;contentFiles\any\any\modules\_protected\Geta.Optimizely.ContentTypeIcons\</PackagePath>
+      <PackagePath>contentFiles\any\any\modules\_protected\$(MSBuildProjectName)</PackagePath>
     </Content>
   </ItemGroup>
 </Project>
