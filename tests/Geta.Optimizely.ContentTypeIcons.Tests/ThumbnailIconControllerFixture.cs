@@ -1,7 +1,5 @@
 ﻿using System;
 using System.IO;
-using EPiServer.ServiceLocation;
-using EPiServer.Shell.Modules;
 using EPiServer.Web;
 using Geta.Optimizely.ContentTypeIcons.Controllers;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
@@ -32,9 +30,8 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
                 CachePath = partialDirectory
             });
 
-            var moduleTable = new ModuleTable();
             var fileProvider = new PhysicalFileProvider(currentDirectory);
-            var service = new ContentTypeIconService(options, fileProvider, new MemoryCache(new MemoryCacheOptions()), moduleTable);
+            var service = new ContentTypeIconService(options, fileProvider, new MemoryCache(new MemoryCacheOptions()));
             Controller = new ContentTypeIconController(service);
             Settings = new ContentTypeIconSettings
             {

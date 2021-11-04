@@ -6,7 +6,6 @@ using System.Drawing.Text;
 using System.IO;
 using System.Runtime.InteropServices;
 using EPiServer.Shell;
-using EPiServer.Shell.Modules;
 using EPiServer.Web;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
 using Geta.Optimizely.ContentTypeIcons.Settings;
@@ -20,18 +19,15 @@ namespace Geta.Optimizely.ContentTypeIcons
     {
         private readonly IFileProvider _fileProvider;
         private readonly IMemoryCache _cache;
-        private readonly ModuleTable _moduleTable;
         private readonly ContentTypeIconOptions _configuration;
 
         public ContentTypeIconService(
             IOptions<ContentTypeIconOptions> options,
             IFileProvider fileProvider,
-            IMemoryCache cache,
-            ModuleTable moduleTable)
+            IMemoryCache cache)
         {
             _fileProvider = fileProvider;
             _cache = cache;
-            _moduleTable = moduleTable;
             _configuration = options.Value;
         }
 
@@ -100,7 +96,6 @@ namespace Geta.Optimizely.ContentTypeIcons
                         break;
                 }
 
-                var format1 = new StringFormat(StringFormatFlags.NoClip);
                 using (var format = new StringFormat(StringFormatFlags.NoClip))
                 {
                     format.LineAlignment = StringAlignment.Center;
@@ -141,7 +136,7 @@ namespace Geta.Optimizely.ContentTypeIcons
                 {
                     fontCollection = new PrivateFontCollection();
 
-                    var path = _moduleTable.ResolvePath(Constants.ModuleName, $"ClientResources/{fileName}");
+                    var path = Paths.ToClientResource(Constants.ModuleName, $"ClientResources/{fileName}");
 
                     var file = _fileProvider.GetFileInfo(path);
                     var fontStream = file.CreateReadStream();
