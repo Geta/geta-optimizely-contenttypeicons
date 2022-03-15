@@ -67,6 +67,8 @@ namespace EPiServer.Templates.Alloy.Mvc
             services.AddCms();
 
             services.AddEmbeddedLocalization<Startup>();
+
+            services.AddSwaggerGen();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -75,6 +77,8 @@ namespace EPiServer.Templates.Alloy.Mvc
             {
                 app.UseDeveloperExceptionPage();
                 app.UseMiddleware<AdministratorRegistrationPageMiddleware>();
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
 
             app.UseStaticFiles();

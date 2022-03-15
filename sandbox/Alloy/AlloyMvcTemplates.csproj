@@ -6,6 +6,7 @@
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="$(BuildBundlerMinifier)" />
     <PackageReference Include="EPiServer.CMS" Version="$(CmsUIVersion)" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
     <PackageReference Include="Wangkanai.Detection" Version="2.0.1" />
   </ItemGroup>
   <ItemGroup>
