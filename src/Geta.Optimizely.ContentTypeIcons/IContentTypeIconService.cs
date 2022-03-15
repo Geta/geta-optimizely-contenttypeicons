@@ -1,5 +1,5 @@
-﻿using System.Drawing;
-using Geta.Optimizely.ContentTypeIcons.Settings;
+﻿using Geta.Optimizely.ContentTypeIcons.Settings;
+using SixLabors.ImageSharp;
 
 namespace Geta.Optimizely.ContentTypeIcons
 {

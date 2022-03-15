@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Text.RegularExpressions;
 using Geta.Optimizely.ContentTypeIcons.Settings;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SixLabors.ImageSharp.Formats.Png;
 
 namespace Geta.Optimizely.ContentTypeIcons.Controllers
 {
@@ -26,10 +26,10 @@ namespace Geta.Optimizely.ContentTypeIcons.Controllers
                 throw new Exception("Unknown foreground or background color");
             }
 
-            var image = _contentTypeIconService.LoadIconImage(settings);
+            using var image = _contentTypeIconService.LoadIconImage(settings);
 
             var stream = new MemoryStream();
-            image.Save(stream, ImageFormat.Png);
+            image.Save(stream, new PngEncoder());
             stream.Seek(0, SeekOrigin.Begin);
             return new FileStreamResult(stream, "image/png");
         }
