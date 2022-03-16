@@ -2,6 +2,8 @@
 using AlloyTemplates.Business.Rendering;
 using EPiServer.Web;
 using EPiServer.Core;
+using Geta.Optimizely.ContentTypeIcons;
+using Geta.Optimizely.ContentTypeIcons.Attributes;
 
 namespace AlloyTemplates.Models.Pages
 {
@@ -11,7 +13,7 @@ namespace AlloyTemplates.Models.Pages
     [SiteContentType(
         GUID = "F8D47655-7B50-4319-8646-3369BA9AF05B",
         GroupName = Global.GroupNames.Specialized)]
-    [SiteImageUrl(Global.StaticGraphicsFolderPath + "page-type-thumbnail-contact.png")]
+    [ContentTypeIcon(FontAwesome.Bicycle, Rotations.Rotate180)]
     public class ContactPage : SitePageData, IContainerPage
     {
         [Display(GroupName = Global.GroupNames.Contact)]

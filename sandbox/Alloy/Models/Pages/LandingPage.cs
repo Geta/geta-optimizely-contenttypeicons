@@ -2,6 +2,8 @@
 using EPiServer.Core;
 using EPiServer.DataAbstraction;
 using EPiServer.DataAnnotations;
+using Geta.Optimizely.ContentTypeIcons;
+using Geta.Optimizely.ContentTypeIcons.Attributes;
 
 namespace AlloyTemplates.Models.Pages
 {
@@ -11,7 +13,7 @@ namespace AlloyTemplates.Models.Pages
     [SiteContentType(
        GUID = "DBED4258-8213-48DB-A11F-99C034172A54",
        GroupName = Global.GroupNames.Specialized)]
-    [SiteImageUrl]
+    [ContentTypeIcon(FontAwesome.Bicycle, Rotations.Rotate90)]
     public class LandingPage : SitePageData
     {
         [Display(

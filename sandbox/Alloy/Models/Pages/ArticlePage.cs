@@ -1,4 +1,7 @@
-﻿namespace AlloyTemplates.Models.Pages
+﻿using Geta.Optimizely.ContentTypeIcons;
+using Geta.Optimizely.ContentTypeIcons.Attributes;
+
+namespace AlloyTemplates.Models.Pages
 {
     /// <summary>
     /// Used primarily for publishing news articles on the website
@@ -6,7 +9,7 @@
     [SiteContentType(
         GroupName = Global.GroupNames.News,
         GUID = "AEECADF2-3E89-4117-ADEB-F8D43565D2F4")]
-    [SiteImageUrl(Global.StaticGraphicsFolderPath + "page-type-thumbnail-article.png")]
+    [ContentTypeIcon(FontAwesome.Bicycle, Rotations.Rotate270)]
     public class ArticlePage : StandardPage
     {
 

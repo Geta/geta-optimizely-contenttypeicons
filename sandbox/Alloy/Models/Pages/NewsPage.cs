@@ -5,6 +5,8 @@ using EPiServer.Framework.Localization;
 using EPiServer.ServiceLocation;
 using AlloyTemplates.Business;
 using AlloyTemplates.Models.Blocks;
+using Geta.Optimizely.ContentTypeIcons;
+using Geta.Optimizely.ContentTypeIcons.Attributes;
 
 namespace AlloyTemplates.Models.Pages
 {
@@ -12,7 +14,7 @@ namespace AlloyTemplates.Models.Pages
     /// Presents a news section including a list of the most recent articles on the site
     /// </summary>
     [SiteContentType(GUID = "638D8271-5CA3-4C72-BABC-3E8779233263")]
-    [SiteImageUrl]
+    [ContentTypeIcon(FontAwesome.Bicycle, Rotations.FlipHorizontal)]
     public class NewsPage : StandardPage
     {
         [Display(
