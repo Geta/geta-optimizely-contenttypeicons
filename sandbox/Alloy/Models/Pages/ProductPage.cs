@@ -4,6 +4,8 @@ using AlloyTemplates.Models.Blocks;
 using EPiServer.Core;
 using EPiServer.DataAbstraction;
 using EPiServer.DataAnnotations;
+using Geta.Optimizely.ContentTypeIcons;
+using Geta.Optimizely.ContentTypeIcons.Attributes;
 
 namespace AlloyTemplates.Models.Pages
 {
@@ -13,10 +15,10 @@ namespace AlloyTemplates.Models.Pages
     [SiteContentType(
         GUID = "17583DCD-3C11-49DD-A66D-0DEF0DD601FC",
         GroupName = Global.GroupNames.Products)]
-    [SiteImageUrl(Global.StaticGraphicsFolderPath + "page-type-thumbnail-product.png")]
     [AvailableContentTypes(
         Availability = Availability.Specific,
         IncludeOn = new[] { typeof(StartPage) })]
+    [ContentTypeIcon(FontAwesome.Bicycle, Rotations.FlipVertical)]
     public class ProductPage : StandardPage, IHasRelatedContent
     {
         [Required]

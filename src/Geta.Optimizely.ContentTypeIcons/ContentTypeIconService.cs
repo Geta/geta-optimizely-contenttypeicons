@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using System.Numerics;
-using System.Runtime.InteropServices;
 using EPiServer.Shell;
 using EPiServer.Web;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
@@ -12,7 +11,6 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Drawing;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.Formats.Png;
 using SixLabors.ImageSharp.PixelFormats;
@@ -46,10 +44,10 @@ namespace Geta.Optimizely.ContentTypeIcons
             var fileName = settings.GetFileName(".png");
             var cachePath = GetFileFullPath(fileName);
 
-            /*if (File.Exists(cachePath))
+            if (File.Exists(cachePath))
             {
                 return Image.Load(cachePath, new PngDecoder());
-            }*/
+            }
 
             using var stream = GenerateImage(settings);
             using var fileStream = File.Create(cachePath);
@@ -62,94 +60,80 @@ namespace Geta.Optimizely.ContentTypeIcons
 
         internal virtual MemoryStream GenerateImage(ContentTypeIconSettings settings)
         {
-            var stream = new MemoryStream();
-
             var family = settings.UseEmbeddedFont
                 ? LoadFontFamilyFromClientResources(settings.EmbeddedFont)
                 : LoadFontFamilyFromDisk(settings.CustomFontName);
 
             var font = family.CreateFont(settings.FontSize);
 
-            using var img = new Image<Rgb24>(settings.Width, settings.Height);
-            
-            Vector2 center = new Vector2(img.Width / 2, img.Height / 2);
+            using var image = new Image<Rgb24>(settings.Width, settings.Height);
 
-            TextOptions textOptions = new(font)
+            var center = new Vector2((float)image.Width / 2, (float)image.Height / 2);
+
+            var textOptions = new TextOptions(font)
             {
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 Origin = center
             };
 
-            var chr = char.ConvertFromUtf32(settings.Character);
-            
-            var bg = Color.Parse(settings.BackgroundColor);
-            var fg = Color.Parse(settings.ForegroundColor);
-            img.Mutate(i => i.Fill(bg));
-            
-            img.Mutate(i => i.DrawText(textOptions, chr, fg));
-            
-            img.Save(stream, new PngEncoder());
+            var character = char.ConvertFromUtf32(settings.Character);
 
-            stream.Position = 0;
+            var background = Color.Parse(settings.BackgroundColor);
+            var foreground = Color.Parse(settings.ForegroundColor);
 
-            return stream;
-            
-
-            /*
-            g.InterpolationMode = InterpolationMode.HighQualityBilinear;
-            g.PixelOffsetMode = PixelOffsetMode.HighQuality;
-            g.SmoothingMode = SmoothingMode.HighQuality;
+            image.Mutate(i => i.Fill(background));
+            image.Mutate(i => i.DrawText(textOptions, character, foreground));
 
             switch (settings.Rotate)
             {
                 case Rotations.Rotate90:
                 case Rotations.Rotate180:
                 case Rotations.Rotate270:
-                    g.TranslateTransform(settings.Width / 2, settings.Height / 2);
-                    g.RotateTransform((int)settings.Rotate);
-                    g.TranslateTransform(-(settings.Width / 2), -(settings.Height / 2));
+                    image.Mutate(i => i.Rotate((float)settings.Rotate));
                     break;
-            }
-
-            switch (settings.Rotate)
-            {
                 case Rotations.FlipHorizontal:
-                    bitmap.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                    image.Mutate(i => i.Flip(FlipMode.Horizontal));
                     break;
                 case Rotations.FlipVertical:
-                    bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                    image.Mutate(i => i.Flip(FlipMode.Vertical));
                     break;
             }
 
-            bitmap.Save(stream, ImageFormat.Png);
+            var stream = new MemoryStream();
 
-            return stream;*/
+            image.Save(stream, new PngEncoder());
+
+            stream.Position = 0;
+
+            return stream;
         }
 
-        protected virtual SixLabors.Fonts.FontFamily LoadFontFamilyFromClientResources(string fileName)
+        protected virtual FontFamily LoadFontFamilyFromClientResources(string fileName)
         {
             var cacheKey = $"geta.fontawesome.embedded.fontcollection.{fileName}";
             _cache.TryGetValue(cacheKey, out FontCollection fontCollection);
 
-            if (fontCollection == null)
+            if (fontCollection != null)
             {
-                try
-                {
-                    var path = Paths.ToClientResource(Constants.ModuleName, $"ClientResources/{fileName}");
+                return fontCollection.Families.First();
+            }
 
-                    fontCollection = new FontCollection();
+            try
+            {
+                var path = Paths.ToClientResource(Constants.ModuleName, $"ClientResources/{fileName}");
 
-                    var file = _fileProvider.GetFileInfo(path);
-                    using var fontStream = file.CreateReadStream();
-                    fontCollection.Add(fontStream);
+                fontCollection = new FontCollection();
 
-                    _cache.Set(cacheKey, fontCollection, DateTimeOffset.Now.AddMinutes(5));
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception($"Unable to load font {fileName} from EmbeddedResource", ex);
-                }
+                var file = _fileProvider.GetFileInfo(path);
+                using var fontStream = file.CreateReadStream();
+                fontCollection.Add(fontStream);
+
+                _cache.Set(cacheKey, fontCollection, DateTimeOffset.Now.AddMinutes(5));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Unable to load font {fileName} from EmbeddedResource", ex);
             }
 
             return fontCollection.Families.First();
@@ -171,7 +155,6 @@ namespace Geta.Optimizely.ContentTypeIcons
                 {
                     fontCollection = new FontCollection();
                     fontCollection.Add(rebased);
-                    // RemoveFontResourceEx(rebased, 16, IntPtr.Zero);
                     _cache.Set(cacheKey, fontCollection, DateTimeOffset.Now.AddMinutes(5));
                 }
                 catch (Exception ex)
@@ -188,10 +171,5 @@ namespace Geta.Optimizely.ContentTypeIcons
             var rootPath = _configuration.CachePath;
             return VirtualPathUtilityEx.RebasePhysicalPath(rootPath + fileName);
         }
-
-        // https://stackoverflow.com/questions/26671026/how-to-delete-the-file-of-a-privatefontcollection-addfontfile
-        // Force unregister of font in GDI32 because of bug
-        [DllImport("gdi32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern int RemoveFontResourceEx(string lpszFilename, int fl, IntPtr pdv);
     }
 }
