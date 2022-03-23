@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.0]
+
+### Changed
+- Linux support - using ImageSharp to generate content icon images
+
 ## [1.2.4]
 
 ### Changed
