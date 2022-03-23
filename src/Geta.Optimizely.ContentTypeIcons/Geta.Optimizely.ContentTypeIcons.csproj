@@ -24,7 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EPiServer.CMS.UI.Core" Version="12.0.2" />
+    <PackageReference Include="EPiServer.CMS.AspNetCore.Templating" Version="12.4.2" />
+    <PackageReference Include="EPiServer.CMS.UI.Core" Version="12.3.2" />
     <PackageReference Include="SixLabors.Fonts" Version="1.0.0-beta16" />
     <PackageReference Include="SixLabors.ImageSharp" Version="2.0.0" />
     <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta14" />
