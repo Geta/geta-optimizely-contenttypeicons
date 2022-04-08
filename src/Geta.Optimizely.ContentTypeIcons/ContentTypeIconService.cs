@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Numerics;
+using EPiServer.Framework.Internal;
 using EPiServer.Shell;
 using EPiServer.Web;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
@@ -21,15 +22,18 @@ namespace Geta.Optimizely.ContentTypeIcons
     public class ContentTypeIconService : IContentTypeIconService
     {
         private readonly IFileProvider _fileProvider;
+        private readonly IPhysicalPathResolver _physicalPathResolver;
         private readonly IMemoryCache _cache;
         private readonly ContentTypeIconOptions _configuration;
 
         public ContentTypeIconService(
             IOptions<ContentTypeIconOptions> options,
             IFileProvider fileProvider,
+            IPhysicalPathResolver physicalPathResolver,
             IMemoryCache cache)
         {
             _fileProvider = fileProvider;
+            _physicalPathResolver = physicalPathResolver;
             _cache = cache;
             _configuration = options.Value;
         }
@@ -149,7 +153,7 @@ namespace Geta.Optimizely.ContentTypeIcons
                 var customFontFolder = _configuration.CustomFontPath;
                 var fontPath = $"{customFontFolder}{fileName}";
 
-                var rebased = VirtualPathUtilityEx.RebasePhysicalPath(fontPath);
+                var rebased = _physicalPathResolver.Rebase(fontPath);
 
                 try
                 {
@@ -169,7 +173,7 @@ namespace Geta.Optimizely.ContentTypeIcons
         protected virtual string GetFileFullPath(string fileName)
         {
             var rootPath = _configuration.CachePath;
-            return VirtualPathUtilityEx.RebasePhysicalPath(rootPath + fileName);
+            return _physicalPathResolver.Rebase(rootPath + fileName);
         }
     }
 }

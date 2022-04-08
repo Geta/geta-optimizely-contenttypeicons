@@ -19,9 +19,10 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
         public ContentTypeIconControllerFixture()
         {
             var currentDirectory = SetCurrentDirectory();
+            var physicalFileProvider = new TestPhysicalPathResolver(currentDirectory);
 
             var partialDirectory = $"[appDataPath]\\thumb_cache\\{Guid.NewGuid()}\\";
-            _temporaryDirectory = VirtualPathUtilityEx.RebasePhysicalPath(partialDirectory);
+            _temporaryDirectory = physicalFileProvider.Rebase(partialDirectory);
 
             Directory.CreateDirectory(_temporaryDirectory);
 
@@ -31,7 +32,11 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
             });
 
             var fileProvider = new PhysicalFileProvider(currentDirectory);
-            var service = new ContentTypeIconService(options, fileProvider, new MemoryCache(new MemoryCacheOptions()));
+            var service = new ContentTypeIconService(
+                options,
+                fileProvider,
+                physicalFileProvider,
+                new MemoryCache(new MemoryCacheOptions()));
             Controller = new ContentTypeIconController(service);
             Settings = new ContentTypeIconSettings
             {
