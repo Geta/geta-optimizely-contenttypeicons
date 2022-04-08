@@ -1,6 +1,6 @@
 # Geta Optimizely ContentTypeIcons
 
-![](http://tc.geta.no/app/rest/builds/buildType:(id:GetaPackages_OptimizelyContentTypeIcons_00ci),branch:master/statusIcon)
+[![Build](https://github.com/Geta/geta-optimizely-contenttypeicons/actions/workflows/build.yml/badge.svg)](https://github.com/Geta/geta-optimizely-contenttypeicons/actions/workflows/build.yml)
 [![Platform](https://img.shields.io/badge/Platform-.NET%205-blue.svg?style=flat)](https://docs.microsoft.com/en-us/dotnet/)
 [![Platform](https://img.shields.io/badge/Optimizely-%2012-orange.svg?style=flat)](http://world.episerver.com/cms/)
 
