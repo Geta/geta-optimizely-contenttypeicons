@@ -1,7 +1,7 @@
 # Geta Optimizely ContentTypeIcons
 
 [![Build](https://github.com/Geta/geta-optimizely-contenttypeicons/actions/workflows/build.yml/badge.svg)](https://github.com/Geta/geta-optimizely-contenttypeicons/actions/workflows/build.yml)
-[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=Geta_geta-optimizely-contenttypeicons)](https://sonarcloud.io/summary/new_code?id=Geta_geta-optimizely-contenttypeicons)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Geta_geta-optimizely-contenttypeicons&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Geta_geta-optimizely-contenttypeicons)
 [![Platform](https://img.shields.io/badge/Platform-.NET%205-blue.svg?style=flat)](https://docs.microsoft.com/en-us/dotnet/)
 [![Platform](https://img.shields.io/badge/Optimizely-%2012-orange.svg?style=flat)](http://world.episerver.com/cms/)
 
