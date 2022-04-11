@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using EPiServer.Framework.Web.Resources;
 using EPiServer.Shell;
+using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure.Initialization;
 
 namespace Geta.Optimizely.ContentTypeIcons
@@ -14,9 +15,9 @@ namespace Geta.Optimizely.ContentTypeIcons
         public IEnumerable<ClientResource> GetClientResources()
         {
             // Only load the fonts when they're needed to save load time
-            if (!TreeIconUiDescriptorInitialization.EnabledAndInUse) yield break;
+            if (!TreeIconUiDescriptorConfiguration.EnabledAndInUse) yield break;
 
-            if (TreeIconUiDescriptorInitialization.FontAwesomeVersion4InUse)
+            if (TreeIconUiDescriptorConfiguration.FontAwesomeVersion4InUse)
             {
                 var path = Paths.ToClientResource(Constants.ModuleName, "ClientResources/fa4/css/font-awesome.min.css");
 
@@ -28,7 +29,7 @@ namespace Geta.Optimizely.ContentTypeIcons
                 };
             }
 
-            if (TreeIconUiDescriptorInitialization.FontAwesomeVersion5InUse)
+            if (TreeIconUiDescriptorConfiguration.FontAwesomeVersion5InUse)
             {
                 var path = Paths.ToClientResource(Constants.ModuleName, "ClientResources/fa5/css/all.min.css");
 

@@ -15,6 +15,7 @@ using System.IO;
 using AlloyMvcTemplates;
 using EPiServer.Authorization;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
+using Geta.Optimizely.ContentTypeIcons.Infrastructure.Initialization;
 
 namespace EPiServer.Templates.Alloy.Mvc
 {
@@ -81,6 +82,8 @@ namespace EPiServer.Templates.Alloy.Mvc
                 app.UseSwaggerUI();
             }
 
+            app.UseContentTypeIcons();
+            
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();

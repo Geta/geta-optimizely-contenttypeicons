@@ -22,6 +22,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
             AddModule(services);
 
             services.AddTransient<IContentTypeIconService, ContentTypeIconService>();
+            services.AddTransient<TreeIconUiDescriptorConfiguration>();
 
             services.AddOptions<ContentTypeIconOptions>().Configure<IConfiguration>((options, configuration) =>
             {

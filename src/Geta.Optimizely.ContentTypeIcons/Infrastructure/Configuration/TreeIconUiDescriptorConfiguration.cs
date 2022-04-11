@@ -1,59 +1,53 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Text;
-using EPiServer.Cms.Shell;
-using EPiServer.Framework;
-using EPiServer.Framework.Initialization;
-using EPiServer.ServiceLocation;
 using EPiServer.Shell;
 using Geta.Optimizely.ContentTypeIcons.Attributes;
-using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
 using Microsoft.Extensions.Options;
 
-namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Initialization
+namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
 {
-    [InitializableModule]
-    [ModuleDependency(typeof(InitializableModule))]
-    internal class TreeIconUiDescriptorInitialization : IInitializableModule
+    internal class TreeIconUiDescriptorConfiguration
     {
+        private readonly UIDescriptorRegistry _uiDescriptorRegistry;
+        private readonly ContentTypeIconOptions _configuration;
         public static bool EnabledAndInUse { get; internal set; }
         public static bool FontAwesomeVersion4InUse { get; internal set; }
         public static bool FontAwesomeVersion5InUse { get; internal set; }
 
-        public void Initialize(InitializationEngine context)
+        public TreeIconUiDescriptorConfiguration(
+            UIDescriptorRegistry uiDescriptorRegistry,
+            IOptions<ContentTypeIconOptions> options)
         {
-            var registry = context.Locate.Advanced.GetInstance<UIDescriptorRegistry>();
-            var configuration = context.Locate.Advanced.GetInstance<IOptions<ContentTypeIconOptions>>().Value;
-
-            EnrichDescriptorsWithIconClass(registry.UIDescriptors, configuration);
+            _uiDescriptorRegistry = uiDescriptorRegistry;
+            _configuration = options.Value;
         }
 
-        internal void EnrichDescriptorsWithIconClass(
-            IEnumerable<UIDescriptor> uiDescriptors,
-            ContentTypeIconOptions configuration)
+        public void Initialize()
         {
-            foreach (var descriptor in uiDescriptors)
+            EnabledAndInUse = false;
+            
+            foreach (var descriptor in _uiDescriptorRegistry.UIDescriptors)
             {
-                EnrichDescriptorWithIconClass(descriptor, configuration);
+                EnrichDescriptorWithIconClass(descriptor);
             }
         }
 
-        internal void EnrichDescriptorWithIconClass(UIDescriptor descriptor, ContentTypeIconOptions configuration)
+        internal void EnrichDescriptorWithIconClass(UIDescriptor descriptor)
         {
             var contentTypeIconAttribute = descriptor.ForType.GetCustomAttribute<ContentTypeIconAttribute>(false);
             var treeIconAttribute = descriptor.ForType.GetCustomAttribute<TreeIconAttribute>(false);
 
             if (contentTypeIconAttribute == null && treeIconAttribute?.Icon == null) return;
 
-            if ((configuration.EnableTreeIcons && treeIconAttribute?.Ignore != true) || treeIconAttribute?.Icon != null)
+            if ((_configuration.EnableTreeIcons && treeIconAttribute?.Ignore != true) || treeIconAttribute?.Icon != null)
             {
                 descriptor.IconClass = BuildIconClassNames(contentTypeIconAttribute, treeIconAttribute);
                 EnabledAndInUse = true;
             }
         }
 
-        private static string BuildIconClassNames(ContentTypeIconAttribute contentTypeIconAttribute,
+        private static string BuildIconClassNames(
+            ContentTypeIconAttribute contentTypeIconAttribute,
             TreeIconAttribute treeIconAttribute)
         {
             var icon = treeIconAttribute?.Icon ?? contentTypeIconAttribute?.Icon;
@@ -89,7 +83,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Initialization
                 case Rotations.Rotate90:
                 case Rotations.Rotate180:
                 case Rotations.Rotate270:
-                    builder.AppendFormat("fa-rotate-{0} ", (int) rotate);
+                    builder.AppendFormat("fa-rotate-{0} ", (int)rotate);
                     break;
                 case Rotations.FlipHorizontal:
                     builder.Append("fa-flip-horizontal ");
@@ -102,11 +96,6 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Initialization
             builder.Append("fa-fw");
 
             return builder.ToString();
-        }
-
-        public void Uninitialize(InitializationEngine context)
-        {
-            // Nothing to uninitialize
         }
     }
 }
