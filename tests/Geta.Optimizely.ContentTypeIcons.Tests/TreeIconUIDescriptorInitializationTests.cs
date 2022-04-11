@@ -350,6 +350,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
         public void Dispose()
         {
             TreeIconUiDescriptorInitialization.EnabledAndInUse = false;
+            GC.SuppressFinalize(this);
         }
     }
 }

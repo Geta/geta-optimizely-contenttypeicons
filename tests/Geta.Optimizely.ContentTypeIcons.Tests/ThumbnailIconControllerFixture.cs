@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using EPiServer.Web;
 using Geta.Optimizely.ContentTypeIcons.Controllers;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
 using Geta.Optimizely.ContentTypeIcons.Settings;
@@ -60,6 +59,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
         public void Dispose()
         {
             Directory.Delete(_temporaryDirectory, true);
+            GC.SuppressFinalize(this);
         }
     }
 }
