@@ -6,9 +6,13 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="$(BuildBundlerMinifier)" />
-    <PackageReference Include="EPiServer.CMS" Version="12.3.2" />
-    <PackageReference Include="EPiServer.CMS.AspNetCore.Templating" Version="12.4.2" />
-    <PackageReference Include="EPiServer.Framework" Version="12.4.2" />
+    <PackageReference Include="EPiServer.CMS" Version="12.4.0" />
+    <PackageReference Include="EPiServer.CMS.AspNetCore.HtmlHelpers" Version="12.5.0" />
+    <PackageReference Include="EPiServer.CMS.AspNetCore.Mvc" Version="12.5.0" />
+    <PackageReference Include="EPiServer.CMS.AspNetCore.Routing" Version="12.5.0" />
+    <PackageReference Include="EPiServer.CMS.AspNetCore.Templating" Version="12.5.0" />
+    <PackageReference Include="EPiServer.Framework" Version="12.5.0" />
+    <PackageReference Include="EPiServer.Hosting" Version="12.5.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
     <PackageReference Include="Wangkanai.Detection" Version="2.0.1" />
