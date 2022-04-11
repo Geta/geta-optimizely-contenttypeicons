@@ -13,9 +13,14 @@ namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
 {
     static class Program
     {
-        static async Task Main(string[] args)
+        static async Task Main()
         {
-            var sourcePath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
+            var sourcePath = Directory.GetParent(Directory.GetCurrentDirectory())?.Parent?.Parent?.Parent?.FullName;
+            if (string.IsNullOrEmpty(sourcePath))
+            {
+                Console.WriteLine("Unable to find source path.");
+                return;
+            }
 
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Font Awesome Enum Generator");
@@ -33,6 +38,7 @@ namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
                 if (metaDataEntry == null)
                 {
                     Console.WriteLine("\nArchive does not contain a metadata directory with a icons.json file.");
+                    return;
                 }
 
                 Console.WriteLine("\nLoading metadata from: {0}", metaDataEntry);
@@ -48,7 +54,7 @@ namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
                     var localPath = $@"{enumBasePath}\{enumName}.cs";
 
                     Console.WriteLine("\nGenerating {0}.cs...", enumName);
-                    var icons = metadata.Where(x => x.Styles.Contains(item) && !x.Private);
+                    var icons = metadata.Where(x => x.Styles.Contains(item) && !x.Private).ToList();
                     WriteEnumToFile(localPath, enumName, icons);
                 }
 
@@ -64,7 +70,8 @@ namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
         {
             var destination = $@"{enumBasePath}\module\ClientResources\fa5\webfonts\";
             var rootEntry = archive.Entries[0];
-            var fontEntries = archive.Entries.Where(x => x.FullName.StartsWith(rootEntry + "webfonts") && x.FullName.Contains("."));
+            var fontEntries = archive.Entries.Where(x =>
+                x.FullName.StartsWith(rootEntry + "webfonts") && x.FullName.Contains("."));
 
             foreach (var fileToCopy in fontEntries)
             {
@@ -89,10 +96,10 @@ namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
 
             var serializer = new JsonSerializer();
             serializer.Converters.Add(new FontAwesomeJsonConverter());
-            return (List<MetadataIcon>)serializer.Deserialize(file, typeof(List<MetadataIcon>));
+            return (List<MetadataIcon>) serializer.Deserialize(file, typeof(List<MetadataIcon>));
         }
 
-        private static void WriteEnumToFile(string path, string enumName, IEnumerable<MetadataIcon> icons)
+        private static void WriteEnumToFile(string path, string enumName, IReadOnlyCollection<MetadataIcon> icons)
         {
             var latestVersionChange = icons.SelectMany(x => x.Changes).Distinct().OrderBy(x => x).Last();
 
@@ -120,7 +127,8 @@ namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
                 foreach (var icon in icons)
                 {
                     writer.WriteLine("        /// <summary>");
-                    writer.WriteLine($"        /// {SecurityElement.Escape(icon.Label.ToTitleCase())} ({SecurityElement.Escape(icon.Name)})");
+                    writer.WriteLine(
+                        $"        /// {SecurityElement.Escape(icon.Label.ToTitleCase())} ({SecurityElement.Escape(icon.Name)})");
                     WriteStyles(writer, icon);
                     WriteSearchTerms(writer, icon);
                     WriteChanges(writer, icon);
@@ -138,7 +146,8 @@ namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
         {
             if (icon.Styles?.Count > 1)
             {
-                writer.WriteLine($"        /// <para>Styles: {SecurityElement.Escape(string.Join(", ", icon.Styles))}</para>");
+                writer.WriteLine(
+                    $"        /// <para>Styles: {SecurityElement.Escape(string.Join(", ", icon.Styles))}</para>");
             }
         }
 
@@ -146,21 +155,24 @@ namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
         {
             if (icon.Search?.Terms?.Count > 0)
             {
-                writer.WriteLine($"        /// <para>Terms: {SecurityElement.Escape(string.Join(", ", icon.Search.Terms))}</para>");
+                writer.WriteLine(
+                    $"        /// <para>Terms: {SecurityElement.Escape(string.Join(", ", icon.Search.Terms))}</para>");
             }
         }
 
         private static void WriteChanges(StreamWriter writer, MetadataIcon icon)
         {
-            var changes = icon.Changes.Select(x => x.FormatSemver()).OrderBy(x => x);
+            var changes = icon.Changes.Select(x => x.FormatSemver()).OrderBy(x => x).ToList();
 
             writer.Write($"        /// <para>Added in {changes.First()}");
             if (changes.Count() > 1)
             {
-                var otherChanges = changes.Skip(1);
-                var result = string.Join(", ", otherChanges.Take(otherChanges.Count() - 1)) + (otherChanges.Count() > 1 ? " and " : string.Empty) + otherChanges.LastOrDefault();
+                var otherChanges = changes.Skip(1).ToList();
+                var result = string.Join(", ", otherChanges.Take(otherChanges.Count() - 1)) +
+                             (otherChanges.Count() > 1 ? " and " : string.Empty) + otherChanges.LastOrDefault();
                 writer.Write($", updated in {result}");
             }
+
             writer.Write(".</para>\n");
         }
 
@@ -188,7 +200,10 @@ namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
 
         public static string ToDashCase(this string input)
         {
-            return string.Concat(input.Select((c, i) => i > 0 && char.IsUpper(c) && (!char.IsDigit(input[i - 1]) || !char.IsDigit(input[i - 2 > 0 ? i - 2 : 0])) ? "-" + c : c.ToString())).ToLower();
+            return string.Concat(input.Select((c, i) =>
+                i > 0 && char.IsUpper(c) && (!char.IsDigit(input[i - 1]) || !char.IsDigit(input[i - 2 > 0 ? i - 2 : 0]))
+                    ? "-" + c
+                    : c.ToString())).ToLower();
         }
     }
 }
