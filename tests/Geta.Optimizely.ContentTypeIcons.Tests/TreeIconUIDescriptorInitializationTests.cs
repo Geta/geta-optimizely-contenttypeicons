@@ -1,6 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using EPiServer.Core;
+using EPiServer.DataAbstraction;
+using EPiServer.Framework.Localization;
+using EPiServer.ServiceLocation;
 using EPiServer.Shell;
+using FakeItEasy;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
 using Geta.Optimizely.ContentTypeIcons.Tests.Models;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure.Initialization;
@@ -324,6 +330,15 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
             out ContentTypeIconOptions configuration)
             where TType : IContent
         {
+            var serviceProvider = A.Fake<IServiceProvider>();
+            var contentTypeRepository = A.Fake<IContentTypeRepository>();
+            var localizationService = A.Fake<LocalizationService>();
+            A.CallTo(() => serviceProvider.GetService(typeof(IContentTypeRepository)))
+                .Returns(contentTypeRepository);
+            A.CallTo(() => serviceProvider.GetService(typeof(IEnumerable<ViewConfiguration>)))
+                .Returns(Enumerable.Empty<ViewConfiguration>());
+            A.CallTo(() => serviceProvider.GetService(typeof(LocalizationService))).Returns(localizationService);
+            ServiceLocator.SetServiceProvider(serviceProvider);
             initializableModule = new TreeIconUiDescriptorInitialization();
             descriptor = new UIDescriptor(typeof(TType));
             configuration = new ContentTypeIconOptions
