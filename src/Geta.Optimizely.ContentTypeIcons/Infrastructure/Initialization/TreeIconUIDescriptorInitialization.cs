@@ -60,7 +60,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Initialization
             if (icon == null) return string.Empty;
 
             var builder = new StringBuilder();
-            var className = ToDashCase(icon.ToString()).Replace("_", string.Empty);
+            var className = icon.ToString().ToDashCase().Replace("_", string.Empty);
 
             switch (icon)
             {
@@ -104,16 +104,9 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Initialization
             return builder.ToString();
         }
 
-        private static string ToDashCase(string input)
-        {
-            return string.Concat(input.Select((c, i) =>
-                i > 0 && char.IsUpper(c) && (!char.IsDigit(input[i - 1]) || !char.IsDigit(input[i - 2 > 0 ? i - 2 : 0]))
-                    ? "-" + c
-                    : c.ToString())).ToLower();
-        }
-
         public void Uninitialize(InitializationEngine context)
         {
+            // Nothing to uninitialize
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
+using Geta.Optimizely.ContentTypeIcons.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Xunit;
 
@@ -70,7 +71,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
             var isValid = false;
 
             // Act
-            isValid = _fixture.Controller.CheckValidFormatHtmlColor(color);
+            isValid = ContentTypeIconController.CheckValidFormatHtmlColor(color);
 
             // Assert
             Assert.True(isValid);
@@ -88,7 +89,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
             var isValid = false;
 
             // Act
-            isValid = _fixture.Controller.CheckValidFormatHtmlColor(color);
+            isValid = ContentTypeIconController.CheckValidFormatHtmlColor(color);
 
             // Assert
             Assert.False(isValid);

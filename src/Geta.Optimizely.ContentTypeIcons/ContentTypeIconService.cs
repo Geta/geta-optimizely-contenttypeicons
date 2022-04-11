@@ -4,7 +4,6 @@ using System.Linq;
 using System.Numerics;
 using EPiServer.Framework.Internal;
 using EPiServer.Shell;
-using EPiServer.Web;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
 using Geta.Optimizely.ContentTypeIcons.Settings;
 using Microsoft.Extensions.Caching.Memory;
@@ -62,7 +61,7 @@ namespace Geta.Optimizely.ContentTypeIcons
             return img.Clone(_ => { });
         }
 
-        internal virtual MemoryStream GenerateImage(ContentTypeIconSettings settings)
+        protected virtual MemoryStream GenerateImage(ContentTypeIconSettings settings)
         {
             var family = settings.UseEmbeddedFont
                 ? LoadFontFamilyFromClientResources(settings.EmbeddedFont)
@@ -137,7 +136,7 @@ namespace Geta.Optimizely.ContentTypeIcons
             }
             catch (Exception ex)
             {
-                throw new Exception($"Unable to load font {fileName} from EmbeddedResource", ex);
+                throw new InvalidOperationException($"Unable to load font {fileName} from EmbeddedResource", ex);
             }
 
             return fontCollection.Families.First();
@@ -148,23 +147,25 @@ namespace Geta.Optimizely.ContentTypeIcons
             var cacheKey = $"geta.fontawesome.disk.fontcollection.{fileName}";
             _cache.TryGetValue(cacheKey, out FontCollection fontCollection);
 
-            if (fontCollection == null)
+            if (fontCollection != null)
             {
-                var customFontFolder = _configuration.CustomFontPath;
-                var fontPath = $"{customFontFolder}{fileName}";
+                return fontCollection.Families.First();
+            }
 
-                var rebased = _physicalPathResolver.Rebase(fontPath);
+            var customFontFolder = _configuration.CustomFontPath;
+            var fontPath = $"{customFontFolder}{fileName}";
 
-                try
-                {
-                    fontCollection = new FontCollection();
-                    fontCollection.Add(rebased);
-                    _cache.Set(cacheKey, fontCollection, DateTimeOffset.Now.AddMinutes(5));
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception($"Unable to load custom font from path {fontPath}", ex);
-                }
+            var rebased = _physicalPathResolver.Rebase(fontPath);
+
+            try
+            {
+                fontCollection = new FontCollection();
+                fontCollection.Add(rebased);
+                _cache.Set(cacheKey, fontCollection, DateTimeOffset.Now.AddMinutes(5));
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException($"Unable to load custom font from path {fontPath}", ex);
             }
 
             return fontCollection.Families.First();

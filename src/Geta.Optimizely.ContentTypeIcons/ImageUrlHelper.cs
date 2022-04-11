@@ -11,15 +11,25 @@ namespace Geta.Optimizely.ContentTypeIcons
     internal static class ImageUrlHelper
     {
 #pragma warning disable 649
-        private static Injected<IOptions<ContentTypeIconOptions>> _injectedOptions; // TODO: see if can use proper DI.
+        private static Injected<IOptions<ContentTypeIconOptions>> InjectedOptions;
 #pragma warning restore 649
 
-        public static string GetUrl(Enum icon, string backgroundColor = "", string foregroundColor = "", int fontSize = -1, Rotations rotate = Rotations.None)
+        public static string GetUrl(
+            Enum icon,
+            string backgroundColor = "",
+            string foregroundColor = "",
+            int fontSize = -1,
+            Rotations rotate = Rotations.None)
         {
             return BuildSettings(icon, backgroundColor, foregroundColor, fontSize, rotate);
         }
 
-        public static string GetUrl(string customFont, int character, string backgroundColor = "", string foregroundColor = "", int fontSize = -1)
+        public static string GetUrl(
+            string customFont,
+            int character,
+            string backgroundColor = "",
+            string foregroundColor = "",
+            int fontSize = -1)
         {
             var settings = GetSettings(backgroundColor, foregroundColor, fontSize);
 
@@ -29,10 +39,30 @@ namespace Geta.Optimizely.ContentTypeIcons
             return CompileUrl(settings);
         }
 
-        internal static string BuildSettings(Enum icon, string backgroundColor, string foregroundColor, int fontSize, Rotations rotate)
+        private static string BuildSettings(
+            Enum icon,
+            string backgroundColor,
+            string foregroundColor,
+            int fontSize,
+            Rotations rotate)
         {
             var embeddedFont = GetEmbeddedFontLocation(icon);
             return BuildSettings(embeddedFont, (int)(object)icon, backgroundColor, foregroundColor, fontSize, rotate);
+        }
+
+        private static string BuildSettings(
+            string embeddedFont,
+            int icon,
+            string backgroundColor,
+            string foregroundColor,
+            int fontSize,
+            Rotations rotate)
+        {
+            var settings = GetSettings(backgroundColor, foregroundColor, fontSize);
+            settings.EmbeddedFont = embeddedFont;
+            settings.Character = icon;
+            settings.Rotate = rotate;
+            return CompileUrl(settings);
         }
 
         internal static string GetEmbeddedFontLocation(Enum icon)
@@ -52,15 +82,6 @@ namespace Geta.Optimizely.ContentTypeIcons
             }
         }
 
-        internal static string BuildSettings(string embeddedFont, int icon, string backgroundColor, string foregroundColor, int fontSize, Rotations rotate)
-        {
-            var settings = GetSettings(backgroundColor, foregroundColor, fontSize);
-            settings.EmbeddedFont = embeddedFont;
-            settings.Character = icon;
-            settings.Rotate = rotate;
-            return CompileUrl(settings);
-        }
-
         // Helper methods
         private static string CompileUrl(ContentTypeIconSettings settings)
         {
@@ -70,9 +91,9 @@ namespace Geta.Optimizely.ContentTypeIcons
             return $"/{Constants.RouteTemplate}?{parameters}";
         }
 
-        public static ContentTypeIconSettings GetSettings(string backgroundColor, string foregroundColor, int fontSize)
+        private static ContentTypeIconSettings GetSettings(string backgroundColor, string foregroundColor, int fontSize)
         {
-            var configuration = _injectedOptions.Service.Value;
+            var configuration = InjectedOptions.Service.Value;
 
             var settings = new ContentTypeIconSettings
             {

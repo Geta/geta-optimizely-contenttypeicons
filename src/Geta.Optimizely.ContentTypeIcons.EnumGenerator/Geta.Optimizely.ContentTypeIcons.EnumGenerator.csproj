@@ -12,4 +12,8 @@
     <PackageReference Include="Octokit" Version="0.50.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Geta.Optimizely.ContentTypeIcons\Geta.Optimizely.ContentTypeIcons.csproj" />
+  </ItemGroup>
+
 </Project>

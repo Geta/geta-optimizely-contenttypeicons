@@ -23,7 +23,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Controllers
         {
             if (!CheckValidFormatHtmlColor(settings.BackgroundColor) || !CheckValidFormatHtmlColor(settings.ForegroundColor))
             {
-                throw new Exception("Unknown foreground or background color");
+                throw new InvalidOperationException("Unknown foreground or background color");
             }
 
             using var image = _contentTypeIconService.LoadIconImage(settings);
@@ -34,7 +34,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Controllers
             return new FileStreamResult(stream, "image/png");
         }
 
-        internal bool CheckValidFormatHtmlColor(string inputColor)
+        internal static bool CheckValidFormatHtmlColor(string inputColor)
         {
             if (Regex.Match(inputColor, "^#(?:[0-9a-fA-F]{3}){1,2}$").Success) return true;
 

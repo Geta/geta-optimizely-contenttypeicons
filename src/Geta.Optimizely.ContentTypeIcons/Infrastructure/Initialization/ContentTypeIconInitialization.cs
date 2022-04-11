@@ -14,11 +14,11 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Initialization
     [InitializableModule]
     internal class ContentTypeIconInitialization : IInitializableModule
     {
-        private static bool _initialized;
+        private static bool Initialized;
 
         public void Initialize(InitializationEngine context)
         {
-            if (_initialized || context.HostType != HostType.WebApplication)
+            if (Initialized || context.HostType != HostType.WebApplication)
             {
                 return;
             }
@@ -34,11 +34,12 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Initialization
                 Directory.CreateDirectory(fullPath);
             }
 
-            _initialized = true;
+            Initialized = true;
         }
 
         public void Uninitialize(InitializationEngine context)
         {
+            // Nothing to uninitialize
         }
     }
 }
