@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Linq;
+using System.Text;
 
 namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
 {
@@ -12,12 +13,16 @@ namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
 
         public static string FormatSemver(this string value)
         {
-            while (value.Count(x => x == '.') < 2)
-            {
-                value += ".0";
-            }
+            var requiredCount = 2;
+            var separatorCount = value.Count(x => x == '.');
+            var sb = new StringBuilder(value);
 
-            return value;
+            for (var i = 0; i < requiredCount - separatorCount; i++)
+            {
+                sb.Append(".0");
+            }
+            
+            return sb.ToString();
         }
     }
 }
