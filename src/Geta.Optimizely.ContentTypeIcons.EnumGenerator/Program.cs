@@ -71,7 +71,8 @@ namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
             var destination = $@"{enumBasePath}\module\ClientResources\fa5\webfonts\";
             var rootEntry = archive.Entries[0];
             var fontEntries = archive.Entries.Where(x =>
-                x.FullName.StartsWith(rootEntry + "webfonts") && x.FullName.Contains("."));
+                                                        x.FullName.StartsWith(rootEntry + "webfonts") &&
+                                                        x.FullName.Contains("."));
 
             foreach (var fileToCopy in fontEntries)
             {
@@ -96,7 +97,7 @@ namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
 
             var serializer = new JsonSerializer();
             serializer.Converters.Add(new FontAwesomeJsonConverter());
-            return (List<MetadataIcon>) serializer.Deserialize(file, typeof(List<MetadataIcon>));
+            return (List<MetadataIcon>)serializer.Deserialize(file, typeof(List<MetadataIcon>));
         }
 
         private static void WriteEnumToFile(string path, string enumName, IReadOnlyCollection<MetadataIcon> icons)
@@ -165,11 +166,11 @@ namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
             var changes = icon.Changes.Select(x => x.FormatSemver()).OrderBy(x => x).ToList();
 
             writer.Write($"        /// <para>Added in {changes.First()}");
-            if (changes.Count() > 1)
+            if (changes.Count > 1)
             {
                 var otherChanges = changes.Skip(1).ToList();
-                var result = string.Join(", ", otherChanges.Take(otherChanges.Count() - 1)) +
-                             (otherChanges.Count() > 1 ? " and " : string.Empty) + otherChanges.LastOrDefault();
+                var result = string.Join(", ", otherChanges.Take(otherChanges.Count - 1)) +
+                             (otherChanges.Count > 1 ? " and " : string.Empty) + otherChanges.LastOrDefault();
                 writer.Write($", updated in {result}");
             }
 
@@ -198,12 +199,19 @@ namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
             return name;
         }
 
-        public static string ToDashCase(this string input)
+        private static string ToDashCase(this string input)
         {
+            bool ShouldAddDash(int i, char c)
+            {
+                return i > 0
+                       && char.IsUpper(c)
+                       && (!char.IsDigit(input[i - 1]) || !char.IsDigit(input[i - 2 > 0 ? i - 2 : 0]));
+            }
+
             return string.Concat(input.Select((c, i) =>
-                i > 0 && char.IsUpper(c) && (!char.IsDigit(input[i - 1]) || !char.IsDigit(input[i - 2 > 0 ? i - 2 : 0]))
-                    ? "-" + c
-                    : c.ToString())).ToLower();
+                                                  ShouldAddDash(i, c)
+                                                      ? "-" + c
+                                                      : c.ToString())).ToLower();
         }
     }
 }
