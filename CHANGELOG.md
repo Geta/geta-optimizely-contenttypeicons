@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - Linux support - using ImageSharp to generate content icon images
+- Added initialization by calling UseContentTypeIcons
 
 ### Notes
 This version requires to explicitly install *EPiServer.CMS.AspNetCore.Templating* and *EPiServer.Framework* version 12.4.2+. Starting from this version, Optimizely (Episerver) is using latest *ImageSharp* which is required to generate images from fonts.
