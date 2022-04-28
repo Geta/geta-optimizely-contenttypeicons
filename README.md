@@ -69,6 +69,12 @@ It is also possible to configure the application in `appsettings.json` file. A c
 }
 ```
 
+Next, initialize Content Type Icons by calling `UseContentTypeIcons` in the Configure method.
+
+```json
+app.UseContentTypeIcons();
+```
+
 ### Tree icons
 
 ![Screenshot of package](/images/treeicon_overview.jpg)
