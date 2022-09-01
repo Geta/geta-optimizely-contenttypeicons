@@ -5,10 +5,10 @@
         public const int DefaultWidth = 120;
         public const int DefaultHeight = 90;
 
-        public const string DefaultCustomFontPath = "[appDataPath]\\fonts\\";
+        public const string DefaultCustomFontPath = "[appDataPath]/fonts/";
         public string CustomFontPath { get; set; } = DefaultCustomFontPath;
 
-        public const string DefaultCachePath = "[appDataPath]\\thumb_cache\\";
+        public const string DefaultCachePath = "[appDataPath]/thumb_cache/";
         public string CachePath { get; set; } = DefaultCachePath;
 
         public const string DefaultBackgroundColor = "#02423F";
