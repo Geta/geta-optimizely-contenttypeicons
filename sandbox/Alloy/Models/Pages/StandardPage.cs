@@ -1,4 +1,4 @@
-﻿﻿using EPiServer.Core;
+﻿using EPiServer.Core;
 using EPiServer.DataAbstraction;
 using EPiServer.DataAnnotations;
 using Geta.Optimizely.ContentTypeIcons;
@@ -11,7 +11,7 @@ namespace AlloyTemplates.Models.Pages
     /// Used for the pages mainly consisting of manually created content such as text, images, and blocks
     /// </summary>
     [SiteContentType(GUID = "9CCC8A41-5C8C-4BE0-8E73-520FF3DE8267")]
-    [ContentTypeIcon(FontAwesome5Brands.Github)]
+    [ContentTypeIcon(FontAwesome5Brands.Github, Rotations.None, "#ff0000", "#ffffff", 40)]
     public class StandardPage : SitePageData
     {
         [Display(
