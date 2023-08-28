@@ -23,7 +23,7 @@
 
   <ItemGroup>
     <PackageReference Include="EPiServer.CMS.AspNetCore.Templating" Version="12.17.0" />
-    <PackageReference Include="EPiServer.CMS.UI.Core" Version="12.22.3" />
+    <PackageReference Include="EPiServer.CMS.UI.Core" Version="12.22.4" />
     <PackageReference Include="SixLabors.Fonts" Version="1.0.0" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
     <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0" />
