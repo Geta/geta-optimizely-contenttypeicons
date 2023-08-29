@@ -1,7 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using EPiServer.Core;
 using EPiServer.DataAbstraction;
 using EPiServer.DataAnnotations;
+using Geta.Optimizely.ContentTypeIcons.Attributes;
+using Geta.Optimizely.ContentTypeIcons;
 
 namespace AlloyTemplates.Models.Blocks
 {
@@ -11,7 +13,7 @@ namespace AlloyTemplates.Models.Blocks
     [SiteContentType(
         GUID = "67F617A4-2175-4360-975E-75EDF2B924A7",
         GroupName = SystemTabNames.Content)]
-    [SiteImageUrl]
+    [ContentTypeIcon(FontAwesome5Solid.Edit)]
     public class EditorialBlock : SiteBlockData
     {
         [Display(GroupName = SystemTabNames.Content)]

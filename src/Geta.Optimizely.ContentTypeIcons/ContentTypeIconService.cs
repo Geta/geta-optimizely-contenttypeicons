@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Numerics;
@@ -49,12 +49,12 @@ namespace Geta.Optimizely.ContentTypeIcons
 
             if (File.Exists(cachePath))
             {
-                return Image.Load(cachePath, new PngDecoder());
+                return Image.Load(cachePath);
             }
 
             using var stream = GenerateImage(settings);
             using var fileStream = File.Create(cachePath);
-            using var img = Image.Load(stream, new PngDecoder());
+            using var img = Image.Load(stream);
 
             img.Save(fileStream, new PngEncoder());
 
@@ -73,7 +73,7 @@ namespace Geta.Optimizely.ContentTypeIcons
 
             var center = new Vector2((float)image.Width / 2, (float)image.Height / 2);
 
-            var textOptions = new TextOptions(font)
+            var textOptions = new RichTextOptions(font)
             {
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Center,
