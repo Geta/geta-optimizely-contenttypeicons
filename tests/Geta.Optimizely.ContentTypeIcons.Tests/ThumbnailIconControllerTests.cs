@@ -67,11 +67,8 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
         [InlineData("#000")]
         public void CheckValidFormatHtmlColor_Valid(string color)
         {
-            // Arrange
-            var isValid = false;
-
             // Act
-            isValid = ContentTypeIconController.CheckValidFormatHtmlColor(color);
+            var isValid = ContentTypeIconController.CheckValidFormatHtmlColor(color);
 
             // Assert
             Assert.True(isValid);
@@ -87,11 +84,8 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
         [InlineData("Blue")]
         public void CheckValidFormatHtmlColor_ValidNamedColors(string color)
         {
-            // Arrange
-            var isValid = false;
-
             // Act
-            isValid = ContentTypeIconController.CheckValidFormatHtmlColor(color);
+            var isValid = ContentTypeIconController.CheckValidFormatHtmlColor(color);
 
             // Assert
             Assert.True(isValid, $"Expected '{color}' to be a valid named color");
@@ -105,11 +99,8 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
         [InlineData("000")]
         public void CheckValidFormatHtmlColor_Invalid(string color)
         {
-            // Arrange
-            var isValid = false;
-
             // Act
-            isValid = ContentTypeIconController.CheckValidFormatHtmlColor(color);
+            var isValid = ContentTypeIconController.CheckValidFormatHtmlColor(color);
 
             // Assert
             Assert.False(isValid);
@@ -121,11 +112,8 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
         [InlineData("xyz123")]
         public void CheckValidFormatHtmlColor_InvalidNamedColors(string color)
         {
-            // Arrange
-            var isValid = false;
-
             // Act
-            isValid = ContentTypeIconController.CheckValidFormatHtmlColor(color);
+            var isValid = ContentTypeIconController.CheckValidFormatHtmlColor(color);
 
             // Assert
             Assert.False(isValid, $"Expected '{color}' to be an invalid named color");

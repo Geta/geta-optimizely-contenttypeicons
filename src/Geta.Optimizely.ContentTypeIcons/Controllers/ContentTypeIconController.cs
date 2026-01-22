@@ -36,7 +36,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Controllers
         internal static bool CheckValidFormatHtmlColor(string inputColor)
         {
             // Use SixLabors.ImageSharp.Color.TryParse which supports both hex colors and named colors
-            // This is cross-platform compatible, unlike System.Drawing.Color which is Windows-only in .NET 6+
+            // This is cross-platform compatible and doesn't require runtime configuration switches
             return SixLabors.ImageSharp.Color.TryParse(inputColor, out _);
         }
     }
