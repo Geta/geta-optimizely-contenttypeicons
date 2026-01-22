@@ -78,6 +78,26 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
         }
 
         [Theory]
+        [InlineData("red")]
+        [InlineData("blue")]
+        [InlineData("green")]
+        [InlineData("white")]
+        [InlineData("black")]
+        [InlineData("Red")]
+        [InlineData("Blue")]
+        public void CheckValidFormatHtmlColor_ValidNamedColors(string color)
+        {
+            // Arrange
+            var isValid = false;
+
+            // Act
+            isValid = ContentTypeIconController.CheckValidFormatHtmlColor(color);
+
+            // Assert
+            Assert.True(isValid, $"Expected '{color}' to be a valid named color");
+        }
+
+        [Theory]
         [InlineData("#FF")]
         [InlineData("#THISISATEST")]
         [InlineData("#-132332")]
@@ -93,6 +113,22 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
 
             // Assert
             Assert.False(isValid);
+        }
+
+        [Theory]
+        [InlineData("notacolor")]
+        [InlineData("invalidcolorname")]
+        [InlineData("xyz123")]
+        public void CheckValidFormatHtmlColor_InvalidNamedColors(string color)
+        {
+            // Arrange
+            var isValid = false;
+
+            // Act
+            isValid = ContentTypeIconController.CheckValidFormatHtmlColor(color);
+
+            // Assert
+            Assert.False(isValid, $"Expected '{color}' to be an invalid named color");
         }
 
         public static IEnumerable<object[]> GetEnumValues(Type type)

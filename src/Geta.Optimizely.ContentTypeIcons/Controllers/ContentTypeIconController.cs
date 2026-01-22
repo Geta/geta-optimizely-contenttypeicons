@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Text.RegularExpressions;
 using Geta.Optimizely.ContentTypeIcons.Settings;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -36,10 +35,9 @@ namespace Geta.Optimizely.ContentTypeIcons.Controllers
 
         internal static bool CheckValidFormatHtmlColor(string inputColor)
         {
-            if (Regex.Match(inputColor, "^#(?:[0-9a-fA-F]{3}){1,2}$").Success) return true;
-
-            var result = System.Drawing.Color.FromName(inputColor);
-            return result.IsKnownColor;
+            // Use SixLabors.ImageSharp.Color.TryParse which supports both hex colors and named colors
+            // This is cross-platform compatible, unlike System.Drawing.Color which is Windows-only in .NET 6+
+            return SixLabors.ImageSharp.Color.TryParse(inputColor, out _);
         }
     }
 }
