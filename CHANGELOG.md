@@ -9,7 +9,7 @@ All notable changes to this project will be documented in this file.
 - Updated SixLabors.ImageSharp from 3.0.1 to 3.1.12+ (fixes CVE-2024-32036, CVE-2024-27929, CVE-2024-32035)
 - Updated SixLabors.Fonts from 1.0.0 to 2.1.3+
 - Updated SixLabors.ImageSharp.Drawing from 1.0.0 to 2.1.7+
-- Added System.Drawing.Common 8.0.10 for .NET 8 compatibility
+- Removed System.Drawing usage for color parsing to improve .NET 8 compatibility
 - Updated test dependencies to latest versions
 - Made SixLabors package dependencies open-ended to allow future updates
 
