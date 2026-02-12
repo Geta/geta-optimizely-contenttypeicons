@@ -67,14 +67,28 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
         [InlineData("#000")]
         public void CheckValidFormatHtmlColor_Valid(string color)
         {
-            // Arrange
-            var isValid = false;
-
             // Act
-            isValid = ContentTypeIconController.CheckValidFormatHtmlColor(color);
+            var isValid = ContentTypeIconController.CheckValidFormatHtmlColor(color);
 
             // Assert
             Assert.True(isValid);
+        }
+
+        [Theory]
+        [InlineData("red")]
+        [InlineData("blue")]
+        [InlineData("green")]
+        [InlineData("white")]
+        [InlineData("black")]
+        [InlineData("Red")]
+        [InlineData("Blue")]
+        public void CheckValidFormatHtmlColor_ValidNamedColors(string color)
+        {
+            // Act
+            var isValid = ContentTypeIconController.CheckValidFormatHtmlColor(color);
+
+            // Assert
+            Assert.True(isValid, $"Expected '{color}' to be a valid named color");
         }
 
         [Theory]
@@ -85,14 +99,24 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
         [InlineData("000")]
         public void CheckValidFormatHtmlColor_Invalid(string color)
         {
-            // Arrange
-            var isValid = false;
-
             // Act
-            isValid = ContentTypeIconController.CheckValidFormatHtmlColor(color);
+            var isValid = ContentTypeIconController.CheckValidFormatHtmlColor(color);
 
             // Assert
             Assert.False(isValid);
+        }
+
+        [Theory]
+        [InlineData("notacolor")]
+        [InlineData("invalidcolorname")]
+        [InlineData("xyz123")]
+        public void CheckValidFormatHtmlColor_InvalidNamedColors(string color)
+        {
+            // Act
+            var isValid = ContentTypeIconController.CheckValidFormatHtmlColor(color);
+
+            // Assert
+            Assert.False(isValid, $"Expected '{color}' to be an invalid named color");
         }
 
         public static IEnumerable<object[]> GetEnumValues(Type type)
