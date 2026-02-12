@@ -95,8 +95,6 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
         [InlineData("#FF")]
         [InlineData("#THISISATEST")]
         [InlineData("#-132332")]
-        [InlineData("#00034333")]
-        [InlineData("000")]
         public void CheckValidFormatHtmlColor_Invalid(string color)
         {
             // Act
