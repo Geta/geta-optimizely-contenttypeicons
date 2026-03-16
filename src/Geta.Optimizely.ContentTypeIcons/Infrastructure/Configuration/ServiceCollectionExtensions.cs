@@ -10,13 +10,18 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
 {
     public static class ServiceCollectionExtensions
     {
-        private static readonly Action<AuthorizationPolicyBuilder> DefaultPolicy = p => 
-            p.RequireRole(["Administrators", 
-                              "CmsAdmins", 
-                              "CmsEditors", 
-                              "WebAdmins", 
-                              "WebEditors", 
-                              "ThumbnailGroup"]);
+        private static readonly Action<AuthorizationPolicyBuilder> DefaultPolicy = p =>
+        {
+            p.RequireAuthenticatedUser();
+            p.RequireRole([
+                "Administrators",
+                "CmsAdmins",
+                "CmsEditors",
+                "WebAdmins",
+                "WebEditors",
+                "ThumbnailGroup"
+            ]);
+        };
 
         public static IServiceCollection AddContentTypeIcons(
             this IServiceCollection services)
