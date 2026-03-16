@@ -2,6 +2,7 @@
 using System.Linq;
 using EPiServer.Cms.Shell;
 using EPiServer.Shell.Modules;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,6 +21,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
             Action<ContentTypeIconOptions> setupAction)
         {
             AddModule(services);
+            AddDefaultAuthorizationPolicy(services);
 
             services.AddTransient<IContentTypeIconService, ContentTypeIconService>();
             services.AddTransient<TreeIconUiDescriptorConfiguration>();
@@ -31,6 +33,21 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
             });
 
             return services;
+        }
+
+        private static void AddDefaultAuthorizationPolicy(IServiceCollection services)
+        {
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(Constants.AuthorizationPolicy, policy =>
+                    policy.RequireRole(
+                        "Administrators",
+                        "CmsAdmins",
+                        "CmsEditors",
+                        "WebAdmins",
+                        "WebEditors",
+                        "ThumbnailGroup"));
+            });
         }
 
         private static void AddModule(IServiceCollection services)

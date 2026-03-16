@@ -17,7 +17,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Controllers
             _contentTypeIconService = contentTypeIconService ?? throw new ArgumentNullException(nameof(contentTypeIconService));
         }
 
-        [Authorize(Roles = "Administrators, CmsAdmins, CmsEditors, WebAdmins, WebEditors, ThumbnailGroup")]
+        [Authorize(Policy = Constants.AuthorizationPolicy)]
         public ActionResult Index(ContentTypeIconSettings settings)
         {
             if (!CheckValidFormatHtmlColor(settings.BackgroundColor) || !CheckValidFormatHtmlColor(settings.ForegroundColor))
