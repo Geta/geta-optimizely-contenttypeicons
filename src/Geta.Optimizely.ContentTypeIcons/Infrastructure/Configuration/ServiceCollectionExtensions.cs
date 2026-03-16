@@ -41,6 +41,11 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
             Action<ContentTypeIconOptions> setupAction,
             Action<AuthorizationPolicyBuilder> configurePolicy)
         {
+            if (configurePolicy is null)
+            {
+                throw new ArgumentNullException(nameof(configurePolicy));
+            }
+
             AddModule(services);
             services.AddAuthorization(options =>
             {
