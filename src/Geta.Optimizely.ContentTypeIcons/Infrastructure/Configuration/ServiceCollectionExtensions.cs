@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using EPiServer.Cms.Shell;
 using EPiServer.Shell.Modules;
@@ -10,18 +10,37 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
 {
     public static class ServiceCollectionExtensions
     {
+        private static readonly Action<AuthorizationPolicyBuilder> DefaultPolicy = p => 
+            p.RequireRole(["Administrators", 
+                              "CmsAdmins", 
+                              "CmsEditors", 
+                              "WebAdmins", 
+                              "WebEditors", 
+                              "ThumbnailGroup"]);
+
         public static IServiceCollection AddContentTypeIcons(
             this IServiceCollection services)
         {
-            return services.AddContentTypeIcons(_ => { });
+            return services.AddContentTypeIcons(_ => { }, DefaultPolicy);
         }
 
         public static IServiceCollection AddContentTypeIcons(
             this IServiceCollection services,
             Action<ContentTypeIconOptions> setupAction)
         {
+            return services.AddContentTypeIcons(setupAction, DefaultPolicy);
+        }
+
+        public static IServiceCollection AddContentTypeIcons(
+            this IServiceCollection services,
+            Action<ContentTypeIconOptions> setupAction,
+            Action<AuthorizationPolicyBuilder> configurePolicy)
+        {
             AddModule(services);
-            AddDefaultAuthorizationPolicy(services);
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(Constants.AuthorizationPolicy, configurePolicy);
+            });
 
             services.AddTransient<IContentTypeIconService, ContentTypeIconService>();
             services.AddTransient<TreeIconUiDescriptorConfiguration>();
@@ -31,24 +50,10 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
                 setupAction(options);
                 configuration.GetSection("Geta:ContentTypeIcons").Bind(options);
             });
-
+        
             return services;
         }
 
-        private static void AddDefaultAuthorizationPolicy(IServiceCollection services)
-        {
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy(Constants.AuthorizationPolicy, policy =>
-                    policy.RequireRole(
-                        "Administrators",
-                        "CmsAdmins",
-                        "CmsEditors",
-                        "WebAdmins",
-                        "WebEditors",
-                        "ThumbnailGroup"));
-            });
-        }
 
         private static void AddModule(IServiceCollection services)
         {
