@@ -146,6 +146,23 @@ Take the content reference from the css (\e897) and replace the \ with 0x so the
 [ContentTypeIcon("customfont.ttf",0xe897)]
 ```
 
+### Authorization
+
+The icon endpoint is protected by a named authorization policy (`ContentTypeIconsPolicy`). By default the policy allows access to the roles `Administrators`, `CmsAdmins`, `CmsEditors`, `WebAdmins`, `WebEditors` and `ThumbnailGroup`.
+
+You can override the policy by passing a second lambda to `AddContentTypeIcons`:
+
+```cs
+services.AddContentTypeIcons(
+    x =>
+    {
+        x.EnableTreeIcons = true;
+        // ... other options
+    },
+    policy => policy.RequireRole("MyCustomRole", "Administrators")
+);
+```
+
 ### Caching
 
 All generated icon images are stored in the cache folder and then served instead of regenerating those. A default cache folder can be changed by configuring the `CachePath` property.
