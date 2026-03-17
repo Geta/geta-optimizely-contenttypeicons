@@ -13,14 +13,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
         private static readonly Action<AuthorizationPolicyBuilder> DefaultPolicy = p =>
         {
             p.RequireAuthenticatedUser();
-            p.RequireRole([
-                "Administrators",
-                "CmsAdmins",
-                "CmsEditors",
-                "WebAdmins",
-                "WebEditors",
-                "ThumbnailGroup"
-            ]);
+            p.RequireRole("Administrators", "CmsAdmins", "CmsEditors", "WebAdmins", "WebEditors", "ThumbnailGroup");
         };
 
         public static IServiceCollection AddContentTypeIcons(
@@ -41,16 +34,11 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
             Action<ContentTypeIconOptions> setupAction,
             Action<AuthorizationPolicyBuilder> configurePolicy)
         {
-            if (configurePolicy is null)
-            {
-                throw new ArgumentNullException(nameof(configurePolicy));
-            }
+            ArgumentNullException.ThrowIfNull(configurePolicy);
 
             AddModule(services);
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy(Constants.AuthorizationPolicy, configurePolicy);
-            });
+            services.AddAuthorizationBuilder()
+                .AddPolicy(Constants.AuthorizationPolicy, configurePolicy);
 
             services.AddTransient<IContentTypeIconService, ContentTypeIconService>();
             services.AddTransient<TreeIconUiDescriptorConfiguration>();
