@@ -40,6 +40,18 @@ namespace Geta.Optimizely.ContentTypeIcons
                     ResourceType = ClientResourceType.Style
                 };
             }
+
+            if (TreeIconUiDescriptorConfiguration.FontAwesomeVersion7InUse)
+            {
+                var path = Paths.ToClientResource(Constants.ModuleName, "ClientResources/fa7/css/all.min.css");
+
+                yield return new ClientResource
+                {
+                    Name = "epi.shell.ui",
+                    Path = path,
+                    ResourceType = ClientResourceType.Style
+                };
+            }
         }
     }
 }

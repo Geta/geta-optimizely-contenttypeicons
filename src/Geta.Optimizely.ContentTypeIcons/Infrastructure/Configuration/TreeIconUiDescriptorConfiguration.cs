@@ -13,6 +13,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
         public static bool EnabledAndInUse { get; internal set; }
         public static bool FontAwesomeVersion4InUse { get; internal set; }
         public static bool FontAwesomeVersion5InUse { get; internal set; }
+        public static bool FontAwesomeVersion7InUse { get; internal set; }
 
         public TreeIconUiDescriptorConfiguration(
             UIDescriptorRegistry uiDescriptorRegistry,
@@ -25,6 +26,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
         public void Initialize()
         {
             EnabledAndInUse = false;
+            FontAwesomeVersion7InUse = false;
             
             foreach (var descriptor in _uiDescriptorRegistry.UIDescriptors)
             {
@@ -73,6 +75,18 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
                 case FontAwesome5Solid _:
                     builder.AppendFormat("fas fa-{0} ", className);
                     FontAwesomeVersion5InUse = true;
+                    break;
+                case FontAwesome7Brands _:
+                    builder.AppendFormat("fa-brands fa-{0} ", className);
+                    FontAwesomeVersion7InUse = true;
+                    break;
+                case FontAwesome7Regular _:
+                    builder.AppendFormat("fa-regular fa-{0} ", className);
+                    FontAwesomeVersion7InUse = true;
+                    break;
+                case FontAwesome7Solid _:
+                    builder.AppendFormat("fa-solid fa-{0} ", className);
+                    FontAwesomeVersion7InUse = true;
                     break;
             }
 

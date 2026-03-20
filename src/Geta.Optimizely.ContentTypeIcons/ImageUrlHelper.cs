@@ -77,6 +77,12 @@ namespace Geta.Optimizely.ContentTypeIcons
                     return "fa5/webfonts/fa-regular-400.ttf";
                 case FontAwesome5Solid _:
                     return "fa5/webfonts/fa-solid-900.ttf";
+                case FontAwesome7Brands _:
+                    return "fa7/webfonts/fa-brands-400.otf";
+                case FontAwesome7Regular _:
+                    return "fa7/webfonts/fa-regular-400.otf";
+                case FontAwesome7Solid _:
+                    return "fa7/webfonts/fa-solid-900.otf";
                 default:
                     return string.Empty;
             }
