@@ -10,7 +10,7 @@
 namespace Geta.Optimizely.ContentTypeIcons
 {
     /// <summary>
-    /// Font Awesome. Version 7.1.0.
+    /// Font Awesome. Version 7.2.0.
     /// </summary>
     public enum FontAwesome7Regular
     {
