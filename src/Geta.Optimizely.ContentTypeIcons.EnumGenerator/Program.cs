@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -49,7 +49,7 @@ namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
                 foreach (var item in styles)
                 {
                     var styleName = item.ToTitleCase();
-                    var enumName = $"FontAwesome5{styleName}";
+                    var enumName = $"FontAwesome7{styleName}";
                     var localPath = $@"{enumBasePath}\{enumName}.cs";
 
                     Console.WriteLine("\nGenerating {0}.cs...", enumName);
@@ -67,7 +67,9 @@ namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
 
         private static void CopyFontFiles(ZipArchive archive, string enumBasePath)
         {
-            var destination = $@"{enumBasePath}\module\ClientResources\fa5\webfonts\";
+            var destination = $@"{enumBasePath}\module\ClientResources\fa7\webfonts\";
+            Directory.CreateDirectory(destination);
+
             var rootEntry = archive.Entries[0];
             var fontEntries = archive.Entries.Where(x =>
                                                         x.FullName.StartsWith(rootEntry + "webfonts") &&
@@ -82,7 +84,9 @@ namespace Geta.Optimizely.ContentTypeIcons.EnumGenerator
 
         private static void CopyCssFiles(ZipArchive archive, string enumBasePath)
         {
-            var destination = $@"{enumBasePath}\module\ClientResources\fa5\css\";
+            var destination = $@"{enumBasePath}\module\ClientResources\fa7\css\";
+            Directory.CreateDirectory(destination);
+
             var rootEntry = archive.Entries[0];
             var cssFile = archive.Entries.Single(x => x.FullName.Contains(rootEntry + "css/all.min.css"));
 

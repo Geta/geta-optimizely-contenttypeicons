@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using EPiServer.DataAnnotations;
 
 namespace Geta.Optimizely.ContentTypeIcons.Attributes
@@ -111,6 +111,74 @@ namespace Geta.Optimizely.ContentTypeIcons.Attributes
             FontSize = fontSize;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Geta.Optimizely.ContentTypeIcons.Attributes.ContentTypeIconAttribute" /> class.
+        /// </summary>
+        /// <param name="icon">The FontAwesome7Brands icon to be used</param>
+        /// <param name="rotate">The rotation to be used, defaults to None</param>
+        /// <param name="backgroundColor">The backgroundColor to be used when rendering the image (specified in hexadecimal, for example #000000)</param>
+        /// <param name="foregroundColor">The foregroundColor to be used when rendering the image (specified in hexadecimal, for example #ffffff) </param>
+        /// <param name="fontSize">The fontSize to be used, default value is 40</param>
+        public ContentTypeIconAttribute(
+            FontAwesome7Brands icon,
+            Rotations rotate = Rotations.None,
+            string backgroundColor = "",
+            string foregroundColor = "",
+            int fontSize = -1)
+            : base(string.Empty)
+        {
+            Icon = icon;
+            Rotate = rotate;
+            BackgroundColor = backgroundColor;
+            ForegroundColor = foregroundColor;
+            FontSize = fontSize;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Geta.Optimizely.ContentTypeIcons.Attributes.ContentTypeIconAttribute" /> class.
+        /// </summary>
+        /// <param name="icon">The FontAwesome7Regular icon to be used</param>
+        /// <param name="rotate">The rotation to be used, defaults to None</param>
+        /// <param name="backgroundColor">The backgroundColor to be used when rendering the image (specified in hexadecimal, for example #000000)</param>
+        /// <param name="foregroundColor">The foregroundColor to be used when rendering the image (specified in hexadecimal, for example #ffffff) </param>
+        /// <param name="fontSize">The fontSize to be used, default value is 40</param>
+        public ContentTypeIconAttribute(
+            FontAwesome7Regular icon,
+            Rotations rotate = Rotations.None,
+            string backgroundColor = "",
+            string foregroundColor = "",
+            int fontSize = -1)
+            : base(string.Empty)
+        {
+            Icon = icon;
+            Rotate = rotate;
+            BackgroundColor = backgroundColor;
+            ForegroundColor = foregroundColor;
+            FontSize = fontSize;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Geta.Optimizely.ContentTypeIcons.Attributes.ContentTypeIconAttribute" /> class.
+        /// </summary>
+        /// <param name="icon">The FontAwesome7Solid icon to be used</param>
+        /// <param name="rotate">The rotation to be used, defaults to None</param>
+        /// <param name="backgroundColor">The backgroundColor to be used when rendering the image (specified in hexadecimal, for example #000000)</param>
+        /// <param name="foregroundColor">The foregroundColor to be used when rendering the image (specified in hexadecimal, for example #ffffff) </param>
+        /// <param name="fontSize">The fontSize to be used, default value is 40</param>
+        public ContentTypeIconAttribute(
+            FontAwesome7Solid icon,
+            Rotations rotate = Rotations.None,
+            string backgroundColor = "",
+            string foregroundColor = "",
+            int fontSize = -1)
+            : base(string.Empty)
+        {
+            Icon = icon;
+            Rotate = rotate;
+            BackgroundColor = backgroundColor;
+            ForegroundColor = foregroundColor;
+            FontSize = fontSize;
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Geta.Optimizely.ContentTypeIcons.Attributes.ContentTypeIconAttribute" /> class.
