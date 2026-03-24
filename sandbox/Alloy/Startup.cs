@@ -1,21 +1,22 @@
+using System.IO;
+using AlloyMvcTemplates;
 using AlloyMvcTemplates.Extensions;
 using AlloyMvcTemplates.Infrastructure;
+using EPiServer.Authorization;
 using EPiServer.Cms.UI.AspNetIdentity;
 using EPiServer.Data;
 using EPiServer.Framework.Web.Resources;
 using EPiServer.Scheduler;
 using EPiServer.ServiceLocation;
 using EPiServer.Web.Routing;
+using Geta.Optimizely.ContentTypeIcons.Caching;
+using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
+using Geta.Optimizely.ContentTypeIcons.Infrastructure.Initialization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.IO;
-using AlloyMvcTemplates;
-using EPiServer.Authorization;
-using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
-using Geta.Optimizely.ContentTypeIcons.Infrastructure.Initialization;
 
 namespace EPiServer.Templates.Alloy.Mvc
 {
@@ -60,7 +61,7 @@ namespace EPiServer.Templates.Alloy.Mvc
                 x.FontSize = 40;
                 x.CachePath = "[appDataPath]\\thumb_cache\\";
                 x.CustomFontPath = "[appDataPath]\\fonts\\";
-            });
+            }).SetCacheProvider<InMemoryIconCacheProvider>(); ;
 
             services.AddCmsAspNetIdentity<ApplicationUser>();
             services.AddMvc();

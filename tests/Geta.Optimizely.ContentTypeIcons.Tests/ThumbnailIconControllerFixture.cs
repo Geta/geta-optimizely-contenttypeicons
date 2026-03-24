@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Geta.Optimizely.ContentTypeIcons.Caching;
 using Geta.Optimizely.ContentTypeIcons.Controllers;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
 using Geta.Optimizely.ContentTypeIcons.Settings;
@@ -31,11 +32,13 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
             });
 
             var fileProvider = new PhysicalFileProvider(currentDirectory);
+            var cacheProvider = new DiskIconCacheProvider(options, physicalFileProvider);
             var service = new ContentTypeIconService(
                 options,
                 fileProvider,
                 physicalFileProvider,
-                new MemoryCache(new MemoryCacheOptions()));
+                new MemoryCache(new MemoryCacheOptions()),
+                cacheProvider);
             Controller = new ContentTypeIconController(service);
             Settings = new ContentTypeIconSettings
             {
