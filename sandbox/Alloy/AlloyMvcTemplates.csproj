@@ -36,7 +36,7 @@
   <!-- Copy the plugin zip from the plugin's build output into the sandbox modules folder after build -->
   <Target Name="CopyPluginZip" AfterTargets="Build">
     <ItemGroup>
-      <PluginZip Include="..\..\src\Geta.Optimizely.ContentTypeIcons\bin\$(Configuration)\net8.0\Geta.Optimizely.ContentTypeIcons.zip" />
+      <PluginZip Include="..\..\src\Geta.Optimizely.ContentTypeIcons\bin\$(Configuration)\$(TargetFramework)\Geta.Optimizely.ContentTypeIcons.zip" />
     </ItemGroup>
     <MakeDir Directories="$(MSBuildProjectDirectory)\modules\_protected\Geta.Optimizely.ContentTypeIcons" />
     <Copy SourceFiles="@(PluginZip)" DestinationFolder="$(MSBuildProjectDirectory)\modules\_protected\Geta.Optimizely.ContentTypeIcons\" />

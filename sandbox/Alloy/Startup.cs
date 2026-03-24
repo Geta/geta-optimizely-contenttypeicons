@@ -61,7 +61,7 @@ namespace EPiServer.Templates.Alloy.Mvc
                 x.FontSize = 40;
                 x.CachePath = "[appDataPath]\\thumb_cache\\";
                 x.CustomFontPath = "[appDataPath]\\fonts\\";
-            }).SetCacheProvider<InMemoryIconCacheProvider>(); ;
+            }).SetCacheProvider<InMemoryIconCacheProvider>();
 
             services.AddCmsAspNetIdentity<ApplicationUser>();
             services.AddMvc();
