@@ -41,8 +41,6 @@ Or with overriddes for specifying different colors and size:
 ```
 The defaults if nothing else is specified is of course the Geta colors as seen in the screenshot.
 
-The images that gets generated are cached in [appDataPath]\thumb_cache\
-
 ## Configuration
 
 For the ConentTypeIcons to work, you have to call `AddContentTypeIcons` extension method in `Startup.ConfigureServices` method. This method provides a configuration of default values and allows to enable tree icon feature. Below is a code with all possible configuration options:
@@ -165,18 +163,18 @@ services.AddContentTypeIcons(
 
 ### Caching
 
-All generated icon images are cached and served on subsequent requests instead of being regenerated. The default cache provider stores files on disk under `CachePath`.
+All generated icon images are cached and served on subsequent requests instead of being regenerated. The default cache provider stores images in memory with a sliding expiration (default 24 hours, configurable via `InMemoryCacheSlidingExpiration`).
 
-#### Using the in-memory cache provider
+#### Using the disk cache provider
 
-To cache generated images in memory instead of on disk, call `SetCacheProvider<T>()` after `AddContentTypeIcons`:
+To persist cached images to disk instead, call `SetCacheProvider<T>()` after `AddContentTypeIcons`:
 
 ```cs
 services.AddContentTypeIcons(x =>
 {
     x.EnableTreeIcons = true;
 })
-.SetCacheProvider<InMemoryIconCacheProvider>();
+.SetCacheProvider<DiskIconCacheProvider>();
 ```
 
 #### Creating a custom cache provider
@@ -206,7 +204,7 @@ services.AddContentTypeIcons(x => { ... })
 
 The `key` is a deterministic filename (e.g. `abc123.png`) derived from the icon settings. Custom providers are resolved via DI, so constructor dependencies are supported.
 
-The default disk cache folder can be changed via the `CachePath` option (only relevant when using `DiskIconCacheProvider`).
+The disk cache folder can be changed via the `CachePath` option (only relevant when using `DiskIconCacheProvider`).
 
 ## Changelog
 

@@ -11,21 +11,21 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
         public void SetCacheProvider_ReplacesDefaultProvider()
         {
             var services = new ServiceCollection();
-            services.AddSingleton<IIconCacheProvider, DiskIconCacheProvider>();
+            services.AddSingleton<IIconCacheProvider, InMemoryIconCacheProvider>();
 
-            services.SetCacheProvider<InMemoryIconCacheProvider>();
+            services.SetCacheProvider<DiskIconCacheProvider>();
 
             var descriptor = Assert.Single(services, d => d.ServiceType == typeof(IIconCacheProvider));
-            Assert.Equal(typeof(InMemoryIconCacheProvider), descriptor.ImplementationType);
+            Assert.Equal(typeof(DiskIconCacheProvider), descriptor.ImplementationType);
         }
 
         [Fact]
         public void SetCacheProvider_RegistersAsSingleton()
         {
             var services = new ServiceCollection();
-            services.AddSingleton<IIconCacheProvider, DiskIconCacheProvider>();
+            services.AddSingleton<IIconCacheProvider, InMemoryIconCacheProvider>();
 
-            services.SetCacheProvider<InMemoryIconCacheProvider>();
+            services.SetCacheProvider<DiskIconCacheProvider>();
 
             var descriptor = Assert.Single(services, d => d.ServiceType == typeof(IIconCacheProvider));
             Assert.Equal(ServiceLifetime.Singleton, descriptor.Lifetime);
