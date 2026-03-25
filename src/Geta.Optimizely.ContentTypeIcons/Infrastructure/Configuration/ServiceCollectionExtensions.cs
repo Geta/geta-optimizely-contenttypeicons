@@ -44,7 +44,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
 
             services.AddTransient<IContentTypeIconService, ContentTypeIconService>();
             services.AddTransient<TreeIconUiDescriptorConfiguration>();
-            services.AddTransient<IIconCacheProvider, DiskIconCacheProvider>();
+            services.AddSingleton<IIconCacheProvider, DiskIconCacheProvider>();
 
             services.AddOptions<ContentTypeIconOptions>().Configure<IConfiguration>((options, configuration) =>
             {
@@ -64,7 +64,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
         public static IServiceCollection SetCacheProvider<T>(this IServiceCollection services)
             where T : class, IIconCacheProvider
         {
-            services.Replace(ServiceDescriptor.Transient<IIconCacheProvider, T>());
+            services.Replace(ServiceDescriptor.Singleton<IIconCacheProvider, T>());
             return services;
         }
 

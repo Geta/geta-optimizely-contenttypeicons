@@ -24,8 +24,6 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
             var partialDirectory = $"[appDataPath]\\thumb_cache\\{Guid.NewGuid()}\\";
             _temporaryDirectory = physicalFileProvider.Rebase(partialDirectory);
 
-            Directory.CreateDirectory(_temporaryDirectory);
-
             var options = Options.Create(new ContentTypeIconOptions
             {
                 CachePath = partialDirectory
@@ -33,6 +31,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
 
             var fileProvider = new PhysicalFileProvider(currentDirectory);
             var cacheProvider = new DiskIconCacheProvider(options, physicalFileProvider);
+            cacheProvider.Initialize();
             var service = new ContentTypeIconService(
                 options,
                 fileProvider,
