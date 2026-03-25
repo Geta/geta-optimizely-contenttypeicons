@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using AlloyTemplates.Models.Blocks;
 using EPiServer.Core;
 using EPiServer.DataAbstraction;
 using EPiServer.DataAnnotations;
+using Geta.Optimizely.ContentTypeIcons;
+using Geta.Optimizely.ContentTypeIcons.Attributes;
 
 namespace AlloyTemplates.Models.Pages
 {
@@ -12,7 +14,7 @@ namespace AlloyTemplates.Models.Pages
     [SiteContentType(
         GUID = "AAC25733-1D21-4F82-B031-11E626C91E30",
         GroupName = Global.GroupNames.Specialized)]
-    [SiteImageUrl]
+    [ContentTypeIcon(FontAwesome7Solid.CartFlatbedSuitcase, Rotations.None)]
     public class SearchPage : SitePageData, IHasRelatedContent, ISearchPage
     {
         [Display(

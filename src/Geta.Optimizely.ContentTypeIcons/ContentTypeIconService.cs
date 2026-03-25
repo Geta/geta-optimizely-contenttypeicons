@@ -4,6 +4,7 @@ using System.Linq;
 using System.Numerics;
 using EPiServer.Framework.Internal;
 using EPiServer.Shell;
+using Geta.Optimizely.ContentTypeIcons.Caching;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
 using Geta.Optimizely.ContentTypeIcons.Settings;
 using Microsoft.Extensions.Caching.Memory;
@@ -24,17 +25,20 @@ namespace Geta.Optimizely.ContentTypeIcons
         private readonly IPhysicalPathResolver _physicalPathResolver;
         private readonly IMemoryCache _cache;
         private readonly ContentTypeIconOptions _configuration;
+        private readonly IIconCacheProvider _iconCacheProvider;
 
         public ContentTypeIconService(
             IOptions<ContentTypeIconOptions> options,
             IFileProvider fileProvider,
             IPhysicalPathResolver physicalPathResolver,
-            IMemoryCache cache)
+            IMemoryCache cache,
+            IIconCacheProvider iconCacheProvider)
         {
             _fileProvider = fileProvider;
             _physicalPathResolver = physicalPathResolver;
             _cache = cache;
             _configuration = options.Value;
+            _iconCacheProvider = iconCacheProvider;
         }
 
         /// <summary>
@@ -44,19 +48,17 @@ namespace Geta.Optimizely.ContentTypeIcons
         /// <returns></returns>
         public virtual Image LoadIconImage(ContentTypeIconSettings settings)
         {
-            var fileName = settings.GetFileName(".png");
-            var cachePath = GetFileFullPath(fileName);
+            var key = settings.GetFileName(".png");
 
-            if (File.Exists(cachePath))
+            if (_iconCacheProvider.TryGet(key, out var cachedImage))
             {
-                return Image.Load(cachePath);
+                return cachedImage;
             }
 
             using var stream = GenerateImage(settings);
-            using var fileStream = File.Create(cachePath);
             using var img = Image.Load(stream);
 
-            img.Save(fileStream, new PngEncoder());
+            _iconCacheProvider.Set(key, img);
 
             return img.Clone(_ => { });
         }
@@ -171,10 +173,5 @@ namespace Geta.Optimizely.ContentTypeIcons
             return fontCollection.Families.First();
         }
 
-        protected virtual string GetFileFullPath(string fileName)
-        {
-            var rootPath = _configuration.CachePath;
-            return _physicalPathResolver.Rebase(rootPath + fileName);
-        }
     }
 }

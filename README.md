@@ -41,8 +41,6 @@ Or with overriddes for specifying different colors and size:
 ```
 The defaults if nothing else is specified is of course the Geta colors as seen in the screenshot.
 
-The images that gets generated are cached in [appDataPath]\thumb_cache\
-
 ## Configuration
 
 For the ConentTypeIcons to work, you have to call `AddContentTypeIcons` extension method in `Startup.ConfigureServices` method. This method provides a configuration of default values and allows to enable tree icon feature. Below is a code with all possible configuration options:
@@ -165,7 +163,48 @@ services.AddContentTypeIcons(
 
 ### Caching
 
-All generated icon images are stored in the cache folder and then served instead of regenerating those. A default cache folder can be changed by configuring the `CachePath` property.
+All generated icon images are cached and served on subsequent requests instead of being regenerated. The default cache provider stores images in memory with a sliding expiration (default 24 hours, configurable via `InMemoryCacheSlidingExpiration`).
+
+#### Using the disk cache provider
+
+To persist cached images to disk instead, call `SetCacheProvider<T>()` after `AddContentTypeIcons`:
+
+```cs
+services.AddContentTypeIcons(x =>
+{
+    x.EnableTreeIcons = true;
+})
+.SetCacheProvider<DiskIconCacheProvider>();
+```
+
+#### Creating a custom cache provider
+
+Implement `IIconCacheProvider` and register it the same way:
+
+```cs
+public class MyCustomCacheProvider : IIconCacheProvider
+{
+    public void Initialize() { /* called once at startup */ }
+
+    public bool TryGet(string key, out Image image)
+    {
+        // return true and set image if found, otherwise false
+    }
+
+    public void Set(string key, Image image)
+    {
+        // store the image under key
+    }
+}
+
+// Registration
+services.AddContentTypeIcons(x => { ... })
+        .SetCacheProvider<MyCustomCacheProvider>();
+```
+
+The `key` is a deterministic filename (e.g. `abc123.png`) derived from the icon settings. Custom providers are resolved via DI, so constructor dependencies are supported.
+
+The disk cache folder can be changed via the `CachePath` option (only relevant when using `DiskIconCacheProvider`).
 
 ## Changelog
 
