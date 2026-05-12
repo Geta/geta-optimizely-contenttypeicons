@@ -1,8 +1,8 @@
 using System;
 using System.IO;
-using EPiServer.Framework.Internal;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
@@ -26,10 +26,10 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Initialization
         {
             var options = services.GetRequiredService<IOptions<ContentTypeIconOptions>>();
             var settings = options.Value;
-            var physicalPathResolver = services.GetRequiredService<IPhysicalPathResolver>();
+            var env = services.GetRequiredService<IWebHostEnvironment>();
 
-            // verify cache directory exists
-            var fullPath = physicalPathResolver.Rebase(settings.CachePath);
+            var appDataPath = Path.Combine(env.ContentRootPath, "App_Data");
+            var fullPath = settings.CachePath.Replace("[appDataPath]", appDataPath, StringComparison.OrdinalIgnoreCase);
             if (!Directory.Exists(fullPath))
             {
                 Directory.CreateDirectory(fullPath);

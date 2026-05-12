@@ -55,7 +55,6 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
 
         private static void AddModule(IServiceCollection services)
         {
-            services.AddCmsUI();
             services.Configure<ProtectedModuleOptions>(
                 pm =>
                 {
