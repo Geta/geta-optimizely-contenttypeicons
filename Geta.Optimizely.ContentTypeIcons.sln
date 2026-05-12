@@ -5,15 +5,11 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geta.Optimizely.ContentTypeIcons", "src\Geta.Optimizely.ContentTypeIcons\Geta.Optimizely.ContentTypeIcons.csproj", "{BFE13B85-6889-44EF-BC5A-188C540186B7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sandbox", "Sandbox", "{E0B839F3-5F6A-44FE-AECE-4730CA5B2E66}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geta.Optimizely.ContentTypeIcons.EnumGenerator", "src\Geta.Optimizely.ContentTypeIcons.EnumGenerator\Geta.Optimizely.ContentTypeIcons.EnumGenerator.csproj", "{E59EF540-4245-40AE-AFDE-C6DC55F1EC3D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F066608B-F984-40F2-AD66-F56E314EE584}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geta.Optimizely.ContentTypeIcons.Tests", "tests\Geta.Optimizely.ContentTypeIcons.Tests\Geta.Optimizely.ContentTypeIcons.Tests.csproj", "{D291CD9F-3E08-4BE0-927C-6CCDD95A8DDE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geta.Optimizely.ContentTypeIcons.Web", "src\Geta.Optimizely.ContentTypeIcons.Web\Geta.Optimizely.ContentTypeIcons.Web.csproj", "{3E8B1F7A-C4D2-4E5F-B9A3-7C6D8E2F1B0A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "geta-foundation-core", "geta-foundation-core", "{4F9C2A8B-D5E3-5F6A-CA45-8D7E9F3A2C1B}"
 EndProject
@@ -41,10 +37,6 @@ Global
 		{D291CD9F-3E08-4BE0-927C-6CCDD95A8DDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D291CD9F-3E08-4BE0-927C-6CCDD95A8DDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D291CD9F-3E08-4BE0-927C-6CCDD95A8DDE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3E8B1F7A-C4D2-4E5F-B9A3-7C6D8E2F1B0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3E8B1F7A-C4D2-4E5F-B9A3-7C6D8E2F1B0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3E8B1F7A-C4D2-4E5F-B9A3-7C6D8E2F1B0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3E8B1F7A-C4D2-4E5F-B9A3-7C6D8E2F1B0A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5A0D3B9C-E6F4-4A7B-DB56-9E8FA0B3D2C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5A0D3B9C-E6F4-4A7B-DB56-9E8FA0B3D2C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A0D3B9C-E6F4-4A7B-DB56-9E8FA0B3D2C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -63,7 +55,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D291CD9F-3E08-4BE0-927C-6CCDD95A8DDE} = {F066608B-F984-40F2-AD66-F56E314EE584}
-		{3E8B1F7A-C4D2-4E5F-B9A3-7C6D8E2F1B0A} = {E0B839F3-5F6A-44FE-AECE-4730CA5B2E66}
 		{5A0D3B9C-E6F4-4A7B-DB56-9E8FA0B3D2C1} = {4F9C2A8B-D5E3-5F6A-CA45-8D7E9F3A2C1B}
 		{6B1E4CAD-F7A5-4B8C-EC67-AF90B1C4E3D2} = {4F9C2A8B-D5E3-5F6A-CA45-8D7E9F3A2C1B}
 		{7C2F5DBE-A8B6-4C9D-FD78-B0A1C2D5F4E3} = {4F9C2A8B-D5E3-5F6A-CA45-8D7E9F3A2C1B}

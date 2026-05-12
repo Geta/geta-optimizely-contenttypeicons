@@ -113,3 +113,6 @@ UpgradeLog*.XML
 License.config
 *.orig
 /.idea/
+
+# Removed sandbox (using Aspire instead)
+sandbox/
