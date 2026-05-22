@@ -116,3 +116,9 @@ License.config
 
 # Removed sandbox (using Aspire instead)
 sandbox/
+
+# App_Data junction to Foundation submodule
+src/Geta.Optimizely.ContentTypeIcons.Web/App_Data/
+
+# Local SQL init script (run manually on fresh DB)
+src/Geta.Optimizely.ContentTypeIcons.Web/init-foundation-schema.sql
