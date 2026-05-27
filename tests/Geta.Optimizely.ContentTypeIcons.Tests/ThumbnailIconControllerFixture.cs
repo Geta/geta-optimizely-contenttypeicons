@@ -22,7 +22,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
             var currentDirectory = SetCurrentDirectory();
             var appDataPath = Path.Combine(currentDirectory, "App_Data");
             var guid = Guid.NewGuid().ToString();
-            var cachePath = $"[appDataPath]\\thumb_cache\\{guid}\\";
+            var cachePath = $"[appDataPath]/thumb_cache/{guid}/";
             _temporaryDirectory = Path.Combine(appDataPath, "thumb_cache", guid);
             Directory.CreateDirectory(_temporaryDirectory);
 

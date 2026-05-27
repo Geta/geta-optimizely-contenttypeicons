@@ -29,8 +29,8 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Initialization
             var env = services.GetRequiredService<IWebHostEnvironment>();
 
             var appDataPath = Path.Combine(env.ContentRootPath, "App_Data");
-            var fullPath = settings.CachePath.Replace("[appDataPath]", appDataPath, StringComparison.OrdinalIgnoreCase);
-            if (!Directory.Exists(fullPath))
+            var fullPath = settings.CachePath?.Replace("[appDataPath]", appDataPath, StringComparison.OrdinalIgnoreCase);
+            if (!string.IsNullOrEmpty(fullPath) && !Directory.Exists(fullPath))
             {
                 Directory.CreateDirectory(fullPath);
             }

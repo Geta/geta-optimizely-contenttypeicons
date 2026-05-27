@@ -33,7 +33,8 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
             var result = _fixture.Controller.Index(_fixture.Settings) as FileStreamResult;
 
             // Assert
-            using var image = Image.Load<Rgba32>(result?.FileStream);
+            Assert.NotNull(result);
+            using var image = Image.Load<Rgba32>(result.FileStream);
             Assert.NotNull(image);
             Assert.True(GetUniqueImageColors(image).Count() > 1, "Image is blank.");
         }
@@ -54,7 +55,8 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
             var result = _fixture.Controller.Index(_fixture.Settings) as FileStreamResult;
 
             // Assert
-            using var image = Image.Load<Rgba32>(result?.FileStream);
+            Assert.NotNull(result);
+            using var image = Image.Load<Rgba32>(result.FileStream);
             Assert.NotNull(image);
             Assert.True(GetUniqueImageColors(image).Count() > 1, "Image is blank.");
         }

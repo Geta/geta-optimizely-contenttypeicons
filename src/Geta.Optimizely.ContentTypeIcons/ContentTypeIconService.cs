@@ -38,7 +38,7 @@ namespace Geta.Optimizely.ContentTypeIcons
         }
 
         private string Rebase(string path) =>
-            path.Replace("[appDataPath]", Path.Combine(_webHostEnvironment.ContentRootPath, "App_Data"), StringComparison.OrdinalIgnoreCase);
+            path?.Replace("[appDataPath]", Path.Combine(_webHostEnvironment.ContentRootPath ?? string.Empty, "App_Data"), StringComparison.OrdinalIgnoreCase) ?? string.Empty;
 
         /// <summary>
         /// Loads or creates a icon using the given settings
