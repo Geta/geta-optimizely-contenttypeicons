@@ -24,8 +24,8 @@ public class Startup
             x.ForegroundColor = "#ffffff";
             x.BackgroundColor = "#02423F";
             x.FontSize = 40;
-            x.CachePath = "[appDataPath]\\thumb_cache\\";
-            x.CustomFontPath = "[appDataPath]\\fonts\\";
+            x.CachePath = "[appDataPath]/thumb_cache/";
+            x.CustomFontPath = "[appDataPath]/fonts/";
         });
 
         const string moduleName = "Geta.Optimizely.ContentTypeIcons";
