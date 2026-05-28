@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using FakeItEasy;
 using Geta.Optimizely.ContentTypeIcons.Controllers;
+using Geta.Optimizely.ContentTypeIcons.Infrastructure;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
 using Geta.Optimizely.ContentTypeIcons.Settings;
 using Microsoft.AspNetCore.Hosting;
@@ -35,10 +36,11 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
             });
 
             var fileProvider = new PhysicalFileProvider(currentDirectory);
+            var pathResolver = new PhysicalPathResolver(fakeEnv);
             var service = new ContentTypeIconService(
                 options,
                 fileProvider,
-                fakeEnv,
+                pathResolver,
                 new MemoryCache(new MemoryCacheOptions()));
             Controller = new ContentTypeIconController(service);
             Settings = new ContentTypeIconSettings

@@ -40,6 +40,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
             services.AddAuthorizationBuilder()
                 .AddPolicy(Constants.AuthorizationPolicy, configurePolicy);
 
+            services.AddSingleton<PhysicalPathResolver>();
             services.AddTransient<IContentTypeIconService, ContentTypeIconService>();
             services.AddTransient<TreeIconUiDescriptorConfiguration>();
 

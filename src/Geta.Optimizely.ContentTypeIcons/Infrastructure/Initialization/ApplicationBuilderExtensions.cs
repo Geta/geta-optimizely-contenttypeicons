@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
@@ -26,10 +25,9 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Initialization
         {
             var options = services.GetRequiredService<IOptions<ContentTypeIconOptions>>();
             var settings = options.Value;
-            var env = services.GetRequiredService<IWebHostEnvironment>();
+            var pathResolver = services.GetRequiredService<PhysicalPathResolver>();
 
-            var appDataPath = Path.Combine(env.ContentRootPath, "App_Data");
-            var fullPath = settings.CachePath?.Replace("[appDataPath]", appDataPath, StringComparison.OrdinalIgnoreCase);
+            var fullPath = pathResolver.Rebase(settings.CachePath);
             if (!string.IsNullOrEmpty(fullPath) && !Directory.Exists(fullPath))
             {
                 Directory.CreateDirectory(fullPath);
