@@ -122,5 +122,8 @@ sandbox/
 # App_Data junction to Foundation submodule
 src/Geta.Optimizely.ContentTypeIcons.Web/App_Data/
 
+# CMS UI module zips (auto-extracted by MSBuild from NuGet packages)
+src/Geta.Optimizely.ContentTypeIcons.Web/modules/_protected/
+
 # Local SQL init script (run manually on fresh DB)
 src/Geta.Optimizely.ContentTypeIcons.Web/init-foundation-schema.sql

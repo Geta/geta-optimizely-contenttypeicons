@@ -16,6 +16,10 @@ This package consists of an override to the built in "ImageUrlAttribute" that is
 * Supports customized foreground and background color on generated images
 * Loading custom fonts
 
+## Requirements
+* .NET 10+
+* Optimizely CMS 13+
+
 ## How to get started?
 * Install NuGet package (use [Optimizely Nuget](http://nuget.episerver.com))
 * ``Install-Package Geta.Optimizely.ContentTypeIcons``

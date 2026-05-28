@@ -6,14 +6,34 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure
 {
     public class PhysicalPathResolver
     {
+        private readonly string _contentRootPath;
         private readonly string _appDataPath;
 
         public PhysicalPathResolver(IWebHostEnvironment webHostEnvironment)
         {
-            _appDataPath = Path.Combine(webHostEnvironment.ContentRootPath ?? string.Empty, "App_Data");
+            _contentRootPath = webHostEnvironment.ContentRootPath ?? string.Empty;
+            _appDataPath = Path.Combine(_contentRootPath, "App_Data");
         }
 
-        public string Rebase(string path) =>
-            path?.Replace("[appDataPath]", _appDataPath, StringComparison.OrdinalIgnoreCase) ?? string.Empty;
+        public string Rebase(string path)
+        {
+            if (string.IsNullOrEmpty(path))
+                return string.Empty;
+
+            if (path.StartsWith("[appDataPath]", StringComparison.OrdinalIgnoreCase))
+            {
+                var relativePath = path.Substring("[appDataPath]".Length).TrimStart('\\', '/');
+                path = Path.Combine(_appDataPath, relativePath);
+            }
+
+            path = Environment.ExpandEnvironmentVariables(path);
+
+            if (!Path.IsPathRooted(path))
+            {
+                path = Path.Combine(_contentRootPath, path);
+            }
+
+            return path;
+        }
     }
 }
