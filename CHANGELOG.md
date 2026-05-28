@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.0.0]
+
+### Changed
+- Updated to .NET 10
+- Updated to Optimizely CMS 13 (EPiServer.CMS.AspNetCore 13.0.2, EPiServer.CMS.UI.Core 13.0.2)
+- Replaced `EPiServer.CMS.AspNetCore.Templating` dependency with `EPiServer.CMS.AspNetCore`
+- Extracted `PhysicalPathResolver` for shared path resolution logic
+- Added null safety to path resolution
+- Cross-platform path separators (forward slashes instead of backslashes)
+- Removed SonarQube integration
+
+### Removed
+- Removed `ContentTypeIconModule` class (no longer needed in CMS 13)
+
+## [3.2.0]
+
+### Changed
+- Added Font Awesome 7.2.0 support (Brands, Regular, Solid)
+
+## [3.1.0]
+
+### Changed
+- Changed authorization to use `AuthorizationPolicyBuilder`
+
 ## [3.0.0]
 
 ### Changed

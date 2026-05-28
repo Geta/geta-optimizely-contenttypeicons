@@ -1,9 +1,8 @@
 # Geta Optimizely ContentTypeIcons
 
 [![Build](https://github.com/Geta/geta-optimizely-contenttypeicons/actions/workflows/build.yml/badge.svg)](https://github.com/Geta/geta-optimizely-contenttypeicons/actions/workflows/build.yml)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Geta_geta-optimizely-contenttypeicons&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Geta_geta-optimizely-contenttypeicons)
-[![Platform](https://img.shields.io/badge/Platform-.NET%208-blue.svg?style=flat)](https://docs.microsoft.com/en-us/dotnet/)
-[![Platform](https://img.shields.io/badge/Optimizely-%2012-orange.svg?style=flat)](http://world.episerver.com/cms/)
+[![Platform](https://img.shields.io/badge/Platform-.NET%2010-blue.svg?style=flat)](https://docs.microsoft.com/en-us/dotnet/)
+[![Platform](https://img.shields.io/badge/Optimizely-%2013-orange.svg?style=flat)](http://world.episerver.com/cms/)
 
 ## Description
 This package consists of an override to the built in "ImageUrlAttribute" that is used to specify preview images for the different content types in your Optimizely project. The only difference is that with this attribute, the images are generated using a configured background color, foreground color and a reference to a FontAwesome icon. The same configured icon can also replace the tree icon in the page tree (feature needs to be explicitly turned on using configuration).
@@ -13,7 +12,7 @@ This package consists of an override to the built in "ImageUrlAttribute" that is
 ## Features
 * Generates preview images for the different content types in your Optimizely project
 * Replace tree icons with custom icons for content types
-* Support for using Font Awesome Free 5 and 4 icons
+* Support for using Font Awesome Free 7, 5 and 4 icons
 * Supports customized foreground and background color on generated images
 * Loading custom fonts
 
@@ -33,7 +32,7 @@ Using this package you can specify it like this instead:
 ```cs
 [ContentTypeIcon(FontAwesome5Brands.Github)]
 ```
-There are a couple different enum types available: `FontAwesome5Brands`, `FontAwesome5Regular` and `FontAwesome5Solid` for the different Font Awesome 5 styles. There is also the `FontAwesome` enum for the Font Awesome version 4 icons.
+There are enum types available for Font Awesome 7 (`FontAwesome7Brands`, `FontAwesome7Regular`, `FontAwesome7Solid`), Font Awesome 5 (`FontAwesome5Brands`, `FontAwesome5Regular`, `FontAwesome5Solid`) and Font Awesome 4 (`FontAwesome`).
 
 Or with overriddes for specifying different colors and size:
 ```cs
@@ -41,7 +40,7 @@ Or with overriddes for specifying different colors and size:
 ```
 The defaults if nothing else is specified is of course the Geta colors as seen in the screenshot.
 
-The images that gets generated are cached in [appDataPath]\thumb_cache\
+The images that gets generated are cached in [appDataPath]/thumb_cache/
 
 ## Configuration
 
@@ -54,8 +53,8 @@ services.AddContentTypeIcons(x =>
     x.ForegroundColor = "#ffffff";
     x.BackgroundColor = "#02423F";
     x.FontSize = 40;
-    x.CachePath = "[appDataPath]\\thumb_cache\\";
-    x.CustomFontPath = "[appDataPath]\\fonts\\";
+    x.CachePath = "[appDataPath]/thumb_cache/";
+    x.CustomFontPath = "[appDataPath]/fonts/";
 });
 ```
 
@@ -120,7 +119,7 @@ You can configure default foreground and background colors and font size by sett
 
 ### Loading custom fonts
 
-To load custom icon fonts, you can place the font you want to use in the default folder `[appDataPath]\fonts\`. This can also be customized using configuration property - `CustomFontPath`.
+To load custom icon fonts, you can place the font you want to use in the default folder `[appDataPath]/fonts/`. This can also be customized using configuration property - `CustomFontPath`.
 
 _You also have to make sure to set the properties of the custom font to "Copy to output directory"_
 
