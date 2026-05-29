@@ -15,10 +15,9 @@ All notable changes to this project will be documented in this file.
 
 ### Removed
 - Removed `ContentTypeIconModule` class (no longer needed in CMS 13)
-- `AddContentTypeIcons` no longer calls `AddCmsUI()` internally — host applications must register the CMS UI themselves
 
 ### Notes
-This version requires .NET 10 and Optimizely CMS 13. If upgrading from 3.x, ensure your host application calls `services.AddCmsUI()` before `services.AddContentTypeIcons()` — this was previously done internally but is now the host's responsibility.
+This version requires .NET 10 and Optimizely CMS 13.
 
 ## [3.2.0]
 

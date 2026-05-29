@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using EPiServer.Cms.Shell;
+using EPiServer.DependencyInjection;
 using EPiServer.Shell.Modules;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
@@ -36,6 +37,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
         {
             ArgumentNullException.ThrowIfNull(configurePolicy);
 
+            services.AddCmsUI();
             AddModule(services);
             services.AddAuthorizationBuilder()
                 .AddPolicy(Constants.AuthorizationPolicy, configurePolicy);
