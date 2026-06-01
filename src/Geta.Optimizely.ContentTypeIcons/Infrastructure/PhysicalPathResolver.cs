@@ -20,9 +20,11 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure
             if (string.IsNullOrEmpty(path))
                 return string.Empty;
 
+            path = path.Replace('\\', Path.DirectorySeparatorChar).Replace('/', Path.DirectorySeparatorChar);
+
             if (path.StartsWith("[appDataPath]", StringComparison.OrdinalIgnoreCase))
             {
-                var relativePath = path.Substring("[appDataPath]".Length).TrimStart('\\', '/');
+                var relativePath = path.Substring("[appDataPath]".Length).TrimStart(Path.DirectorySeparatorChar);
                 path = Path.Combine(_appDataPath, relativePath);
             }
 

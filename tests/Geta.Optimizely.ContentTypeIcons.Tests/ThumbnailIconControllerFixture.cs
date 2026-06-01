@@ -20,7 +20,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
 
         public ContentTypeIconControllerFixture()
         {
-            var currentDirectory = SetCurrentDirectory();
+            var currentDirectory = GetProjectDirectory();
             var appDataPath = Path.Combine(currentDirectory, "App_Data");
             var guid = Guid.NewGuid().ToString();
             var cachePath = $"[appDataPath]/thumb_cache/{guid}/";
@@ -53,13 +53,11 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
             };
         }
 
-        private static string SetCurrentDirectory()
+        private static string GetProjectDirectory()
         {
-            var currentDir = Directory.GetCurrentDirectory();
+            var currentDir = AppContext.BaseDirectory;
             var idx = currentDir.IndexOf("bin", StringComparison.InvariantCulture);
-            var projectDir = currentDir.Substring(0, idx);
-            Directory.SetCurrentDirectory(projectDir);
-            return projectDir;
+            return currentDir.Substring(0, idx);
         }
 
         public void Dispose()
