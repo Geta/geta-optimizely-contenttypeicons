@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using EPiServer.Cms.Shell;
+using EPiServer.DependencyInjection;
 using EPiServer.Shell.Modules;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
@@ -36,10 +37,12 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
         {
             ArgumentNullException.ThrowIfNull(configurePolicy);
 
+            services.AddCmsUI();
             AddModule(services);
             services.AddAuthorizationBuilder()
                 .AddPolicy(Constants.AuthorizationPolicy, configurePolicy);
 
+            services.AddSingleton<PhysicalPathResolver>();
             services.AddTransient<IContentTypeIconService, ContentTypeIconService>();
             services.AddTransient<TreeIconUiDescriptorConfiguration>();
 
@@ -55,7 +58,6 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
 
         private static void AddModule(IServiceCollection services)
         {
-            services.AddCmsUI();
             services.Configure<ProtectedModuleOptions>(
                 pm =>
                 {

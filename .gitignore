@@ -1,3 +1,8 @@
+# Local development settings with credentials
+appsettings.Development.json
+.claude/
+*.nupkg
+
 # Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
 [Bb]in/
 [Oo]bj/
@@ -110,3 +115,15 @@ UpgradeLog*.XML
 License.config
 *.orig
 /.idea/
+
+# Removed sandbox (using Aspire instead)
+sandbox/
+
+# App_Data junction to Foundation submodule
+src/Geta.Optimizely.ContentTypeIcons.Web/App_Data/
+
+# CMS UI module zips (auto-extracted by MSBuild from NuGet packages)
+src/Geta.Optimizely.ContentTypeIcons.Web/modules/_protected/
+
+# Local SQL init script (run manually on fresh DB)
+src/Geta.Optimizely.ContentTypeIcons.Web/init-foundation-schema.sql

@@ -1,8 +1,11 @@
-﻿using System;
+using System;
 using System.IO;
+using FakeItEasy;
 using Geta.Optimizely.ContentTypeIcons.Controllers;
+using Geta.Optimizely.ContentTypeIcons.Infrastructure;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
 using Geta.Optimizely.ContentTypeIcons.Settings;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
@@ -18,23 +21,26 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
         public ContentTypeIconControllerFixture()
         {
             var currentDirectory = SetCurrentDirectory();
-            var physicalFileProvider = new TestPhysicalPathResolver(currentDirectory);
-
-            var partialDirectory = $"[appDataPath]\\thumb_cache\\{Guid.NewGuid()}\\";
-            _temporaryDirectory = physicalFileProvider.Rebase(partialDirectory);
-
+            var appDataPath = Path.Combine(currentDirectory, "App_Data");
+            var guid = Guid.NewGuid().ToString();
+            var cachePath = $"[appDataPath]/thumb_cache/{guid}/";
+            _temporaryDirectory = Path.Combine(appDataPath, "thumb_cache", guid);
             Directory.CreateDirectory(_temporaryDirectory);
+
+            var fakeEnv = A.Fake<IWebHostEnvironment>();
+            A.CallTo(() => fakeEnv.ContentRootPath).Returns(currentDirectory);
 
             var options = Options.Create(new ContentTypeIconOptions
             {
-                CachePath = partialDirectory
+                CachePath = cachePath
             });
 
             var fileProvider = new PhysicalFileProvider(currentDirectory);
+            var pathResolver = new PhysicalPathResolver(fakeEnv);
             var service = new ContentTypeIconService(
                 options,
                 fileProvider,
-                physicalFileProvider,
+                pathResolver,
                 new MemoryCache(new MemoryCacheOptions()));
             Controller = new ContentTypeIconController(service);
             Settings = new ContentTypeIconSettings
