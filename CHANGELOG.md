@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - Updated to .NET 10
-- Updated to Optimizely CMS 13 (EPiServer.CMS.AspNetCore 13.0.2, EPiServer.CMS.UI.Core 13.0.2)
+- Updated to Optimizely CMS 13 (EPiServer.CMS.AspNetCore 13.1.0, EPiServer.CMS.UI.Core 13.1.0)
 - Replaced `EPiServer.CMS.AspNetCore.Templating` dependency with `EPiServer.CMS.AspNetCore`
 - Extracted `PhysicalPathResolver` for shared path resolution logic
 - Added null safety to path resolution
