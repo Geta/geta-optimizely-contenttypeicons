@@ -18,14 +18,12 @@ jobs:
         run: |
           $version = ("${{github.ref_name}}").Remove(0, 1)
           echo "VERSION=$version" >> $env:GITHUB_ENV
-      - name: Release
-        run: |
-          echo "${env:VERSION}"
-          dotnet build --configuration Release /p:Version=${{env.VERSION}}
+      - name: Build
+        run: dotnet build src/Geta.Optimizely.ContentTypeIcons/Geta.Optimizely.ContentTypeIcons.csproj -c Release /p:Version=${{env.VERSION}}
       - name: Test
-        run: dotnet test --configuration Release /p:Version=${{env.VERSION}} --no-build
+        run: dotnet test tests/Geta.Optimizely.ContentTypeIcons.Tests/Geta.Optimizely.ContentTypeIcons.Tests.csproj -c Release /p:Version=${{env.VERSION}} --no-build
       - name: Pack
-        run: dotnet pack --configuration Release /p:Version=${{env.VERSION}} --no-build --output .
+        run: dotnet pack src/Geta.Optimizely.ContentTypeIcons/Geta.Optimizely.ContentTypeIcons.csproj -c Release /p:Version=${{env.VERSION}} --no-build --output .
       - name: Push
         run: |
           dotnet nuget push Geta.Optimizely.ContentTypeIcons.${{env.VERSION}}.nupkg --source https://nuget.pkg.github.com/Geta/index.json --api-key ${{env.GITHUB_TOKEN}}

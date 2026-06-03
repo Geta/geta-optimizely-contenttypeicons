@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <PackageId>Geta.Optimizely.ContentTypeIcons</PackageId>
-    <Title>Generates images based on FontAwesome (4 and 5) or custom icon font, to be shown when creating new content in Episerver.</Title>
+    <Title>Generates images based on FontAwesome (4, 5 and 7) or custom icon font, to be shown when creating new content in Optimizely.</Title>
     <Authors>Geta Digital</Authors>
     <Company>Geta Digital</Company>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
@@ -11,7 +11,7 @@
     <PackageIcon>icon.png</PackageIcon>
     <PackageIconUrl>https://cdn.geta.no/opensource/icons/Geta-logo-3.png</PackageIconUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Description>Generates images based on FontAwesome (4 and 5) or custom icon font, to be shown when creating new content in Episerver.</Description>
+    <Description>Generates images based on FontAwesome (4, 5 and 7) or custom icon font, to be shown when creating new content in Optimizely.</Description>
     <PackageReleaseNotes>https://github.com/Geta/geta-optimizely-content-type-icons/blob/master/CHANGELOG.md</PackageReleaseNotes>
     <PackageTags>Optimizely Episerver ContentType Icon Thumbnail</PackageTags>
     <RepositoryUrl>https://github.com/Geta/geta-optimizely-contenttypeicons.git</RepositoryUrl>
@@ -22,8 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EPiServer.CMS.AspNetCore.Templating" Version="12.17.0" />
-    <PackageReference Include="EPiServer.CMS.UI.Core" Version="12.22.4" />
+    <PackageReference Include="EPiServer.CMS.AspNetCore" Version="13.1.0" />
+    <PackageReference Include="EPiServer.CMS.UI.Core" Version="13.1.0" />
     <PackageReference Include="SixLabors.Fonts" Version="[2.1.3,3.0.0)" />
     <PackageReference Include="SixLabors.ImageSharp" Version="[3.1.12,4.0.0)" />
     <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="[2.1.7,3.0.0)" />

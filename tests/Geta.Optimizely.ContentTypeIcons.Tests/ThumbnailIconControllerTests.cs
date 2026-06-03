@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Linq;
-using System.Runtime.InteropServices;
 using Geta.Optimizely.ContentTypeIcons.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
 using Xunit;
 
 namespace Geta.Optimizely.ContentTypeIcons.Tests
@@ -34,11 +33,12 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
             var result = _fixture.Controller.Index(_fixture.Settings) as FileStreamResult;
 
             // Assert
-            var image = Image.FromStream(result?.FileStream);
+            Assert.NotNull(result);
+            using var image = Image.Load<Rgba32>(result.FileStream);
             Assert.NotNull(image);
             Assert.True(GetUniqueImageColors(image).Count() > 1, "Image is blank.");
         }
-        
+
         [Theory]
         [InlineData(0xe897, "icofont.ttf")]
         [InlineData(0xe898, "icofont.ttf")]
@@ -55,7 +55,8 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
             var result = _fixture.Controller.Index(_fixture.Settings) as FileStreamResult;
 
             // Assert
-            var image = Image.FromStream(result?.FileStream);
+            Assert.NotNull(result);
+            using var image = Image.Load<Rgba32>(result.FileStream);
             Assert.NotNull(image);
             Assert.True(GetUniqueImageColors(image).Count() > 1, "Image is blank.");
         }
@@ -131,24 +132,21 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
             }
         }
 
-        private static IEnumerable<Color> GetUniqueImageColors(Image image)
+        private static IEnumerable<Color> GetUniqueImageColors(Image<Rgba32> image)
         {
-            using (var bitmap = new Bitmap(image))
+            var colors = new HashSet<Color>();
+            image.ProcessPixelRows(accessor =>
             {
-                var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
-                var bitmapBytes = new byte[bitmapData.Width * bitmapData.Height * 3];
-                var colors = new Color[bitmapData.Width * bitmapData.Height];
-                Marshal.Copy(bitmapData.Scan0, bitmapBytes, 0, bitmapBytes.Length);
-                bitmap.UnlockBits(bitmapData);
-
-                for (var i = 0; i < colors.Length; i++)
+                for (var y = 0; y < accessor.Height; y++)
                 {
-                    var start = i * 3;
-                    colors[i] = Color.FromArgb(bitmapBytes[start], bitmapBytes[start + 1], bitmapBytes[start + 2]);
+                    var row = accessor.GetRowSpan(y);
+                    foreach (ref var pixel in row)
+                    {
+                        colors.Add(new Color(pixel));
+                    }
                 }
-
-                return colors.Distinct();
-            }
+            });
+            return colors;
         }
     }
 }

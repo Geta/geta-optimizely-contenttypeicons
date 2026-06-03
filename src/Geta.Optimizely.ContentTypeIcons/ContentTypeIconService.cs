@@ -2,8 +2,8 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Numerics;
-using EPiServer.Framework.Internal;
 using EPiServer.Shell;
+using Geta.Optimizely.ContentTypeIcons.Infrastructure;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
 using Geta.Optimizely.ContentTypeIcons.Settings;
 using Microsoft.Extensions.Caching.Memory;
@@ -21,18 +21,18 @@ namespace Geta.Optimizely.ContentTypeIcons
     public class ContentTypeIconService : IContentTypeIconService
     {
         private readonly IFileProvider _fileProvider;
-        private readonly IPhysicalPathResolver _physicalPathResolver;
+        private readonly PhysicalPathResolver _pathResolver;
         private readonly IMemoryCache _cache;
         private readonly ContentTypeIconOptions _configuration;
 
         public ContentTypeIconService(
             IOptions<ContentTypeIconOptions> options,
             IFileProvider fileProvider,
-            IPhysicalPathResolver physicalPathResolver,
+            PhysicalPathResolver pathResolver,
             IMemoryCache cache)
         {
             _fileProvider = fileProvider;
-            _physicalPathResolver = physicalPathResolver;
+            _pathResolver = pathResolver;
             _cache = cache;
             _configuration = options.Value;
         }
@@ -155,7 +155,7 @@ namespace Geta.Optimizely.ContentTypeIcons
             var customFontFolder = _configuration.CustomFontPath;
             var fontPath = $"{customFontFolder}{fileName}";
 
-            var rebased = _physicalPathResolver.Rebase(fontPath);
+            var rebased = _pathResolver.Rebase(fontPath);
 
             try
             {
@@ -174,7 +174,7 @@ namespace Geta.Optimizely.ContentTypeIcons
         protected virtual string GetFileFullPath(string fileName)
         {
             var rootPath = _configuration.CachePath;
-            return _physicalPathResolver.Rebase(rootPath + fileName);
+            return _pathResolver.Rebase(rootPath + fileName);
         }
     }
 }
