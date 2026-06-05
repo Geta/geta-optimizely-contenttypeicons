@@ -56,11 +56,11 @@ namespace Geta.Optimizely.ContentTypeIcons
             }
 
             using var stream = GenerateImage(settings);
-            using var img = Image.Load(stream);
+            var img = Image.Load(stream);
 
             _iconCacheProvider.Set(key, img);
 
-            return img.Clone(_ => { });
+            return img;
         }
 
         protected virtual MemoryStream GenerateImage(ContentTypeIconSettings settings)

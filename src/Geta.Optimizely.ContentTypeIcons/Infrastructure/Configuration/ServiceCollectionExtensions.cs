@@ -59,10 +59,12 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
         }
 
 
-        public static IServiceCollection SetCacheProvider<T>(this IServiceCollection services)
+        public static IServiceCollection SetCacheProvider<T>(
+            this IServiceCollection services,
+            ServiceLifetime lifetime = ServiceLifetime.Singleton)
             where T : class, IIconCacheProvider
         {
-            services.Replace(ServiceDescriptor.Singleton<IIconCacheProvider, T>());
+            services.Replace(ServiceDescriptor.Describe(typeof(IIconCacheProvider), typeof(T), lifetime));
             return services;
         }
 

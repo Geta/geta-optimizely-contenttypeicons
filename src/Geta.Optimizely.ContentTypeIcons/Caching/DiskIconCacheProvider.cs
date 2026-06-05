@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Concurrent;
 using System.IO;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
@@ -11,6 +13,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Caching
     {
         private readonly PhysicalPathResolver _pathResolver;
         private readonly ContentTypeIconOptions _options;
+        private readonly ConcurrentDictionary<string, object> _locks = new();
 
         public DiskIconCacheProvider(
             IOptions<ContentTypeIconOptions> options,
@@ -31,27 +34,42 @@ namespace Geta.Optimizely.ContentTypeIcons.Caching
 
         public bool TryGet(string key, out Image image)
         {
-            var fullPath = GetFullPath(key);
-            if (File.Exists(fullPath))
+            var lockObj = _locks.GetOrAdd(key, _ => new object());
+            lock (lockObj)
             {
-                image = Image.Load(fullPath);
-                return true;
-            }
+                var fullPath = GetFullPath(key);
+                if (File.Exists(fullPath))
+                {
+                    try
+                    {
+                        image = Image.Load(fullPath);
+                        return true;
+                    }
+                    catch
+                    {
+                        try { File.Delete(fullPath); } catch { }
+                    }
+                }
 
-            image = null;
-            return false;
+                image = null;
+                return false;
+            }
         }
 
         public void Set(string key, Image image)
         {
-            var fullPath = GetFullPath(key);
-            using var fileStream = File.Create(fullPath);
-            image.Save(fileStream, new PngEncoder());
+            var lockObj = _locks.GetOrAdd(key, _ => new object());
+            lock (lockObj)
+            {
+                var fullPath = GetFullPath(key);
+                using var fileStream = File.Create(fullPath);
+                image.Save(fileStream, new PngEncoder());
+            }
         }
 
         private string GetFullPath(string key)
         {
-            return _pathResolver.Rebase(_options.CachePath + key);
+            return _pathResolver.Rebase(Path.Combine(_options.CachePath, key));
         }
     }
 }

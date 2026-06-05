@@ -28,5 +28,16 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
             var descriptor = Assert.Single(services, d => d.ServiceType == typeof(IIconCacheProvider));
             Assert.Equal(ServiceLifetime.Singleton, descriptor.Lifetime);
         }
+
+        [Fact]
+        public void SetCacheProvider_RegistersWithSpecifiedLifetime()
+        {
+            var services = new ServiceCollection();
+            services.AddSingleton<IIconCacheProvider, InMemoryIconCacheProvider>();
+            services.SetCacheProvider<DiskIconCacheProvider>(ServiceLifetime.Transient);
+
+            var descriptor = Assert.Single(services, d => d.ServiceType == typeof(IIconCacheProvider));
+            Assert.Equal(ServiceLifetime.Transient, descriptor.Lifetime);
+        }
     }
 }
