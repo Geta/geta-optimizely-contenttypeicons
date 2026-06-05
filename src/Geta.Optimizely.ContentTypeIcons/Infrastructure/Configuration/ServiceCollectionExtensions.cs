@@ -3,9 +3,11 @@ using System.Linq;
 using EPiServer.Cms.Shell;
 using EPiServer.DependencyInjection;
 using EPiServer.Shell.Modules;
+using Geta.Optimizely.ContentTypeIcons.Caching;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
 {
@@ -45,6 +47,7 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
             services.AddSingleton<PhysicalPathResolver>();
             services.AddTransient<IContentTypeIconService, ContentTypeIconService>();
             services.AddTransient<TreeIconUiDescriptorConfiguration>();
+            services.AddSingleton<IIconCacheProvider, InMemoryIconCacheProvider>();
 
             services.AddOptions<ContentTypeIconOptions>().Configure<IConfiguration>((options, configuration) =>
             {
@@ -55,6 +58,13 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
             return services;
         }
 
+
+        public static IServiceCollection SetCacheProvider<T>(this IServiceCollection services)
+            where T : class, IIconCacheProvider
+        {
+            services.Replace(ServiceDescriptor.Singleton<IIconCacheProvider, T>());
+            return services;
+        }
 
         private static void AddModule(IServiceCollection services)
         {
