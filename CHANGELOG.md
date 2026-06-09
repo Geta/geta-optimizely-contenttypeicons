@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.1.0]
+
+### Added
+- Added `IIconCacheProvider` abstraction with disk and in-memory implementations
+- Default cache provider changed from disk to `InMemoryIconCacheProvider` (24h sliding expiration)
+- Added `SetCacheProvider<T>()` extension method to swap cache implementations
+- Added `DiskIconCacheProvider` with per-key thread safety and self-healing for corrupt files
+- Added `InMemoryCacheSlidingExpiration` configuration option
+
 ## [4.0.0]
 
 ### Changed
