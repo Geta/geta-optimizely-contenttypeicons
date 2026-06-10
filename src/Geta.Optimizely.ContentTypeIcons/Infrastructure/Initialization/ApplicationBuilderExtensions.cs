@@ -1,9 +1,7 @@
-using System;
-using System.IO;
+using Geta.Optimizely.ContentTypeIcons.Caching;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 
 namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Initialization
 {
@@ -16,22 +14,10 @@ namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Initialization
             var descriptorConfiguration = services.GetRequiredService<TreeIconUiDescriptorConfiguration>();
             descriptorConfiguration.Initialize();
 
-            EnsureCacheFolderCreated(services);
+            var cacheProvider = services.GetRequiredService<IIconCacheProvider>();
+            cacheProvider.Initialize();
 
             return app;
-        }
-
-        private static void EnsureCacheFolderCreated(IServiceProvider services)
-        {
-            var options = services.GetRequiredService<IOptions<ContentTypeIconOptions>>();
-            var settings = options.Value;
-            var pathResolver = services.GetRequiredService<PhysicalPathResolver>();
-
-            var fullPath = pathResolver.Rebase(settings.CachePath);
-            if (!string.IsNullOrEmpty(fullPath) && !Directory.Exists(fullPath))
-            {
-                Directory.CreateDirectory(fullPath);
-            }
         }
     }
 }

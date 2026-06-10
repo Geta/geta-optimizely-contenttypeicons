@@ -1,4 +1,6 @@
-﻿namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
+﻿using System;
+
+namespace Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration
 {
     public class ContentTypeIconOptions
     {
@@ -21,5 +23,8 @@
         public int FontSize { get; set; } = DefaultFontSize;
 
         public bool EnableTreeIcons { get; set; }
+
+        public static readonly TimeSpan DefaultInMemoryCacheSlidingExpiration = TimeSpan.FromHours(24);
+        public TimeSpan InMemoryCacheSlidingExpiration { get; set; } = DefaultInMemoryCacheSlidingExpiration;
     }
 }

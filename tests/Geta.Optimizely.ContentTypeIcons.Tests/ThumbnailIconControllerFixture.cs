@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using FakeItEasy;
+using Geta.Optimizely.ContentTypeIcons.Caching;
 using Geta.Optimizely.ContentTypeIcons.Controllers;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure;
 using Geta.Optimizely.ContentTypeIcons.Infrastructure.Configuration;
@@ -37,11 +38,14 @@ namespace Geta.Optimizely.ContentTypeIcons.Tests
 
             var fileProvider = new PhysicalFileProvider(currentDirectory);
             var pathResolver = new PhysicalPathResolver(fakeEnv);
+            var cacheProvider = new DiskIconCacheProvider(options, pathResolver);
+            cacheProvider.Initialize();
             var service = new ContentTypeIconService(
                 options,
                 fileProvider,
                 pathResolver,
-                new MemoryCache(new MemoryCacheOptions()));
+                new MemoryCache(new MemoryCacheOptions()),
+                cacheProvider);
             Controller = new ContentTypeIconController(service);
             Settings = new ContentTypeIconSettings
             {
